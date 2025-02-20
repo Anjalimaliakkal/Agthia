@@ -60,6 +60,63 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - asset/logo_agthia.jpg
+     - asset/background_image1.jpg
+     - asset/About_us.jpg
+     - asset/image2.jpg
+     - asset/about_us2.jpg
+     - asset/our_people.jpg
+     - asset/mission.jpg
+     - asset/beefbar.jpg
+     - asset/dinand.jpg
+     - asset/ferdi.jpg
+     - asset/novikov.jpg
+     - asset/philippe.jpg
+     - asset/brand_image3.jpg
+     - asset/BurgerInn_logo.jpg
+     - asset/brand_image2.jpg
+     - asset/brand_image1.jpg
+     - asset/image1.jpg
+     - asset/image3.jpg
+     - asset/image4.jpg
+     - asset/BU_MASOUD.jpg
+     - asset/BURGER_INN.jpg
+     - asset/FATAYER.jpg
+     - asset/NAMLET.jpg
+     - asset/beefbar2.jpg
+     - asset/beefbar3.jpg
+     - asset/beefbar4.jpg
+     - asset/philippe2.jpg
+     - asset/philippe3.jpg
+     - asset/philippe4.jpg
+     - asset/ferdi2.jpg
+     - asset/ferdi3.jpg
+     - asset/ferdi4.jpg
+     - asset/novikov2.jpg
+     - asset/novikov3.jpg
+     - asset/novikov4.jpg
+     - asset/dinand2.jpg
+     - asset/dinand3.jpg
+     - asset/dinand4.jpg
+     - asset/dinand5.jpg
+     - asset/bumasoud2.jpg
+     - asset/bumasoud3.jpg
+     - asset/bumasoud4.jpg
+     - asset/burgerinn2.png
+     - asset/burgerinn3.png
+     - asset/burgerinn4.png
+     - asset/fatayer2.jpg
+     - asset/fatayer3.jpg
+     - asset/fatayer4.jpg
+     - asset/namlet2.jpg
+     - asset/namlet3.jpg
+     - asset/namlet4.jpg
+     - asset/media.jpg
+     - asset/carreer.jpg
+     - asset/instagram.jpeg
+     - asset/facebook.jpeg
+     - asset/twitter.jpeg
+     - asset/printest.jpeg
+
   
 
   # An image asset can refer to one or more resolution-specific "variants", see
