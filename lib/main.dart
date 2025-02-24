@@ -1,3 +1,4 @@
+import 'package:agthia/delivery_home.dart';
 import 'package:agthia/homescreen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class Agthia extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueGrey
       ),
-      home: Homescreen(),
+      home: DeliveryHome(),
     );
   }
 }

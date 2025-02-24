@@ -277,42 +277,38 @@ class Contactus extends StatelessWidget {
             ),
             SizedBox(height: 20,),
             Center(child: Text("Have a Question ?",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)),
-            Container(
-               decoration: BoxDecoration(
-                  color:Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 6,
-                      spreadRadius: 2,
-                      offset: Offset(2, 4),
-                    ),
-                  ],
-                ),
-              height: 450,
-              width: 500,
-              child: Column(
-                children: [
-                   TextField(decoration: InputDecoration(hintText: "Name"),),
-                      SizedBox(height: 10),
-                      TextField(decoration: InputDecoration(hintText: "Email")),
-                      SizedBox(height: 10),
-                      TextField(decoration: InputDecoration(hintText: "Subject")),
-                      SizedBox(height: 10),
-                      TextField(decoration: InputDecoration(hintText: "Phone")),
-                      SizedBox(height: 10),
-                      TextField(
-                        decoration: InputDecoration(hintText: "Message"),
+            SizedBox(height: 20,),
+            Column(
+              children: [
+                 SizedBox(
+                  width: 400,
+                  child: TextField(decoration: InputDecoration(hintText: "Name",border: OutlineInputBorder()),)),
+                    SizedBox(height: 10),
+                    SizedBox(
+                      width: 400,
+                      child: TextField(decoration: InputDecoration(hintText: "Email",border: OutlineInputBorder()))),
+                    SizedBox(height: 10),
+                    SizedBox(
+                      width: 400,
+                      child: TextField(decoration: InputDecoration(hintText: "Subject",border: OutlineInputBorder()))),
+                    SizedBox(height: 10),
+                    SizedBox(
+                      width: 400,
+                      child: TextField(decoration: InputDecoration(hintText: "Phone",border: OutlineInputBorder()))),
+                    SizedBox(height: 10),
+                    SizedBox(
+                      width: 400,
+                      child: TextField(
+                        decoration: InputDecoration(hintText: "Message",border: OutlineInputBorder()),
                         maxLines: 5,
                       ),
-                      SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text("Send"),
-                      ),
-                ],
-              ),
+                    ),
+                    SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Send"),
+                    ),
+              ],
             ),
 
             SizedBox(height: 20),
