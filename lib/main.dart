@@ -27,7 +27,7 @@ class Agthia extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueGrey
       ),
-      home: AddOurPeople(),
+      home: Login(),
     );
   }
 }
