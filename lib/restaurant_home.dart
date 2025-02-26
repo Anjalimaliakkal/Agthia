@@ -1,11 +1,13 @@
-import 'package:agthia/delivery_changepassword.dart';
-import 'package:agthia/delivery_neworders.dart';
-import 'package:agthia/delivery_previousorders.dart';
+import 'package:agthia/Add_Restaurant.dart';
+import 'package:agthia/Restaurant_changepassword.dart';
+import 'package:agthia/Restaurant_viewdelivery.dart';
+import 'package:agthia/Restaurant_vieworders.dart';
+import 'package:agthia/delivery_allocation.dart';
 import 'package:agthia/login.dart';
 import 'package:flutter/material.dart';
 
-class DeliveryHome extends StatelessWidget {
-  const DeliveryHome({super.key});
+class RestaurantHome extends StatelessWidget {
+  const RestaurantHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +25,19 @@ class DeliveryHome extends StatelessWidget {
         ),
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFF282d37),
-
         actions: [
           PopupMenuButton<String>(
-      child: Row(
+            child: Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: const Color.fromARGB(255, 188, 187, 187),
-                  child: Icon(Icons.person, color: Colors.white)), // Profile Icon
+                    backgroundColor: const Color.fromARGB(255, 188, 187, 187),
+                    child: Icon(Icons.person,
+                        color: Colors.white)), // Profile Icon
                 SizedBox(width: 5),
                 Text(
-                  "DELIVERY PERSONNEL",
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  "RESTAURANT",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(width: 5),
                 Icon(Icons.arrow_drop_down)
@@ -42,10 +45,14 @@ class DeliveryHome extends StatelessWidget {
             ),
             onSelected: (value) {
               if (value == 'change_password') {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>DeliveryChangepassword()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RestaurantChangepassword()));
                 // Navigate to change password screen
               } else if (value == 'logout') {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Login()));
                 // Perform logout action
               }
             },
@@ -54,7 +61,7 @@ class DeliveryHome extends StatelessWidget {
               PopupMenuItem<String>(
                 enabled: false,
                 child: Text(
-                  "Delivery Personnel",
+                  "Restaurant",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -88,7 +95,6 @@ class DeliveryHome extends StatelessWidget {
           SizedBox(width: 10),
         ],
       ),
-
       drawer: Drawer(
         width: 200,
         backgroundColor: Color(0xFF282d37),
@@ -110,7 +116,7 @@ class DeliveryHome extends StatelessWidget {
                     height: 7,
                   ),
                   Text(
-                    "Delivery Personnel",
+                    "Restaurant",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -124,29 +130,50 @@ class DeliveryHome extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RestaurantHome()));
               },
             ),
             ListTile(
-              title: Text("New Orders",
+              title: Text("Add Restaurant",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddRestaurant()));
+              },
+            ),
+            ListTile(
+              title: Text("View Orders",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DeliveryNeworders()));
+                        builder: (context) => RestaurantVieworders()));
               },
             ),
             ListTile(
-              title: Text("Previous Orders",
+              title: Text("View Delivery Personnel",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DeliveryPreviousorders()));
+                        builder: (context) => RestaurantViewdelivery()));
+              },
+            ),
+            ListTile(
+              title: Text("Allocate Delivery Personnel",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DeliveryAllocation()));
               },
             ),
           ],
@@ -155,36 +182,40 @@ class DeliveryHome extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        //color: Color.fromARGB(255, 207, 198, 198), 
+        //color: Color.fromARGB(255, 207, 198, 198),
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage("asset/background_image1.jpg"),
-          fit: BoxFit.cover)
-        ),
+            image: DecorationImage(
+                image: AssetImage("asset/background_image1.jpg"),
+                fit: BoxFit.cover)),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              SizedBox(height: 100,),
+              SizedBox(
+                height: 100,
+              ),
               Center(
                 child: Row(
                   children: [
-                    SizedBox(width: 550,),
+                    SizedBox(
+                      width: 600,
+                    ),
                     Container(
                       decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 6,
-                              spreadRadius: 2,
-                              offset: Offset(2, 4),
-                            ),
-                          ],
-                        ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 6,
+                            spreadRadius: 2,
+                            offset: Offset(2, 4),
+                          ),
+                        ],
+                      ),
                       //width: MediaQuery.of(context).size.width,
                       //color: Color(0xFFf3eddf),
-                      width: 200,
+                      width: 300,
                       height: 200,
                       child: Padding(
                         padding: EdgeInsets.all(20),
@@ -193,90 +224,45 @@ class DeliveryHome extends StatelessWidget {
                           children: [
                             Center(
                               child: Text(
-                                "198",
-                                style:
-                                    TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                                "105",
+                                style: TextStyle(
+                                    fontSize: 28, fontWeight: FontWeight.bold),
                               ),
                             ),
                             SizedBox(height: 10),
                             //Divider(color: Colors.orange,),
-                            SizedBox(height: 5,),
+                            SizedBox(
+                              height: 5,
+                            ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                      shape: BeveledRectangleBorder()),
-                              onPressed: (){}, child: 
-                            Center(
-                              child: Text(
-                                "Total Orders", style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.green),  
+                                  shape: BeveledRectangleBorder()),
+                              onPressed: () {},
+                              child: Center(
+                                child: Text(
+                                  "Registered Restaurants",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.green),
+                                ),
                               ),
                             ),
-                        ),
-                        SizedBox(height: 10,),
-                            Center(child: CircleAvatar(
-                              backgroundColor: const Color.fromARGB(255, 218, 216, 216),
-                              child: Center(child: Icon(Icons.check))))
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Center(
+                                child: CircleAvatar(
+                                    backgroundColor: const Color.fromARGB(
+                                        255, 218, 216, 216),
+                                    child: Center(child: Icon(Icons.check))))
                           ],
                         ),
                       ),
                     ),
-                
-                SizedBox(width: 30,),
-                
-                Container(
-                  decoration: BoxDecoration(
-                      color:  Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 6,
-                          spreadRadius: 2,
-                          offset: Offset(2, 4),
-                        ),
-                      ],
-                    ),
-                  //width: MediaQuery.of(context).size.width,
-                  //color: Color(0xFFf3eddf),
-                  width: 200,
-                  height: 200,
-                  child: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            "300",
-                            style:
-                                TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        //Divider(color: Colors.orange,),
-                        SizedBox(height: 5,),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                                  shape: BeveledRectangleBorder()),
-                          onPressed: (){}, child: 
-                        Center(
-                          child: Text(
-                            "Orders Today", style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.green),  
-                          ),
-                        ),
-                    ),
-                    SizedBox(height: 10,),
-                        Center(child: CircleAvatar(
-                          backgroundColor: const Color.fromARGB(255, 218, 216, 216),
-                          child: Center(child: Icon(Icons.check))))
-                      ],
-                    ),
-                  ),
-                ),
-                 ],
+                  ],
                 ),
               ),
-        
-        
               SizedBox(height: 100),
               Container(
                 color: Colors.black,

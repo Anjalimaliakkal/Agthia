@@ -1,4 +1,5 @@
 import 'package:agthia/delivery_changepassword.dart';
+import 'package:agthia/login.dart';
 import 'package:flutter/material.dart';
 import 'package:agthia/delivery_home.dart';
 import 'package:agthia/delivery_previousorders.dart';
@@ -15,7 +16,8 @@ class _DeliveryNewordersState extends State<DeliveryNeworders> {
     {
       'orderId': '243556',
       'address': 'Maliakkal',
-      'totalItems': 1,
+      'itemcount': 1,
+      'itemname':'Burger',
       'shippingCharge': 60.95,
       'totalPrice': 300.95,
       'paymentMethod': 'COD',
@@ -23,7 +25,8 @@ class _DeliveryNewordersState extends State<DeliveryNeworders> {
     {
       'orderId': '217867',
       'address': 'Thattaruparambil',
-      'totalItems': 4,
+      'itemcount': 4,
+      'itemname':'Pizza',
       'shippingCharge': 50.0,
       'totalPrice': 250.90,
       'paymentMethod': 'COD',
@@ -68,6 +71,7 @@ class _DeliveryNewordersState extends State<DeliveryNeworders> {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>DeliveryChangepassword()));
                 // Navigate to change password screen
               } else if (value == 'logout') {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
                 // Perform logout action
               }
             },
@@ -202,7 +206,8 @@ class _DeliveryNewordersState extends State<DeliveryNeworders> {
                   columns: [
                     DataColumn(label: Text('Order ID')),
                     DataColumn(label: Text('Address')),
-                    DataColumn(label: Text('Items')),
+                    DataColumn(label: Text('Item Count')),
+                    DataColumn(label: Text('Item Name')),
                     DataColumn(label: Text('Shipping')),
                     DataColumn(label: Text('Total Price')),
                     DataColumn(label: Text('Payment')),
@@ -212,7 +217,8 @@ class _DeliveryNewordersState extends State<DeliveryNeworders> {
                     return DataRow(cells: [
                       DataCell(Text(order['orderId'].toString())),
                       DataCell(Text(order['address'])),
-                      DataCell(Text(order['totalItems'].toString())),
+                      DataCell(Text(order['itemcount'].toString())),
+                       DataCell(Text(order['itemname'])),
                       DataCell(Text("\$${order['shippingCharge']}")),
                       DataCell(Text("\$${order['totalPrice']}")),
                       DataCell(Text(order['paymentMethod'])),

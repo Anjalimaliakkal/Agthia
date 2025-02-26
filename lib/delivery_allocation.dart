@@ -1,11 +1,38 @@
-import 'package:agthia/delivery_changepassword.dart';
-import 'package:agthia/delivery_neworders.dart';
-import 'package:agthia/delivery_previousorders.dart';
+import 'package:agthia/Add_Restaurant.dart';
+import 'package:agthia/Restaurant_changepassword.dart';
+import 'package:agthia/Restaurant_viewdelivery.dart';
+import 'package:agthia/Restaurant_vieworders.dart';
+import 'package:agthia/assign_order.dart';
 import 'package:agthia/login.dart';
+import 'package:agthia/restaurant_home.dart';
 import 'package:flutter/material.dart';
 
-class DeliveryHome extends StatelessWidget {
-  const DeliveryHome({super.key});
+class DeliveryAllocation extends StatefulWidget {
+
+   const DeliveryAllocation({super.key});
+
+  @override
+  State<DeliveryAllocation> createState() => _DeliveryAllocationState();
+}
+
+class _DeliveryAllocationState extends State<DeliveryAllocation> {
+  final List<Map<String, dynamic>> orders = [
+    {
+      'personelId': '1567',
+      'name': 'Abhay',
+      'email': 'abhay@gmail.com',
+      'username':'abhay@123',
+      'joinedon': 'Jan 25, 2025',
+      
+    },
+    {
+      'personelId': '1578',
+      'name': 'Akhil',
+      'email': 'akhil@gmail.com',
+      'username':'akhil@123',
+      'joinedon': 'Feb 15, 2025',
+    }
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +60,7 @@ class DeliveryHome extends StatelessWidget {
                   child: Icon(Icons.person, color: Colors.white)), // Profile Icon
                 SizedBox(width: 5),
                 Text(
-                  "DELIVERY PERSONNEL",
+                  "RESTAURANT",
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(width: 5),
@@ -42,7 +69,7 @@ class DeliveryHome extends StatelessWidget {
             ),
             onSelected: (value) {
               if (value == 'change_password') {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>DeliveryChangepassword()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>RestaurantChangepassword()));
                 // Navigate to change password screen
               } else if (value == 'logout') {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
@@ -54,7 +81,7 @@ class DeliveryHome extends StatelessWidget {
               PopupMenuItem<String>(
                 enabled: false,
                 child: Text(
-                  "Delivery Personnel",
+                  "Restaurant",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -110,7 +137,7 @@ class DeliveryHome extends StatelessWidget {
                     height: 7,
                   ),
                   Text(
-                    "Delivery Personnel",
+                    "Restaurant",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -124,34 +151,60 @@ class DeliveryHome extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RestaurantHome()));
               },
             ),
             ListTile(
-              title: Text("New Orders",
+              title: Text("Add Restaurant",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DeliveryNeworders()));
+                        builder: (context) => AddRestaurant()));
               },
             ),
             ListTile(
-              title: Text("Previous Orders",
+              title: Text("View Orders",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DeliveryPreviousorders()));
+                        builder: (context) => RestaurantVieworders()));
+              },
+            ),
+            ListTile(
+              title: Text("View Delivery Personnel",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RestaurantViewdelivery()));
+              },
+            ),
+            ListTile(
+              title: Text("Allocate Delivery Personnel",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DeliveryAllocation()));
               },
             ),
           ],
         ),
       ),
+
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -161,122 +214,60 @@ class DeliveryHome extends StatelessWidget {
           fit: BoxFit.cover)
         ),
         child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              SizedBox(height: 100,),
-              Center(
-                child: Row(
-                  children: [
-                    SizedBox(width: 550,),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 6,
-                              spreadRadius: 2,
-                              offset: Offset(2, 4),
-                            ),
-                          ],
-                        ),
-                      //width: MediaQuery.of(context).size.width,
-                      //color: Color(0xFFf3eddf),
-                      width: 200,
-                      height: 200,
-                      child: Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Text(
-                                "198",
-                                style:
-                                    TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            //Divider(color: Colors.orange,),
-                            SizedBox(height: 5,),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                      shape: BeveledRectangleBorder()),
-                              onPressed: (){}, child: 
-                            Center(
-                              child: Text(
-                                "Total Orders", style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.green),  
-                              ),
-                            ),
-                        ),
-                        SizedBox(height: 10,),
-                            Center(child: CircleAvatar(
-                              backgroundColor: const Color.fromARGB(255, 218, 216, 216),
-                              child: Center(child: Icon(Icons.check))))
-                          ],
-                        ),
-                      ),
-                    ),
-                
-                SizedBox(width: 30,),
-                
-                Container(
-                  decoration: BoxDecoration(
-                      color:  Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 6,
-                          spreadRadius: 2,
-                          offset: Offset(2, 4),
-                        ),
-                      ],
-                    ),
-                  //width: MediaQuery.of(context).size.width,
-                  //color: Color(0xFFf3eddf),
-                  width: 200,
-                  height: 200,
-                  child: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            "300",
-                            style:
-                                TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              SizedBox(height: 20),
+              Text(
+                'Allocate Delivery Personnels',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold,color: Colors.white),
+              ),
+              SizedBox(height: 30),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  columnSpacing: 50,
+                  dataRowHeight: 60, // Adjust row height
+                  headingRowColor: MaterialStateColor.resolveWith(
+                      (states) => const Color.fromARGB(255, 178, 208, 223)),
+                  headingTextStyle:
+                      TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  dataRowColor: MaterialStateColor.resolveWith(
+                      (states) => Colors.grey.shade100),
+                  border: TableBorder.all(color: Colors.black54, width: 0.5),
+                  columns: [
+                    DataColumn(label: Text('Personel ID')),
+                    DataColumn(label: Text('Name')),
+                    DataColumn(label: Text('Email')),
+                    DataColumn(label: Text('Username')),
+                    DataColumn(label: Text('Joined On')),
+                    DataColumn(label: Text('Allocation')),
+                    
+                  ],
+                  rows: orders.map((order) {
+                    return DataRow(cells: [
+                      DataCell(Text(order['personelId'].toString())),
+                      DataCell(Text(order['name'])),
+                      DataCell(Text(order['email'])),
+                      DataCell(Text(order['username'])),
+                      DataCell(Text(order['joinedon'].toString())),
+                      DataCell(Column(
+                        children: [
+                          SizedBox(height: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>AssignOrder()));
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: BeveledRectangleBorder(),
+                                backgroundColor: Colors.green),
+                            child: Text('Assign Order'),
                           ),
-                        ),
-                        SizedBox(height: 10),
-                        //Divider(color: Colors.orange,),
-                        SizedBox(height: 5,),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                                  shape: BeveledRectangleBorder()),
-                          onPressed: (){}, child: 
-                        Center(
-                          child: Text(
-                            "Orders Today", style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.green),  
-                          ),
-                        ),
-                    ),
-                    SizedBox(height: 10,),
-                        Center(child: CircleAvatar(
-                          backgroundColor: const Color.fromARGB(255, 218, 216, 216),
-                          child: Center(child: Icon(Icons.check))))
-                      ],
-                    ),
-                  ),
-                ),
-                 ],
+                        ],
+                      )),
+                    ]);
+                  }).toList(),
                 ),
               ),
-        
-        
               SizedBox(height: 100),
               Container(
                 color: Colors.black,
@@ -367,10 +358,12 @@ class DeliveryHome extends StatelessWidget {
                   ],
                 ),
               ),
+
             ],
           ),
         ),
       ),
+
     );
   }
 }

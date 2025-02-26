@@ -14,7 +14,7 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         title: Center(
           child: Transform.translate(
             offset: Offset(-10.0, 0.0),
@@ -28,7 +28,6 @@ class About extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFF282d37),
       ),
-
       drawer: Drawer(
         width: 200,
         backgroundColor: Color(0xFF282d37),
@@ -167,7 +166,6 @@ class About extends StatelessWidget {
           ],
         ),
       ),
-      
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -176,27 +174,31 @@ class About extends StatelessWidget {
               height: 300,
               child: Stack(
                 children: [
-                  Positioned.fill(child: Image(image: AssetImage("asset/about_us2.jpg"),
-                  fit: BoxFit.cover,))
+                  Positioned.fill(
+                      child: Image(
+                    image: AssetImage("asset/about_us2.jpg"),
+                    fit: BoxFit.cover,
+                  ))
                 ],
               ),
             ),
-            SizedBox(height: 30,),
-
+            SizedBox(
+              height: 30,
+            ),
             Container(
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 6,
-                      spreadRadius: 2,
-                      offset: Offset(2, 4),
-                    ),
-                  ],
-                ),
-             // width: MediaQuery.of(context).size.width,
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 6,
+                    spreadRadius: 2,
+                    offset: Offset(2, 4),
+                  ),
+                ],
+              ),
+              // width: MediaQuery.of(context).size.width,
               //color: Color(0xFFf3eddf),
               width: 1000,
               height: 200,
@@ -208,13 +210,17 @@ class About extends StatelessWidget {
                     Center(
                       child: Text(
                         "About us",
-                        style:
-                            TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 28, fontWeight: FontWeight.bold),
                       ),
                     ),
                     SizedBox(height: 10),
-                    Divider(color: Colors.orange,),
-                    SizedBox(height: 5,),
+                    Divider(
+                      color: Colors.orange,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
                     Center(
                       child: Text(
                         "Agthia-Food Company focuses on sustainable and high-quality food concepts, aiming to enhance human health and the environment for future generations.",
@@ -252,13 +258,11 @@ class About extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white70, fontSize: 14),
                   ),
-
                   SizedBox(height: 10),
                   Padding(
                     padding: EdgeInsets.only(),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      
                       children: [
                         SizedBox(
                           width: 1400,
@@ -279,25 +283,25 @@ class About extends StatelessWidget {
                       ],
                     ),
                   ),
-
-                  SizedBox(height: 10,),
-
-                        Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.red
-                        )
-                      ),
-                      width: MediaQuery.of(context).size.width/1.1,
-                      height: 40,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              minimumSize: Size(MediaQuery.of(context).size.width/1.1, 40),
-                              shape: RoundedRectangleBorder()
-                          ),
-                          onPressed: (){}, child: Text("Subscribe",style: TextStyle(color: Colors.black),)),),
-
-
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.red)),
+                    width: MediaQuery.of(context).size.width / 1.1,
+                    height: 40,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                                MediaQuery.of(context).size.width / 1.1, 40),
+                            shape: RoundedRectangleBorder()),
+                        onPressed: () {},
+                        child: Text(
+                          "Subscribe",
+                          style: TextStyle(color: Colors.black),
+                        )),
+                  ),
                   SizedBox(height: 15),
                   Text("22260445",
                       style: TextStyle(
@@ -316,12 +320,9 @@ class About extends StatelessWidget {
                 ],
               ),
             ),
-                ],
-              ),
-            ),
-          
-        );
-
-
+          ],
+        ),
+      ),
+    );
   }
 }

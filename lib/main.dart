@@ -1,5 +1,6 @@
 import 'package:agthia/delivery_home.dart';
 import 'package:agthia/homescreen.dart';
+import 'package:agthia/restaurant_home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class Agthia extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueGrey
       ),
-      home: DeliveryHome(),
+      home: RestaurantHome(),
     );
   }
 }
