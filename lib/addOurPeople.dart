@@ -34,6 +34,7 @@ class AddOurPeople extends StatelessWidget {
               SizedBox(height: 15,),
               Container(
                 height: 150,
+                width: 800,
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey,width: 1)
                 ),

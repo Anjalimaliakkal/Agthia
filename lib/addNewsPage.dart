@@ -35,47 +35,56 @@ class addNewsPage extends StatelessWidget {
                       child: Text("Add News",style: TextStyle(fontSize: 20,fontFamily: 'Timesnewroman',fontWeight: FontWeight.bold),)),
                   SizedBox(height: 20,),
                   Text("Title",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w300),),
-                  Container(
-                    decoration:BoxDecoration(
-                    border: Border.all(color: Colors.grey)
-                    ),
-                    height: 120,
-                    child: TextFormField(
-                      maxLines: null,
-                      decoration: InputDecoration(
-                        labelText: '',
-                        border: InputBorder.none
+                  SizedBox(
+                    width: 800,
+                    child: Container(
+                      decoration:BoxDecoration(
+                      border: Border.all(color: Colors.grey)
                       ),
-
+                      height: 120,
+                      child: TextFormField(
+                        maxLines: null,
+                        decoration: InputDecoration(
+                          labelText: '',
+                          border: InputBorder.none
+                        ),
+                    
+                      ),
                     ),
                   ),
                   SizedBox(height: 20,),
                   Text("Content",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w300),),
-                  Container(
-                    decoration:BoxDecoration(
-                        border: Border.all(color: Colors.grey)
-                    ),
-                    height: 120,
-                    child: TextFormField(
-                      maxLines: null,
-                      decoration: InputDecoration(
-                          labelText: '',
-                          border: InputBorder.none
+                  SizedBox(
+                    width: 800,
+                    child: Container(
+                      decoration:BoxDecoration(
+                          border: Border.all(color: Colors.grey)
                       ),
-
+                      height: 120,
+                      child: TextFormField(
+                        maxLines: null,
+                        decoration: InputDecoration(
+                            labelText: '',
+                            border: InputBorder.none
+                        ),
+                    
+                      ),
                     ),
                   ),
                   SizedBox(height: 20,),
-                  Align(
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)
-                        )
-                      ),
-                        onPressed: (){}, child: Text("Save",style: TextStyle(color: Colors.white),)),
+                  SizedBox(
+                    width: 700,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)
+                          )
+                        ),
+                          onPressed: (){}, child: Text("Save",style: TextStyle(color: Colors.white),)),
+                    ),
                   )
                 ],
               ),

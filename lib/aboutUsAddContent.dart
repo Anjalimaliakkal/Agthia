@@ -44,69 +44,73 @@ class AboutUsAdd extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 15,),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border(top: BorderSide(color: Colors.blue,width: 4),),
-                  borderRadius: BorderRadius.circular(12)
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 10,),
-                      Text("Add about",style: TextStyle(fontFamily: 'Timesnewroman',fontSize: 20,fontWeight: FontWeight.bold),),
-                      SizedBox(height: 15,),
-                      Text("About (first paragraph)",style: TextStyle(fontSize: 19,fontFamily: 'Barlowthin',fontWeight: FontWeight.bold),),
-                      SizedBox(height: 5,),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey,width: 1)
-                        ),
-                        child: TextFormField(
-                          maxLines: null,
-                          decoration: InputDecoration(
-                              labelText:'',
-                              //contentPadding: EdgeInsets.all(2),
-                              border: InputBorder.none
-                          ),
-                          textAlignVertical: TextAlignVertical.top,
-                        ),
-                      ),
-                      SizedBox(height: 20,),
-                      Text("About (second paragraph) (optional)",style: TextStyle(fontSize: 19,fontFamily: 'Barlowthin',fontWeight: FontWeight.bold),),
-                      SizedBox(height: 5,),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey,width: 1)
-                        ),
-                        child: TextFormField(
-                          maxLines: null,
-                          decoration: InputDecoration(
-                              labelText: '',
-                              border: InputBorder.none
-                          ),
-                          textAlignVertical: TextAlignVertical.top,
-                        ),
-                      ),
-                      SizedBox(height: 20,),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)
-                              )
-                          ),
-                          onPressed: (){}, child: Text("Save",style: TextStyle(color: Colors.white,fontSize: 18),))
-
-                    ],
+              Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border(top: BorderSide(color: Colors.blue,width: 4),),
+                    borderRadius: BorderRadius.circular(12)
                   ),
-                )
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 10,),
+                        Text("Add about",style: TextStyle(fontFamily: 'Timesnewroman',fontSize: 20,fontWeight: FontWeight.bold),),
+                        SizedBox(height: 15,),
+                        Text("About (first paragraph)",style: TextStyle(fontSize: 19,fontFamily: 'Barlowthin',fontWeight: FontWeight.bold),),
+                        SizedBox(height: 5,),
+                        Container(
+                         // width: MediaQuery.of(context).size.width,
+                         width: 800,
+                          height: 150,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey,width: 1)
+                          ),
+                          child: TextFormField(
+                            maxLines: null,
+                            decoration: InputDecoration(
+                                labelText:'',
+                                //contentPadding: EdgeInsets.all(2),
+                                border: InputBorder.none
+                            ),
+                            textAlignVertical: TextAlignVertical.top,
+                          ),
+                        ),
+                        SizedBox(height: 20,),
+                        Text("About (second paragraph) (optional)",style: TextStyle(fontSize: 19,fontFamily: 'Barlowthin',fontWeight: FontWeight.bold),),
+                        SizedBox(height: 5,),
+                        Container(
+                          //width: MediaQuery.of(context).size.width,
+                          width: 800,
+                          height: 150,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey,width: 1)
+                          ),
+                          child: TextFormField(
+                            maxLines: null,
+                            decoration: InputDecoration(
+                                labelText: '',
+                                border: InputBorder.none
+                            ),
+                            textAlignVertical: TextAlignVertical.top,
+                          ),
+                        ),
+                        SizedBox(height: 20,),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)
+                                )
+                            ),
+                            onPressed: (){}, child: Text("Save",style: TextStyle(color: Colors.white,fontSize: 18),))
+                
+                      ],
+                    ),
+                  )
+                ),
               )],
           ),
         ),

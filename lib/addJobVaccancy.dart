@@ -35,7 +35,7 @@ class _AddJobVaccancyState extends State<AddJobVaccancy> {
           padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color.fromARGB(255, 207, 216, 224),
                 borderRadius: BorderRadius.circular(9)
             ),
             child: Padding(

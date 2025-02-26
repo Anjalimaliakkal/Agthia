@@ -32,16 +32,19 @@ class AddVisionPage extends StatelessWidget {
               SizedBox(height: 20,),
               Text("Vision",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w300),),
               SizedBox(height: 15,),
-              Container(
-                height: 150,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey,width: 1)
-                ),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelText: '',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(5)
+              SizedBox(
+                width: 800,
+                child: Container(
+                  height: 150,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey,width: 1)
+                  ),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: '',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.all(5)
+                    ),
                   ),
                 ),
               ),
