@@ -30,6 +30,8 @@ class Addwordsfromchairman extends StatelessWidget {
           backgroundColor: Color(0xFF282d37),
           actions: [IconButton(onPressed: (){}, icon: Icon(Icons.settings))],
         ),
+        backgroundColor: const Color.fromARGB(255, 189, 195, 181),
+        
         drawer: Drawer(
         width: 200,
         backgroundColor: Color(0xFF282d37),
@@ -168,40 +170,65 @@ class Addwordsfromchairman extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Add CEO Word",style: TextStyle(fontFamily: 'Timesnewroman',fontSize: 20,fontWeight: FontWeight.bold),),
-              SizedBox(height: 20,),
-              Text("CEO",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w300),),
-              SizedBox(height: 15,),
-              Container(
-                height: 150,
-                width: 800,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey,width: 1)
+      
+      body: Center(
+        
+        child: Container(
+          height: 400,
+          width: 600,
+          
+          decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 245, 247, 243),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 6,
+                      spreadRadius: 2,
+                      offset: Offset(2, 4),
+                    ),
+                  ],
                 ),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelText: '',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(5)
+                
+          //color: const Color.fromARGB(255, 120, 148, 205),
+          child: Padding(
+            
+            
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Add CEO Word",style: TextStyle(fontFamily: 'Timesnewroman',fontSize: 20,fontWeight: FontWeight.bold),),
+                SizedBox(height: 20,),
+                Text("CEO",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w300),),
+                SizedBox(height: 15,),
+                Container(
+                  height: 150,
+                  width: 800,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey,width: 1)
+                  ),
+                  child: TextFormField(
+                    
+                    decoration: InputDecoration(
+                        labelText: '',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.all(5)
+                        
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20,),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  )
-                ),
-                  onPressed: (){}, child: Text("Save",style: TextStyle(color: Colors.white),))
-            ],
+                SizedBox(height: 20,),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    )
+                  ),
+                    onPressed: (){}, child: Text("Save",style: TextStyle(color: Colors.white),))
+              ],
+            ),
           ),
         ),
       ),

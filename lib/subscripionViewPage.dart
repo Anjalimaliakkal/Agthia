@@ -30,6 +30,7 @@ class Subscripionviewpage extends StatelessWidget {
           backgroundColor: Color(0xFF282d37),
           actions: [IconButton(onPressed: (){}, icon: Icon(Icons.settings))],
         ),
+        backgroundColor:  const Color.fromARGB(255, 189, 195, 181),
         drawer: Drawer(
         width: 200,
         backgroundColor: Color(0xFF282d37),

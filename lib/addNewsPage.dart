@@ -30,6 +30,7 @@ class addNewsPage extends StatelessWidget {
         backgroundColor: Color(0xFF282d37),
         actions: [IconButton(onPressed: (){}, icon: Icon(Icons.settings))],
       ),
+      backgroundColor:  const Color.fromARGB(255, 189, 195, 181),
       drawer: Drawer(
         width: 200,
         backgroundColor: Color(0xFF282d37),
@@ -168,71 +169,88 @@ class addNewsPage extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        child: SingleChildScrollView(
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: Alignment.center,
-                      child: Text("Add News",style: TextStyle(fontSize: 20,fontFamily: 'Timesnewroman',fontWeight: FontWeight.bold),)),
-                  SizedBox(height: 20,),
-                  Text("Title",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w300),),
-                  SizedBox(
-                    width: 800,
-                    child: Container(
-                      decoration:BoxDecoration(
-                      border: Border.all(color: Colors.grey)
-                      ),
-                      height: 120,
-                      child: TextFormField(
-                        maxLines: null,
-                        decoration: InputDecoration(
-                          labelText: '',
-                          border: InputBorder.none
-                        ),
-                    
-                      ),
+      body: Center(
+        child: Container(
+          width: 600,
+          height: 500,
+          decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 239, 241, 237),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 6,
+                      spreadRadius: 2,
+                      offset: Offset(2, 4),
                     ),
-                  ),
-                  SizedBox(height: 20,),
-                  Text("Content",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w300),),
-                  SizedBox(
-                    width: 800,
-                    child: Container(
-                      decoration:BoxDecoration(
-                          border: Border.all(color: Colors.grey)
-                      ),
-                      height: 120,
-                      child: TextFormField(
-                        maxLines: null,
-                        decoration: InputDecoration(
+                  ],
+                ),
+          //color:  Color.fromARGB(255, 189, 195, 181),
+          child: SingleChildScrollView(
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                        child: Text("Add News",style: TextStyle(fontSize: 20,fontFamily: 'Timesnewroman',fontWeight: FontWeight.bold),)),
+                    SizedBox(height: 20,),
+                    Text("Title",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w300),),
+                    SizedBox(
+                      width: 800,
+                      child: Container(
+                        decoration:BoxDecoration(
+                        border: Border.all(color: Colors.grey)
+                        ),
+                        height: 120,
+                        child: TextFormField(
+                          maxLines: null,
+                          decoration: InputDecoration(
                             labelText: '',
                             border: InputBorder.none
+                          ),
+                      
                         ),
-                    
                       ),
                     ),
-                  ),
-                  SizedBox(height: 20,),
-                  SizedBox(
-                    width: 700,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)
-                          )
+                    SizedBox(height: 20,),
+                    Text("Content",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w300),),
+                    SizedBox(
+                      width: 800,
+                      child: Container(
+                        decoration:BoxDecoration(
+                            border: Border.all(color: Colors.grey)
                         ),
-                          onPressed: (){}, child: Text("Save",style: TextStyle(color: Colors.white),)),
+                        height: 120,
+                        child: TextFormField(
+                          maxLines: null,
+                          decoration: InputDecoration(
+                              labelText: '',
+                              border: InputBorder.none
+                          ),
+                      
+                        ),
+                      ),
                     ),
-                  )
-                ],
+                    SizedBox(height: 20,),
+                    SizedBox(
+                      width: 700,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)
+                            )
+                          ),
+                            onPressed: (){}, child: Text("Save",style: TextStyle(color: Colors.white),)),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

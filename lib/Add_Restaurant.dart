@@ -272,14 +272,16 @@ class _AddRestaurantState extends State<AddRestaurant> {
         ),
       ),
       body: Container(
+        
          width: double.infinity,
         height: double.infinity,
         //color: Color.fromARGB(255, 207, 198, 198),
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 200, 213, 219),
-            image: DecorationImage(
-                image: AssetImage("asset/background_image1.jpg"),
-                fit: BoxFit.cover)),
+            // image: DecorationImage(
+            //     image: AssetImage("asset/background_image1.jpg"),
+            //     fit: BoxFit.cover)
+            ),
 
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -293,7 +295,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                   Center(
                       child: Text("Add Restaurant",
                           style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold,color: Colors.white))),
+                              fontSize: 22, fontWeight: FontWeight.bold,))),
                   SizedBox(height: 20),
               
                   // Restaurant Name
@@ -309,7 +311,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                     return null;
                   },
                         decoration: InputDecoration(
-                          labelText: "Restaurant Name",labelStyle: TextStyle(color: Colors.white),
+                          labelText: "Restaurant Name",labelStyle: TextStyle(),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide(color: Colors.white,width: 10),
@@ -334,7 +336,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                     return null;
                   },
                         decoration: InputDecoration(
-                          labelText: "Register Number",labelStyle: TextStyle(color: Colors.white),
+                          labelText: "Register Number",labelStyle: TextStyle(),
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -345,7 +347,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                   SizedBox(height: 20),
               
                   // Restaurant Status
-                  Center(child: Text("Restaurant Status",style: TextStyle(color: Colors.white),)),
+                  Center(child: Text("Restaurant Status",style: TextStyle(),)),
                   Center(
                     child: SizedBox(
                       width: 200,
@@ -363,7 +365,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                                 },
                               ),
                             ),
-                            Center(child: Text("Active",style: TextStyle(color: Colors.white),)),
+                            Center(child: Text("Active",style: TextStyle(),)),
                             SizedBox(width: 20),
                             Center(
                               child: Radio(
@@ -376,7 +378,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                                 },
                               ),
                             ),
-                            Center(child: Text("Inactive",style: TextStyle(color: Colors.white),)),
+                            Center(child: Text("Inactive",style: TextStyle(),)),
                           ],
                         ),
                       ),
@@ -385,7 +387,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                   SizedBox(height: 20),
                   // Brands Dropdown
                   SizedBox(
-                      width: 1000, child: Center(child: Text("Select Brand",style:  TextStyle(color: Colors.white),))),
+                      width: 1000, child: Center(child: Text("Select Brand",style:  TextStyle(),))),
                   SizedBox(height: 10),
                   Center(
                     child: SizedBox(
@@ -411,7 +413,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                   },
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: "Brand",labelStyle: TextStyle(color: Colors.white),
+                          labelText: "Brand",labelStyle: TextStyle(),
                         ),
                       ),
                     ),
@@ -436,7 +438,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                   },
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            labelText: "Seating Capacity",labelStyle: TextStyle(color: Colors.white),
+                            labelText: "Seating Capacity",labelStyle: TextStyle(),
                             border: OutlineInputBorder(),
                           ),
                         ),
