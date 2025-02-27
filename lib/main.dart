@@ -1,5 +1,8 @@
 import 'package:agthia/aboutUsHomePage.dart';
+import 'package:agthia/backend_homepages.dart';
 import 'package:agthia/controlpanel.dart';
+import 'package:agthia/delivery_allocation.dart';
+import 'package:agthia/login.dart';
 import 'package:agthia/ourpeopleHomePage.dart';
 import 'package:agthia/splashscreen.dart';
 import 'package:agthia/visionhomepage.dart';
@@ -34,7 +37,7 @@ class Agthia extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueGrey
       ),
-      home: Controlpanel(),
+      home: DeliveryAllocation(),
     );
   }
 }

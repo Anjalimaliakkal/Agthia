@@ -1,9 +1,13 @@
 import 'package:agthia/Restaurant_changepassword.dart';
-import 'package:agthia/Restaurant_viewdelivery.dart';
-import 'package:agthia/Restaurant_vieworders.dart';
-import 'package:agthia/delivery_allocation.dart';
+import 'package:agthia/aboutUsHomePage.dart';
+import 'package:agthia/addJobVaccancy.dart';
+import 'package:agthia/addNewsPage.dart';
+import 'package:agthia/addWordsfromChairman.dart';
+import 'package:agthia/backend_homepages.dart';
 import 'package:agthia/login.dart';
-import 'package:agthia/restaurant_home.dart';
+import 'package:agthia/ourpeopleHomePage.dart';
+import 'package:agthia/subscripionViewPage.dart';
+import 'package:agthia/visionhomepage.dart';
 import 'package:flutter/material.dart';
 
 class AddRestaurant extends StatefulWidget {
@@ -69,7 +73,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                         color: Colors.white)), // Profile Icon
                 SizedBox(width: 5),
                 Text(
-                  "RESTAURANT",
+                  "Admin",
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
@@ -95,7 +99,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
               PopupMenuItem<String>(
                 enabled: false,
                 child: Text(
-                  "Restaurant",
+                  "Admin",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -150,7 +154,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                     height: 7,
                   ),
                   Text(
-                    "Restaurant",
+                    "Admin",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -165,11 +169,80 @@ class _AddRestaurantState extends State<AddRestaurant> {
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RestaurantHome()));
+                    MaterialPageRoute(builder: (context) => AdminHome()));
+              },
+            ),
+            ExpansionTile(
+              //tilePadding: const EdgeInsets.only(left: 15, right: 15),
+              title: Text(
+                "About us",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              children: [
+                ListTile(
+                  title: Text(
+                    "About",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AboutUsHomePage()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                ListTile(
+                  title: Text(
+                    "Our People",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Ourpeoplehomepage()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                ListTile(
+                  title: Text(
+                    "Mission/Vision",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Visionhomepage()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                ListTile(
+                  title: Text(
+                    "Word from Chairman",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Addwordsfromchairman()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+              ],
+            ),
+            ListTile(
+              title: Text("Media",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => addNewsPage()));
               },
             ),
             ListTile(
-              title: Text("Add Restaurant",
+              title: Text("Manage Restaurants",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
@@ -178,36 +251,21 @@ class _AddRestaurantState extends State<AddRestaurant> {
               },
             ),
             ListTile(
-              title: Text("View Orders",
+              title: Text("Subscriptions",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => RestaurantVieworders()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Subscripionviewpage()));
               },
             ),
             ListTile(
-              title: Text("View Delivery Personnel",
+              title: Text("Careers",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => RestaurantViewdelivery()));
-              },
-            ),
-            ListTile(
-              title: Text("Allocate Delivery Personnel",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DeliveryAllocation()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddJobVaccancy()));
               },
             ),
           ],

@@ -1,4 +1,3 @@
-import 'package:agthia/Add_Restaurant.dart';
 import 'package:agthia/Restaurant_changepassword.dart';
 import 'package:agthia/Restaurant_vieworders.dart';
 import 'package:agthia/delivery_allocation.dart';
@@ -147,17 +146,6 @@ class RestaurantViewdelivery extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => RestaurantHome()));
-              },
-            ),
-            ListTile(
-              title: Text("Add Restaurant",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AddRestaurant()));
               },
             ),
             ListTile(

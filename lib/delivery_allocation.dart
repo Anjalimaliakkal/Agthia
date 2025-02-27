@@ -158,17 +158,6 @@ class _DeliveryAllocationState extends State<DeliveryAllocation> {
               },
             ),
             ListTile(
-              title: Text("Add Restaurant",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AddRestaurant()));
-              },
-            ),
-            ListTile(
               title: Text("View Orders",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),

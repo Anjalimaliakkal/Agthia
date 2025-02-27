@@ -1,3 +1,11 @@
+import 'package:agthia/Add_Restaurant.dart';
+import 'package:agthia/aboutUsHomePage.dart';
+import 'package:agthia/addJobVaccancy.dart';
+import 'package:agthia/addWordsfromChairman.dart';
+import 'package:agthia/backend_homepages.dart';
+import 'package:agthia/ourpeopleHomePage.dart';
+import 'package:agthia/subscripionViewPage.dart';
+import 'package:agthia/visionhomepage.dart';
 import 'package:flutter/material.dart';
 
 class addNewsPage extends StatelessWidget {
@@ -21,6 +29,144 @@ class addNewsPage extends StatelessWidget {
         ),
         backgroundColor: Color(0xFF282d37),
         actions: [IconButton(onPressed: (){}, icon: Icon(Icons.settings))],
+      ),
+      drawer: Drawer(
+        width: 200,
+        backgroundColor: Color(0xFF282d37),
+        child: ListView(
+          padding: EdgeInsets.all(12),
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Color(0xFF282d37)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.person),
+                  ),
+                  SizedBox(
+                    height: 7,
+                  ),
+                  Text(
+                    "Admin",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  )
+                ],
+              ),
+            ),
+            ListTile(
+              title: Text("Home",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AdminHome()));
+              },
+            ),
+            ExpansionTile(
+              //tilePadding: const EdgeInsets.only(left: 15, right: 15),
+              title: Text(
+                "About us",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              children: [
+                ListTile(
+                  title: Text(
+                    "About",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AboutUsHomePage()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                ListTile(
+                  title: Text(
+                    "Our People",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Ourpeoplehomepage()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                ListTile(
+                  title: Text(
+                    "Mission/Vision",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Visionhomepage()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                ListTile(
+                  title: Text(
+                    "Word from Chairman",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Addwordsfromchairman()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+              ],
+            ),
+            ListTile(
+              title: Text("Media",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => addNewsPage()));
+              },
+            ),
+            ListTile(
+              title: Text("Manage Restaurants",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddRestaurant()));
+              },
+            ),
+            ListTile(
+              title: Text("Subscriptions",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Subscripionviewpage()));
+              },
+            ),
+            ListTile(
+              title: Text("Careers",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddJobVaccancy()));
+              },
+            ),
+          ],
+        ),
       ),
       body: Container(
         child: SingleChildScrollView(
