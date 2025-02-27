@@ -1,8 +1,8 @@
 import 'package:agthia/aboutUsAddContent.dart';
 import 'package:flutter/material.dart';
 
-class AboutUsHomePage extends StatelessWidget {
-  const AboutUsHomePage({super.key});
+class Controlpanel extends StatelessWidget {
+  const Controlpanel({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class AboutUsHomePage extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    "About Us",
+                    "Control Panel",
                     style: TextStyle(
                         fontSize: 20,
                         color: const Color.fromARGB(255, 70, 95, 108),
@@ -66,33 +66,6 @@ class AboutUsHomePage extends StatelessWidget {
                   TextButton(onPressed: (){}, child: Text("Logout",style: TextStyle(color: Colors.blue,fontSize: 14),)),
                 ],
               ),
-              SizedBox(height: 15,),
-              Container(
-                width: MediaQuery.of(context).size.width,
-               // height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border(top: BorderSide(color: Colors.grey.shade300,width: 4)),
-                  borderRadius: BorderRadius.circular(9,)
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("No Content",style: TextStyle(fontSize: 16),),
-                      SizedBox(height: 10,),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder()
-                        ),
-                          onPressed: (){
-                             Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutUsAdd()));
-                          }, child: Text("+ Add",style: TextStyle(color: Colors.black),))
-                    ],
-                  ),
-                ),
-              )
             ],
           ),
         ),
