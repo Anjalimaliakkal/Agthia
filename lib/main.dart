@@ -1,19 +1,25 @@
-import 'package:agthia/Add_Restaurant.dart';
-import 'package:agthia/aboutUsAddContent.dart';
-import 'package:agthia/aboutUsHomePage.dart';
-import 'package:agthia/addJobVaccancy.dart';
-import 'package:agthia/addNewsPage.dart';
-import 'package:agthia/addOurPeople.dart';
-import 'package:agthia/addVisionPage.dart';
-import 'package:agthia/addWordsfromChairman.dart';
-import 'package:agthia/delivery_home.dart';
-import 'package:agthia/homescreen.dart';
-import 'package:agthia/login.dart';
-import 'package:agthia/restaurant_home.dart';
-import 'package:agthia/subscripionViewPage.dart';
+import 'package:agthia/backend_homepages.dart';
+import 'package:agthia/backendlogin.dart';
+import 'package:agthia/delivery_allocation.dart';
+import 'package:agthia/splashscreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() 
+async{
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: 'AIzaSyDsQ8TrWI4uoespSrHIHhRXMu8RLuYzjI0', 
+      appId: '1:508611247978:android:90eab59dc91e76a31aaf13', 
+      messagingSenderId: '508611247978',
+       projectId: 'agthia-fb9e4')
+    );
+    print("firebase initialisation successfull");
+  } catch (e) {
+    print("error initialisation$e");
+  }
   runApp(const Agthia());
 }
 class Agthia extends StatelessWidget {
@@ -27,7 +33,7 @@ class Agthia extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueGrey
       ),
-      home: Login(),
+      home: Splashscreen(),
     );
   }
 }

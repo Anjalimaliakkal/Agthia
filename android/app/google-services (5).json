@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "508611247978",
+    "project_id": "agthia-fb9e4",
+    "storage_bucket": "agthia-fb9e4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508611247978:android:90eab59dc91e76a31aaf13",
+        "android_client_info": {
+          "package_name": "com.example.agthia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5yQCCCMiMpbtPnH8d9Uxuc8vli8dC0u4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
