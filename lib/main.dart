@@ -1,4 +1,4 @@
-import 'package:agthia/login.dart';
+import 'package:agthia/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +30,7 @@ class Agthia extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueGrey
       ),
-      home: Login(),
+      home: Splashscreen(),
     );
   }
 }

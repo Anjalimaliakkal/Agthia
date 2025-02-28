@@ -1,4 +1,4 @@
-import 'package:agthia/homescreen.dart';
+import 'package:agthia/User_pages/homescreen.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -226,7 +226,7 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: 1400,
+                          width: MediaQuery.of(context).size.width / 1.1,
                           child: Center(
                             child: TextField(
                               textAlign: TextAlign.center,
