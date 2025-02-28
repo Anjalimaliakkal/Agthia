@@ -4,7 +4,7 @@ import 'package:agthia/Admin_pages/addJobVaccancy.dart';
 import 'package:agthia/Admin_pages/addNewsPage.dart';
 import 'package:agthia/Admin_pages/addVisionPage.dart';
 import 'package:agthia/Admin_pages/addWordsfromChairman.dart';
-import 'package:agthia/backend_pages/backend_homepages.dart';
+import 'package:agthia/Admin_pages/admin_home.dart';
 import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
 import 'package:agthia/Admin_pages/subscripionViewPage.dart';
 import 'package:flutter/material.dart';
@@ -255,7 +255,7 @@ class Visionhomepage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "No Mission Content",
+                            "No Mission / Vision Content",
                             style: TextStyle(fontSize: 16),
                           ),
                           SizedBox(
@@ -276,42 +276,7 @@ class Visionhomepage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10,),
-                                Container(
-                    width: MediaQuery.of(context).size.width,
-                    // height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border(
-                            top: BorderSide(color: Colors.grey.shade300, width: 4)),
-                        borderRadius: BorderRadius.circular(
-                          9,
-                        )),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "No Vision Content",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder()),
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>AddVisionPage()));
-                              },
-                              child: Text(
-                                "+ Add",
-                                style: TextStyle(color: Colors.black),
-                              ))
-                        ],
-                      ),
-                    ),
-                  )
+                              
                 ],
               ),
             ),

@@ -1,9 +1,9 @@
 import 'package:agthia/Admin_pages/addJobVaccancy.dart';
 import 'package:agthia/Admin_pages/addNewsPage.dart';
+import 'package:agthia/Admin_pages/admin_home.dart';
 import 'package:agthia/Restaurant_pages/Restaurant_changepassword.dart';
 import 'package:agthia/Admin_pages/aboutUsHomePage.dart';
 import 'package:agthia/Admin_pages/addWordsfromChairman.dart';
-import 'package:agthia/backend_pages/backend_homepages.dart';
 import 'package:agthia/login.dart';
 import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
 import 'package:agthia/Admin_pages/subscripionViewPage.dart';

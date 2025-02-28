@@ -1,4 +1,6 @@
-import 'package:agthia/splashscreen.dart';
+import 'package:agthia/backend_pages/backend_Admin/add_wordsfromChairman.dart';
+import 'package:agthia/backend_pages/backend_User/Ourpeople.dart';
+import 'package:agthia/backend_pages/backend_User/word_from_chairman.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +32,7 @@ class Agthia extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueGrey
       ),
-      home: Splashscreen(),
+      home: WordFromChairmanpage(),
     );
   }
 }

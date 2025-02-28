@@ -3,14 +3,13 @@ import 'package:agthia/Admin_pages/aboutUsHomePage.dart';
 import 'package:agthia/Admin_pages/addJobVaccancy.dart';
 import 'package:agthia/Admin_pages/addNewsPage.dart';
 import 'package:agthia/Admin_pages/addWordsfromChairman.dart';
-import 'package:agthia/backend_pages/backend_homepages.dart';
 import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
 import 'package:agthia/Admin_pages/subscripionViewPage.dart';
 import 'package:agthia/Admin_pages/visionhomepage.dart';
 import 'package:flutter/material.dart';
 
-class AdminHomepage extends StatelessWidget {
-  const AdminHomepage({super.key});
+class AdminHome extends StatelessWidget {
+  const AdminHome({super.key});
 
   @override
   Widget build(BuildContext context) {
