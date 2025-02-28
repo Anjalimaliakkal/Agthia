@@ -1,10 +1,5 @@
-import 'package:agthia/User_pages/news_1.dart';
-import 'package:agthia/User_pages/news_2.dart';
-import 'package:agthia/User_pages/news_3.dart';
-import 'package:agthia/User_pages/news_4.dart';
-import 'package:agthia/backend_pages/backend_Admin/add_wordsfromChairman.dart';
-import 'package:agthia/backend_pages/backend_User/Ourpeople.dart';
-import 'package:agthia/backend_pages/backend_User/word_from_chairman.dart';
+import 'package:agthia/Admin_pages/admin_home.dart';
+import 'package:agthia/DeliveryPersonnel_pages/delivery_home.dart';
 import 'package:agthia/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +32,7 @@ class Agthia extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueGrey
       ),
-      home: News4(),
+      home: Splashscreen(),
     );
   }
 }

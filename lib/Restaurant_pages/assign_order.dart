@@ -216,9 +216,10 @@ class _AssignOrder extends State<AssignOrder> {
         //color: Color.fromARGB(255, 207, 198, 198),
         decoration: BoxDecoration(
             color: const Color.fromARGB(255, 200, 213, 219),
-            image: DecorationImage(
-                image: AssetImage("asset/background_image1.jpg"),
-                fit: BoxFit.cover)),
+            // image: DecorationImage(
+            //     image: AssetImage("asset/image1.jpg"),
+            //     fit: BoxFit.cover)/
+            ),
 
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -234,7 +235,7 @@ class _AssignOrder extends State<AssignOrder> {
                             style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white))),
+                               ))),
                     SizedBox(height: 20),
 
                     Center(
@@ -250,11 +251,11 @@ class _AssignOrder extends State<AssignOrder> {
                           },
                           decoration: InputDecoration(
                             labelText: "Order ID",
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle: TextStyle(),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide:
-                                  BorderSide(color: Colors.white, width: 10),
+                                  BorderSide( width: 10),
                             ),
                           ),
                         ),
@@ -275,7 +276,7 @@ class _AssignOrder extends State<AssignOrder> {
                           },
                           decoration: InputDecoration(
                             labelText: "Address",
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle: TextStyle(),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -296,7 +297,7 @@ class _AssignOrder extends State<AssignOrder> {
                           },
                           decoration: InputDecoration(
                             labelText: "Item Count",
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle: TextStyle(),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -319,7 +320,7 @@ class _AssignOrder extends State<AssignOrder> {
                           },
                           decoration: InputDecoration(
                             labelText: "Address",
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle: TextStyle(),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -341,7 +342,7 @@ class _AssignOrder extends State<AssignOrder> {
                           },
                           decoration: InputDecoration(
                             labelText: "Item Name",
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle: TextStyle(),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -364,7 +365,7 @@ class _AssignOrder extends State<AssignOrder> {
                           },
                           decoration: InputDecoration(
                             labelText: "Shipping Charge",
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle: TextStyle(),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -386,7 +387,7 @@ class _AssignOrder extends State<AssignOrder> {
                           },
                           decoration: InputDecoration(
                             labelText: "Total Price",
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle: TextStyle(),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -405,7 +406,7 @@ class _AssignOrder extends State<AssignOrder> {
                         child: Center(
                             child: Text(
                           "Payment method",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(),
                         ))),
                     SizedBox(height: 10),
                     Center(
@@ -433,7 +434,7 @@ class _AssignOrder extends State<AssignOrder> {
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: "Payment Method",
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle: TextStyle(),
                           ),
                         ),
                       ),

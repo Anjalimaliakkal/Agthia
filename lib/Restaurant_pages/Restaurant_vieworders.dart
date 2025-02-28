@@ -197,6 +197,7 @@ class RestaurantVieworders extends StatelessWidget {
           fit: BoxFit.cover)
         ),
         child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
           child: Column(
             children: [
               SizedBox(height: 20),
@@ -209,7 +210,7 @@ class RestaurantVieworders extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                   columnSpacing: 50,
-                  dataRowHeight: 100, // Adjust row height
+                  dataRowHeight: 200, // Adjust row height
                   headingRowColor: MaterialStateColor.resolveWith(
                       (states) => const Color.fromARGB(255, 178, 208, 223)),
                   headingTextStyle:

@@ -1,10 +1,10 @@
 import 'package:agthia/User_pages/About.dart';
 import 'package:agthia/User_pages/brandspage.dart';
-import 'package:agthia/Admin_pages/carreerpage.dart';
-import 'package:agthia/Admin_pages/contactus.dart';
+import 'package:agthia/User_pages/carreerpage.dart';
+import 'package:agthia/User_pages/contactus.dart';
 import 'package:agthia/User_pages/dinand_reservation.dart';
 import 'package:agthia/User_pages/homescreen.dart';
-import 'package:agthia/Admin_pages/mediapage.dart';
+import 'package:agthia/User_pages/mediapage.dart';
 import 'package:agthia/User_pages/mission.dart';
 import 'package:agthia/User_pages/ourpeople.dart';
 import 'package:agthia/User_pages/words_from_chairman.dart';

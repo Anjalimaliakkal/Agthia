@@ -194,6 +194,7 @@ class RestaurantViewdelivery extends StatelessWidget {
           fit: BoxFit.cover)
         ),
         child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
           child: Column(
             children: [
               SizedBox(height: 20),
@@ -269,7 +270,7 @@ class RestaurantViewdelivery extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: 1400,
+                            width: MediaQuery.of(context).size.width / 1.1,
                             child: Center(
                               child: TextField(
                                 textAlign: TextAlign.center,

@@ -23,18 +23,19 @@ class DeliveryHome extends StatelessWidget {
         ),
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFF282d37),
-
         actions: [
           PopupMenuButton<String>(
-      child: Row(
+            child: Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: const Color.fromARGB(255, 188, 187, 187),
-                  child: Icon(Icons.person, color: Colors.white)), // Profile Icon
+                    backgroundColor: const Color.fromARGB(255, 188, 187, 187),
+                    child: Icon(Icons.person,
+                        color: Colors.white)), // Profile Icon
                 SizedBox(width: 5),
                 Text(
                   "DELIVERY PERSONNEL",
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(width: 5),
                 Icon(Icons.arrow_drop_down)
@@ -42,10 +43,14 @@ class DeliveryHome extends StatelessWidget {
             ),
             onSelected: (value) {
               if (value == 'change_password') {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>DeliveryChangepassword()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DeliveryChangepassword()));
                 // Navigate to change password screen
               } else if (value == 'logout') {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Login()));
                 // Perform logout action
               }
             },
@@ -88,7 +93,6 @@ class DeliveryHome extends StatelessWidget {
           SizedBox(width: 10),
         ],
       ),
-
       drawer: Drawer(
         width: 200,
         backgroundColor: Color(0xFF282d37),
@@ -152,223 +156,154 @@ class DeliveryHome extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        //color: Color.fromARGB(255, 207, 198, 198), 
-        decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage("asset/background_image1.jpg"),
-          fit: BoxFit.cover)
-        ),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              SizedBox(height: 100,),
-              Center(
-                child: Row(
-                  children: [
-                    SizedBox(width: 550,),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 6,
-                              spreadRadius: 2,
-                              offset: Offset(2, 4),
-                            ),
-                          ],
-                        ),
-                      //width: MediaQuery.of(context).size.width,
-                      //color: Color(0xFFf3eddf),
-                      width: 200,
-                      height: 200,
-                      child: Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Text(
-                                "198",
-                                style:
-                                    TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            //Divider(color: Colors.orange,),
-                            SizedBox(height: 5,),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                      shape: BeveledRectangleBorder()),
-                              onPressed: (){}, child: 
-                            Center(
-                              child: Text(
-                                "Total Orders", style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.green),  
-                              ),
-                            ),
-                        ),
-                        SizedBox(height: 10,),
-                            Center(child: CircleAvatar(
-                              backgroundColor: const Color.fromARGB(255, 218, 216, 216),
-                              child: Center(child: Icon(Icons.check))))
-                          ],
-                        ),
-                      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 50), // Reduced spacing
+
+            // Restaurant Count Container
+            Center(
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 6,
+                      spreadRadius: 2,
+                      offset: Offset(2, 4),
                     ),
-                
-                SizedBox(width: 30,),
-                
-                Container(
-                  decoration: BoxDecoration(
-                      color:  Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 6,
-                          spreadRadius: 2,
-                          offset: Offset(2, 4),
-                        ),
-                      ],
-                    ),
-                  //width: MediaQuery.of(context).size.width,
-                  //color: Color(0xFFf3eddf),
-                  width: 200,
-                  height: 200,
-                  child: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            "300",
-                            style:
-                                TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        //Divider(color: Colors.orange,),
-                        SizedBox(height: 5,),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                                  shape: BeveledRectangleBorder()),
-                          onPressed: (){}, child: 
-                        Center(
-                          child: Text(
-                            "Orders Today", style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.green),  
-                          ),
-                        ),
-                    ),
-                    SizedBox(height: 10,),
-                        Center(child: CircleAvatar(
-                          backgroundColor: const Color.fromARGB(255, 218, 216, 216),
-                          child: Center(child: Icon(Icons.check))))
-                      ],
-                    ),
-                  ),
+                  ],
                 ),
-                 ],
-                ),
-              ),
-        
-        
-              SizedBox(height: 100),
-              Container(
-                color: Colors.black,
-                padding: EdgeInsets.only(),
+                width:
+                    MediaQuery.of(context).size.width * 0.8, // Responsive width
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Divider(color: Colors.white),
-                    SizedBox(height: 10),
-                    Text(
-                      "CONTACT",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold),
+                    const Text(
+                      "105",
+                      style:
+                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      "AL-SHARIQA TOWER\nFLOOR 7\nJABER AL MUBARAK STREET, BLOCK 2\nKUWAIT CITY",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: const BeveledRectangleBorder(),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        "Registered Restaurants",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green),
+                      ),
                     ),
-                    SizedBox(height: 15),
-                    Text(
-                      "Join our mailing list for updates\nGet news & other events",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                    const SizedBox(height: 10),
+                    const CircleAvatar(
+                      backgroundColor: Color.fromARGB(255, 218, 216, 216),
+                      child: Icon(Icons.check),
                     ),
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: EdgeInsets.only(),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width / 1.1,
-                            child: Center(
-                              child: TextField(
-                                textAlign: TextAlign.center,
-                                decoration: InputDecoration(
-                                  hintText: "Email",
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(),
-                                  ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 50),
+
+            Container(
+              color: Colors.black,
+              padding: EdgeInsets.only(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Divider(color: Colors.white),
+                  SizedBox(height: 10),
+                  Text(
+                    "CONTACT",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "AL-SHARIQA TOWER\nFLOOR 7\nJABER AL MUBARAK STREET, BLOCK 2\nKUWAIT CITY",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
+                  SizedBox(height: 15),
+                  Text(
+                    "Join our mailing list for updates\nGet news & other events",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white70, fontSize: 14),
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: EdgeInsets.only(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 1.1,
+                          child: Center(
+                            child: TextField(
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                hintText: "Email",
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(),
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      decoration:
-                          BoxDecoration(border: Border.all(color: Colors.red)),
-                      width: MediaQuery.of(context).size.width / 1.1,
-                      height: 40,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              minimumSize: Size(
-                                  MediaQuery.of(context).size.width / 1.1, 40),
-                              shape: RoundedRectangleBorder()),
-                          onPressed: () {},
-                          child: Text(
-                            "Subscribe",
-                            style: TextStyle(color: Colors.black),
-                          )),
-                    ),
-                    SizedBox(height: 15),
-                    Text("22260445",
-                        style: TextStyle(
-                            color: Colors.pink[200],
-                            fontWeight: FontWeight.bold)),
-                    Text("INFO@AGTHIA-FOOD.COM.KW",
-                        style: TextStyle(color: Colors.pink[200])),
-                    SizedBox(height: 10),
-                    Divider(color: Colors.white),
-                    SizedBox(height: 5),
-                    Icon(
-                      Icons.copyright,
-                      color: Colors.white,
-                    ),
-                    Text("Copyright", style: TextStyle(color: Colors.white)),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.red)),
+                    width: MediaQuery.of(context).size.width / 1.1,
+                    height: 40,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                                MediaQuery.of(context).size.width / 1.1, 40),
+                            shape: RoundedRectangleBorder()),
+                        onPressed: () {},
+                        child: Text(
+                          "Subscribe",
+                          style: TextStyle(color: Colors.black),
+                        )),
+                  ),
+                  SizedBox(height: 15),
+                  Text("22260445",
+                      style: TextStyle(
+                          color: Colors.pink[200],
+                          fontWeight: FontWeight.bold)),
+                  Text("INFO@AGTHIA-FOOD.COM.KW",
+                      style: TextStyle(color: Colors.pink[200])),
+                  SizedBox(height: 10),
+                  Divider(color: Colors.white),
+                  SizedBox(height: 5),
+                  Icon(
+                    Icons.copyright,
+                    color: Colors.white,
+                  ),
+                  Text("Copyright", style: TextStyle(color: Colors.white)),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -169,92 +169,65 @@ class RestaurantHome extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        //color: Color.fromARGB(255, 207, 198, 198),
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("asset/background_image1.jpg"),
-                fit: BoxFit.cover)),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 100,
+      body: SingleChildScrollView(
+  child: Column(
+    children: [
+      SizedBox(height: 100),
+
+      Center(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6,
+                spreadRadius: 2,
+                offset: Offset(2, 4),
               ),
-              Center(
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 600,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 6,
-                            spreadRadius: 2,
-                            offset: Offset(2, 4),
-                          ),
-                        ],
-                      ),
-                      //width: MediaQuery.of(context).size.width,
-                      //color: Color(0xFFf3eddf),
-                      width: 300,
-                      height: 200,
-                      child: Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Text(
-                                "105",
-                                style: TextStyle(
-                                    fontSize: 28, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            //Divider(color: Colors.orange,),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  shape: BeveledRectangleBorder()),
-                              onPressed: () {},
-                              child: Center(
-                                child: Text(
-                                  "Registered Restaurants",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.green),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Center(
-                                child: CircleAvatar(
-                                    backgroundColor: const Color.fromARGB(
-                                        255, 218, 216, 216),
-                                    child: Center(child: Icon(Icons.check))))
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+            ],
+          ),
+          width: MediaQuery.of(context).size.width * 0.8, // Responsive width
+          height: 200,
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "105",
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
-              ),
-              SizedBox(height: 100),
-              Container(
+                SizedBox(height: 10),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: BeveledRectangleBorder(),
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    "Registered Restaurants",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green),
+                  ),
+                ),
+                SizedBox(height: 10),
+                CircleAvatar(
+                  backgroundColor: const Color.fromARGB(255, 218, 216, 216),
+                  child: Icon(Icons.check),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+
+      SizedBox(height: 100),
+
+      // Contact Section
+       Container(
                 color: Colors.black,
                 padding: EdgeInsets.only(),
                 child: Column(
@@ -343,10 +316,9 @@ class RestaurantHome extends StatelessWidget {
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
+    ],
+  ),
+),
     );
   }
 }

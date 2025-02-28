@@ -1,9 +1,9 @@
 import 'package:agthia/User_pages/About.dart';
 import 'package:agthia/User_pages/brandspage.dart';
 import 'package:agthia/Admin_pages/carreer_application.dart';
-import 'package:agthia/Admin_pages/contactus.dart';
+import 'package:agthia/User_pages/contactus.dart';
 import 'package:agthia/User_pages/homescreen.dart';
-import 'package:agthia/Admin_pages/mediapage.dart';
+import 'package:agthia/User_pages/mediapage.dart';
 import 'package:agthia/User_pages/mission.dart';
 import 'package:agthia/User_pages/ourpeople.dart';
 import 'package:agthia/User_pages/words_from_chairman.dart';
@@ -222,7 +222,7 @@ class Carreerpage extends StatelessWidget {
                   ],
                 ),
                 width: 900,
-                height: 180,
+                height: 300,
                 //color: Color(0xFFf3eddf),
                 child: Padding(
                   padding: EdgeInsets.all(20),
@@ -280,7 +280,7 @@ class Carreerpage extends StatelessWidget {
                   ],
                 ),
                 width: 900,
-                height: 180,
+                height: 300,
                 //color: Color(0xFFf3eddf),
                 child: Padding(
                   padding: EdgeInsets.all(20),
@@ -355,7 +355,7 @@ class Carreerpage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: 1400,
+                          width: MediaQuery.of(context).size.width/1.1,
                           child: Center(
                             child: TextField(
                               textAlign: TextAlign.center,

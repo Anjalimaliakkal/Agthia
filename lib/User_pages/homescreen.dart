@@ -4,10 +4,10 @@ import 'package:agthia/User_pages/brandspage.dart';
 import 'package:agthia/User_pages/bumasoud.dart';
 import 'package:agthia/User_pages/burgerinn.dart';
 import 'package:agthia/User_pages/fatayer.dart';
-import 'package:agthia/Admin_pages/carreerpage.dart';
-import 'package:agthia/Admin_pages/contactus.dart';
+import 'package:agthia/User_pages/carreerpage.dart';
+import 'package:agthia/User_pages/contactus.dart';
 import 'package:agthia/User_pages/ferdi.dart';
-import 'package:agthia/Admin_pages/mediapage.dart';
+import 'package:agthia/User_pages/mediapage.dart';
 import 'package:agthia/User_pages/mission.dart';
 import 'package:agthia/User_pages/namlet.dart';
 import 'package:agthia/User_pages/novikov.dart';
@@ -280,8 +280,117 @@ class Homescreen extends StatelessWidget {
                             ),
                           ],
                         ),
+                         ],
+                    ),
 
-                        SizedBox(width: 30), // Space between the two cards
+                    //     SizedBox(width: 30), // Space between the two cards
+                    //     Row(
+                    //       children: [
+                    //         Column(
+                    //           children: [
+                    //             GestureDetector(
+                    //               onTap: () => Navigator.push(
+                    //                   context,
+                    //                   MaterialPageRoute(
+                    //                       builder: (context) => Ferdi())),
+                    //               child: MouseRegion(
+                    //                 cursor: SystemMouseCursors.click,
+                    //                 child: Container(
+                    //                   color: Colors.red,
+                    //                   height: 250,
+                    //                   width: 230,
+                    //                   child: Image(
+                    //                       image: AssetImage('asset/image3.jpg'),
+                    //                       fit: BoxFit.cover),
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //             SizedBox(height: 10),
+                    //             Container(
+                    //               width: 230,
+                    //               height: 30,
+                    //               alignment: Alignment.center,
+                    //               decoration: BoxDecoration(
+                    //                 color: Colors.white,
+                    //                 boxShadow: [
+                    //                   BoxShadow(
+                    //                     color: Colors.black.withOpacity(0.25),
+                    //                     blurRadius: 8,
+                    //                     offset: Offset(4, 4),
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //               child: Text(
+                    //                 "FERDI",
+                    //                 style: TextStyle(
+                    //                     fontFamily: 'Timesnewroman',
+                    //                     fontWeight: FontWeight.bold),
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //     //   ],
+                    //     // ),
+                    // //   ],
+                    // // ),
+
+                    // SizedBox(
+                    //   height: 25,
+                    // ),
+                    // GestureDetector(
+                    //   onTap: () => Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => Novikov(),
+                    //       )),
+                    //   child: Center(
+                    //     child: MouseRegion(
+                    //       cursor: SystemMouseCursors.click,
+                    //       child: Container(
+                    //         color: Colors.red,
+                    //         height: 250,
+                    //         width: 230,
+                    //         child: Image(
+                    //           image: AssetImage('asset/image4.jpg'),
+                    //           fit: BoxFit.cover,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
+                    // Center(
+                    //   child: Container(
+                    //     width: 230,
+                    //     height: 30,
+                    //     child: Padding(
+                    //       padding: const EdgeInsets.all(5.0),
+                    //       child: Text(
+                    //         "NOVIKOV",
+                    //         style: TextStyle(
+                    //             fontFamily: 'Timesnewroman',
+                    //             fontWeight: FontWeight.bold),
+                    //       ),
+                    //     ),
+                    //     decoration:
+                    //         BoxDecoration(color: Colors.white, boxShadow: [
+                    //       BoxShadow(
+                    //           color: Colors.black
+                    //               .withOpacity(0.25), // color of the shadow
+                    //           blurRadius: 8, // softness control
+                    //           offset: Offset(4, 4))
+                    //     ]),
+                    //   ),
+                      
+                    // ),
+                    //   ],
+                    //     ),
+
+                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                         Column(
                           children: [
                             GestureDetector(
@@ -325,58 +434,51 @@ class Homescreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                      ],
-                    ),
-
-                    SizedBox(
-                      height: 25,
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Novikov(),
-                          )),
-                      child: Center(
-                        child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: Container(
-                            color: Colors.red,
-                            height: 250,
-                            width: 230,
-                            child: Image(
-                              image: AssetImage('asset/image4.jpg'),
-                              fit: BoxFit.cover,
+                        SizedBox(width: 30), // Space between the two cards
+                        Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Novikov())),
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: Container(
+                                  color: Colors.red,
+                                  height: 250,
+                                  width: 230,
+                                  child: Image(
+                                      image: AssetImage('asset/image4.jpg'),
+                                      fit: BoxFit.cover),
+                                ),
+                              ),
                             ),
-                          ),
+                            SizedBox(height: 10),
+                            Container(
+                              width: 230,
+                              height: 30,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.25),
+                                    blurRadius: 8,
+                                    offset: Offset(4, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Text(
+                                "NOVIKOV",
+                                style: TextStyle(
+                                    fontFamily: 'Timesnewroman',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Center(
-                      child: Container(
-                        width: 230,
-                        height: 30,
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text(
-                            "NOVIKOV",
-                            style: TextStyle(
-                                fontFamily: 'Timesnewroman',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        decoration:
-                            BoxDecoration(color: Colors.white, boxShadow: [
-                          BoxShadow(
-                              color: Colors.black
-                                  .withOpacity(0.25), // color of the shadow
-                              blurRadius: 8, // softness control
-                              offset: Offset(4, 4))
-                        ]),
-                      ),
+                         ],
                     ),
 
                     SizedBox(height: 50),
@@ -485,8 +587,12 @@ class Homescreen extends StatelessWidget {
                             ),
                           ],
                         ),
+                         ],
+                    ),
 
-                        SizedBox(width: 30), // Space between the two cards
+                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                         Column(
                           children: [
                             GestureDetector(
@@ -530,59 +636,53 @@ class Homescreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                      ],
+                        SizedBox(width: 30), // Space between the two cards
+                        Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Namlet())),
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: Container(
+                                  color: Colors.red,
+                                  height: 250,
+                                  width: 230,
+                                  child: Image(
+                                      image: AssetImage('asset/NAMLET.jpg'),
+                                      fit: BoxFit.cover),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Container(
+                              width: 230,
+                              height: 30,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.25),
+                                    blurRadius: 8,
+                                    offset: Offset(4, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Text(
+                                "NAMLET",
+                                style: TextStyle(
+                                    fontFamily: 'Timesnewroman',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                         ],
                     ),
 
-                    SizedBox(
-                      height: 25,
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Namlet(),
-                          )),
-                      child: Center(
-                        child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: Container(
-                            color: Colors.red,
-                            height: 250,
-                            width: 230,
-                            child: Image(
-                              image: AssetImage('asset/NAMLET.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Center(
-                      child: Container(
-                        width: 230,
-                        height: 30,
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text(
-                            "NAMLET",
-                            style: TextStyle(
-                                fontFamily: 'Timesnewroman',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        decoration:
-                            BoxDecoration(color: Colors.white, boxShadow: [
-                          BoxShadow(
-                              color: Colors.black
-                                  .withOpacity(0.25), // color of the shadow
-                              blurRadius: 8, // softness control
-                              offset: Offset(4, 4))
-                        ]),
-                      ),
-                    ),
 
                     SizedBox(
                       height: 40,

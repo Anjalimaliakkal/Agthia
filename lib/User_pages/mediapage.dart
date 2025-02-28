@@ -1,15 +1,15 @@
 import 'package:agthia/User_pages/About.dart';
 import 'package:agthia/User_pages/brandspage.dart';
-import 'package:agthia/Admin_pages/carreerpage.dart';
+import 'package:agthia/User_pages/carreerpage.dart';
+import 'package:agthia/User_pages/contactus.dart';
 import 'package:agthia/User_pages/homescreen.dart';
-import 'package:agthia/Admin_pages/mediapage.dart';
 import 'package:agthia/User_pages/mission.dart';
 import 'package:agthia/User_pages/ourpeople.dart';
 import 'package:agthia/User_pages/words_from_chairman.dart';
 import 'package:flutter/material.dart';
 
-class Contactus extends StatelessWidget {
-  const Contactus({super.key});
+class Mediapage extends StatelessWidget {
+  const Mediapage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -176,30 +176,19 @@ class Contactus extends StatelessWidget {
               height: 300,
               child: Stack(
                 children: [
-                  Positioned.fill(child: Image(image: AssetImage("asset/mission.jpg"),
+                  Positioned.fill(child: Image(image: AssetImage("asset/media.jpg"),
                   fit: BoxFit.cover,))
                 ],
               ),
             ),
-            SizedBox(height: 30,),
+            SizedBox(height: 20,),
 
             Container(
-              decoration: BoxDecoration(
-                  color: Color(0xFFf3eddf),
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 6,
-                      spreadRadius: 2,
-                      offset: Offset(2, 4),
-                    ),
-                  ],
-                ),
               //width: MediaQuery.of(context).size.width,
+              width: 900,
+              height: 300,
               //color: Color(0xFFf3eddf),
-              width: 500,
-              height: 400,
+              color: Colors.white70,
               child: Padding(
                 padding: EdgeInsets.all(20),
                 child: Column(
@@ -207,110 +196,41 @@ class Contactus extends StatelessWidget {
                   children: [
                     Center(
                       child: Text(
-                        "Contact Information",
+                        "Latest News",
                         style:
                             TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                       ),
                     ),
                     SizedBox(height: 10),
                     Divider(color: Colors.orange,),
-                    SizedBox(height: 5,),
+                    SizedBox(height: 10,),
                     Center(
                       child: Text(
-                        "We're here to answer any questions you may have about our products, services, or company. Reach out to us and we'll respond as soon as we can.",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        "Ferdi Restaurant Now Open in Kuwait",style: TextStyle(fontSize: 20,color: Colors.blue),
                       ),
                     ),
-                    SizedBox(height: 15,),
-                    Row(
-                      children: [
-                        CircleAvatar(child: Icon(Icons.location_on)),
-                        SizedBox(width: 10,),
-                        Text("AL SHARQIA TOWER",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
-                      ],
-                    ),
                     SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        CircleAvatar(child: Icon(Icons.email)),
-                        SizedBox(width: 10,),
-                        Text("INFO@AGTHIA.FOOD.COM.KW",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
-                      ],
-                    ),
-                    SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        CircleAvatar(child: Icon(Icons.phone)),
-                        SizedBox(width: 10,),
-                        Text("22260445",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
-                      ],
-                    ),
-                    SizedBox(height: 20,),
                     Center(
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 15,
-                            backgroundColor: const Color.fromARGB(183, 131, 128, 128),
-                            child: Image(image: AssetImage("asset/instagram.jpeg"))),
-                            SizedBox(width: 10,),
-                            CircleAvatar(
-                            radius: 15,
-                            backgroundColor: const Color.fromARGB(183, 131, 128, 128),
-                            child: Image(image: AssetImage("asset/facebook.jpeg"))),
-                            SizedBox(width: 10,),
-                            CircleAvatar(
-                            radius: 15,
-                            backgroundColor: const Color.fromARGB(183, 131, 128, 128),
-                            child: Image(image: AssetImage("asset/twitter.jpeg"))),
-                           SizedBox(width: 10,),
-                            CircleAvatar(
-                            radius: 15,
-                            backgroundColor: const Color.fromARGB(183, 131, 128, 128),
-                            child: Image(image: AssetImage("asset/printest.jpeg"))),
-                        ],
+                      child: Text(
+                        "Philippe – New High End Chinese Restaurant",style: TextStyle(fontSize: 20,color: Colors.blue),
                       ),
-                    )
+                    ),
+                    SizedBox(height: 10,),
+                    Center(
+                      child: Text(
+                        "Beefbar Coming to Kuwait",style: TextStyle(fontSize: 20,color: Colors.blue),
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    Center(
+                      child: Text(
+                        "Sneak Peek: Beefbar Opens Next Week.",style: TextStyle(fontSize: 20,color: Colors.blue),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 20,),
-            Center(child: Text("Have a Question ?",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)),
-            SizedBox(height: 20,),
-            Column(
-              children: [
-                 SizedBox(
-                  width: 400,
-                  child: TextField(decoration: InputDecoration(hintText: "Name",border: OutlineInputBorder()),)),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: 400,
-                      child: TextField(decoration: InputDecoration(hintText: "Email",border: OutlineInputBorder()))),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: 400,
-                      child: TextField(decoration: InputDecoration(hintText: "Subject",border: OutlineInputBorder()))),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: 400,
-                      child: TextField(decoration: InputDecoration(hintText: "Phone",border: OutlineInputBorder()))),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: 400,
-                      child: TextField(
-                        decoration: InputDecoration(hintText: "Message",border: OutlineInputBorder()),
-                        maxLines: 5,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text("Send"),
-                    ),
-              ],
-            ),
-
             SizedBox(height: 20),
             Container(
               color: Colors.black,
@@ -348,7 +268,7 @@ class Contactus extends StatelessWidget {
                       
                       children: [
                         SizedBox(
-                          width: 1400,
+                          width: MediaQuery.of(context).size.width/1.1,
                           child: Center(
                             child: TextField(
                               textAlign: TextAlign.center,

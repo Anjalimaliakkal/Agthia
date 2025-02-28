@@ -195,7 +195,7 @@ class _DeliveryNewordersState extends State<DeliveryNeworders> {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                   columnSpacing: 50,
-                  dataRowHeight: 100, // Adjust row height
+                  dataRowHeight: 150, // Adjust row height
                   headingRowColor: MaterialStateColor.resolveWith(
                       (states) => const Color.fromARGB(255, 178, 208, 223)),
                   headingTextStyle:
