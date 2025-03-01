@@ -1,6 +1,7 @@
 import 'package:agthia/Admin_pages/admin_home.dart';
 import 'package:agthia/DeliveryPersonnel_pages/delivery_home.dart';
-import 'package:agthia/splashscreen.dart';
+import 'package:agthia/Restaurant_pages/restaurant_home.dart';
+import 'package:agthia/User_pages/homescreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,13 @@ class Agthia extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueGrey
       ),
-      home: Splashscreen(),
+      home: Homescreen(),
+      routes: {
+        '/adminHome': (context) => AdminHome(),
+        '/userHome': (context) => Homescreen(),
+        '/restaurantHome': (context) => RestaurantHome(),
+        '/deliveryHome': (context) => DeliveryHome(),
+      },
     );
   }
 }

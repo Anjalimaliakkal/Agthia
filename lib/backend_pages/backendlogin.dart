@@ -5,12 +5,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'auth_service.dart';
 //import 'home_pages.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPages extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginPagesState createState() => _LoginPagesState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPagesState extends State<LoginPages> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final AuthService _authService = AuthService();
