@@ -1,19 +1,39 @@
-import 'package:agthia/Admin_pages/addBrands.dart';
-import 'package:agthia/Restaurant_pages/Add_Restaurant.dart';
 import 'package:agthia/Admin_pages/aboutUsHomePage.dart';
 import 'package:agthia/Admin_pages/addJobVaccancy.dart';
 import 'package:agthia/Admin_pages/addNewsPage.dart';
-import 'package:agthia/Admin_pages/addOurPeople.dart';
 import 'package:agthia/Admin_pages/addWordsfromChairman.dart';
 import 'package:agthia/Admin_pages/admin_home.dart';
 import 'package:agthia/Admin_pages/approval_delivery.dart';
 import 'package:agthia/Admin_pages/approval_restaurant.dart';
+import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
 import 'package:agthia/Admin_pages/subscripionViewPage.dart';
 import 'package:agthia/Admin_pages/visionhomepage.dart';
+import 'package:agthia/Restaurant_pages/Add_Restaurant.dart';
 import 'package:flutter/material.dart';
 
-class Ourpeoplehomepage extends StatelessWidget {
-  const Ourpeoplehomepage({super.key});
+class Addbrands extends StatefulWidget {
+  const Addbrands({super.key});
+
+  @override
+  State<Addbrands> createState() => _AddbrandsState();
+}
+
+class _AddbrandsState extends State<Addbrands> {
+    final _formKey = GlobalKey<FormState>();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController registerNumberController =
+      TextEditingController();
+
+
+
+    void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      // Process the form submission
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Brand added successfully!')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +52,8 @@ class Ourpeoplehomepage extends StatelessWidget {
           ),
         ),
         backgroundColor: Color(0xFF282d37),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
+        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.settings))],
       ),
-
       drawer: Drawer(
         width: 200,
         backgroundColor: Color(0xFF282d37),
@@ -208,118 +227,106 @@ class Ourpeoplehomepage extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: Color(0xFFecf1f4),
-      body: Container(
-        width: double.infinity,
+       body: Container(
+        
+         width: double.infinity,
         height: double.infinity,
         //color: Color.fromARGB(255, 207, 198, 198),
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("asset/background_image1.jpg"),
-                fit: BoxFit.cover)),  
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+          color: const Color.fromARGB(255, 200, 213, 219),
+            // image: DecorationImage(
+            //     image: AssetImage("asset/background_image1.jpg"),
+            //     fit: BoxFit.cover)
+            ),
+
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Form(
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Admin",
-                        style: TextStyle(
-                            fontFamily: 'Timesnewroman',
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Our People",
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: const Color.fromARGB(255, 70, 95, 108),
-                            fontWeight: FontWeight.w200),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.circle,
-                        size: 5,
-                      ),
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Change password",
-                            style: TextStyle(color: Colors.blue, fontSize: 14),
-                          )),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.circle,
-                        size: 5,
-                      ),
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Logout",
-                            style: TextStyle(color: Colors.blue, fontSize: 14),
-                          )),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    // height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border(
-                            top: BorderSide(color: Colors.grey.shade300, width: 4)),
-                        borderRadius: BorderRadius.circular(
-                          9,
-                        )),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "No Content",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder()),
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>AddOurPeople()));
-                              },
-                              child: Text(
-                                "+ Add",
-                                style: TextStyle(color: Colors.black),
-                              ))
-                        ],
+                  Center(
+                      child: Text("Add Brands",
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold,))),
+                  SizedBox(height: 20),
+              
+                 
+                  Center(
+                    child: SizedBox(
+                      width: 600,
+                      child: TextFormField(
+                        controller: nameController,
+                        validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the Brand name';
+                    }
+                    return null;
+                  },
+                        decoration: InputDecoration(
+                          labelText: "Brand Name",labelStyle: TextStyle(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(color: Colors.white,width: 10),
+                            
+                          ),                                         
+                        ),
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+                  ),
+                  SizedBox(height: 20),
+              
+                  // Register Number
+                  Center(
+                    child: SizedBox(
+                      width: 600,
+                      child: TextFormField(
+                        controller: registerNumberController,
+                        validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the brand registered  ID';
+                    }
+                    return null;
+                  },
+                        decoration: InputDecoration(
+                          labelText: "Registered ID",labelStyle: TextStyle(),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+              
+                  SizedBox(height: 20),
+              
+                 
+                  SizedBox(height: 20),
+              
+                  // Submit Button
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _submitForm();
+                        // Handle form submission
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                      ),
+                      child: Text("ADD BRAND",
+                          style: TextStyle(fontSize: 18, color: Colors.white)),
+                    ),
+                  ),
+                ]
+              )
+            )
+          )
+        )
+       )
     );
   }
 }

@@ -1,8 +1,11 @@
-import 'package:agthia/Admin_pages/Add_Restaurant.dart';
+import 'package:agthia/Admin_pages/addBrands.dart';
+import 'package:agthia/Restaurant_pages/Add_Restaurant.dart';
 import 'package:agthia/Admin_pages/aboutUsHomePage.dart';
 import 'package:agthia/Admin_pages/addJobVaccancy.dart';
 import 'package:agthia/Admin_pages/addNewsPage.dart';
 import 'package:agthia/Admin_pages/addWordsfromChairman.dart';
+import 'package:agthia/Admin_pages/approval_delivery.dart';
+import 'package:agthia/Admin_pages/approval_restaurant.dart';
 import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
 import 'package:agthia/Admin_pages/subscripionViewPage.dart';
 import 'package:agthia/Admin_pages/visionhomepage.dart';
@@ -139,13 +142,48 @@ class AdminHome extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Manage Restaurants",
+              title: Text("Add Brands",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AddRestaurant()));
+                    MaterialPageRoute(builder: (context) => Addbrands()));
               },
+            ),
+            ExpansionTile(
+              //tilePadding: const EdgeInsets.only(left: 15, right: 15),
+              title: Text(
+                "Approvals",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              children: [
+                ListTile(
+                  title: Text(
+                    "Restaurant",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ApprovalRestaurant()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                ListTile(
+                  title: Text(
+                    "Delivery Personnel",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ApprovalDelivery()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                
+              ],
             ),
             ListTile(
               title: Text("Subscriptions",
@@ -226,7 +264,9 @@ class AdminHome extends StatelessWidget {
               ),
               
             ),
+            
           ),
+          
           
         ),
       ),

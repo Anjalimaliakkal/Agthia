@@ -372,7 +372,7 @@ class Namlet extends StatelessWidget {
                               builder: (context) => NamletReservation()));
                     },
                     child: Text(
-                      "Reservation",
+                      "Order",
                       style: TextStyle(color: Colors.green),
                     )),
               ),

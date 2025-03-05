@@ -372,7 +372,7 @@ class Fatayer extends StatelessWidget {
                               builder: (context) => FatayerReservation()));
                     },
                     child: Text(
-                      "Reservation",
+                      "Order",
                       style: TextStyle(color: Colors.green),
                     )),
               ),

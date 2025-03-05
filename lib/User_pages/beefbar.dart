@@ -369,7 +369,7 @@ class Beefbar extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => BeefbarReservation()));
+                              builder: (context) => BeefbarApp()));
                     },
                     child: Text(
                       "Reservation",

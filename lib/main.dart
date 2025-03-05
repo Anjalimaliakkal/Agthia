@@ -1,7 +1,12 @@
+import 'package:agthia/Admin_pages/addBrands.dart';
 import 'package:agthia/Admin_pages/admin_home.dart';
 import 'package:agthia/DeliveryPersonnel_pages/delivery_home.dart';
 import 'package:agthia/Restaurant_pages/restaurant_home.dart';
+import 'package:agthia/User_pages/beefbar_reservation.dart';
 import 'package:agthia/User_pages/homescreen.dart';
+import 'package:agthia/User_pages/payment.dart';
+import 'package:agthia/backend_pages/backend_new/loginpage.dart';
+import 'package:agthia/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +38,7 @@ class Agthia extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueGrey
       ),
-      home: Homescreen(),
+      home: LoginPage(),
       routes: {
         '/adminHome': (context) => AdminHome(),
         '/userHome': (context) => Homescreen(),

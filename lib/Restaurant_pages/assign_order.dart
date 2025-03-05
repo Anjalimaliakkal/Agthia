@@ -1,4 +1,4 @@
-import 'package:agthia/Admin_pages/Add_Restaurant.dart';
+import 'package:agthia/Restaurant_pages/Add_Restaurant.dart';
 import 'package:agthia/Restaurant_pages/Restaurant_changepassword.dart';
 import 'package:agthia/Restaurant_pages/Restaurant_viewdelivery.dart';
 import 'package:agthia/Restaurant_pages/Restaurant_vieworders.dart';

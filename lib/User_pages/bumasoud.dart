@@ -372,7 +372,7 @@ class Bumasoud extends StatelessWidget {
                               builder: (context) => BumasoudReservation()));
                     },
                     child: Text(
-                      "Reservation",
+                      "Order",
                       style: TextStyle(color: Colors.green),
                     )),
               ),

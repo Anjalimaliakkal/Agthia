@@ -1,8 +1,35 @@
+// 
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class AddOurPeople extends StatelessWidget {
+class AddOurPeople extends StatefulWidget {
   const AddOurPeople({super.key});
 
+  @override
+  State<AddOurPeople> createState() => _AddOurPeopleState();
+}
+
+class _AddOurPeopleState extends State<AddOurPeople> {
+   final TextEditingController _ourPeopleController = TextEditingController();
+
+  Future<void> saveOurPeopleText() async {
+    try {
+      String text = _ourPeopleController.text.trim();
+      if (text.isNotEmpty) {
+        // Save the text to Firestore under the document 'ourPeopleText'
+        await FirebaseFirestore.instance.collection('ourPeople').doc('ourPeopleText').set({
+          'text': text,
+          'timestamp': FieldValue.serverTimestamp(),
+        });
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Text saved successfully!')));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please enter some text!')));
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to save text: $e')));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +66,7 @@ class AddOurPeople extends StatelessWidget {
                     border: Border.all(color: Colors.grey,width: 1)
                 ),
                 child: TextFormField(
+                  controller: _ourPeopleController,
                   decoration: InputDecoration(
                       labelText: '',
                       border: InputBorder.none,
@@ -54,7 +82,7 @@ class AddOurPeople extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       )
                   ),
-                  onPressed: (){}, child: Text("Save",style: TextStyle(color: Colors.white),))
+                  onPressed: saveOurPeopleText, child: Text("Save",style: TextStyle(color: Colors.white),))
             ],
           ),
         ),

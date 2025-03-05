@@ -664,7 +664,7 @@ class _AboutState extends State<About> {
                       // ),
                     ),
                     SizedBox(height: 10,),
-                    Center(child: Text(paragraph2.isNotEmpty ? paragraph2 : "Loading...", style: TextStyle(fontSize: 16))),
+                    Center(child: Text(paragraph2.isNotEmpty ? paragraph2 : "", style: TextStyle(fontSize: 16))),
                   ],
                 ),
               ),

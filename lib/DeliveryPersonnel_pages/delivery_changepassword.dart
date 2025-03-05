@@ -1,3 +1,4 @@
+import 'package:agthia/DeliveryPersonnel_pages/add_Delivery.dart';
 import 'package:flutter/material.dart';
 import 'package:agthia/DeliveryPersonnel_pages/delivery_home.dart';
 import 'package:agthia/DeliveryPersonnel_pages/delivery_neworders.dart';
@@ -82,6 +83,17 @@ class _DeliveryChangepasswordState extends State<DeliveryChangepassword> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => DeliveryHome()));
+              },
+            ),
+             ListTile(
+              title: Text("Add Delivery Personnel",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddDelivery()));
               },
             ),
             ListTile(

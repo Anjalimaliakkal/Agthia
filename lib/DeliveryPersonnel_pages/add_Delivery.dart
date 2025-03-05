@@ -1,52 +1,35 @@
-import 'package:agthia/Admin_pages/addJobVaccancy.dart';
-import 'package:agthia/Admin_pages/addNewsPage.dart';
-import 'package:agthia/Admin_pages/admin_home.dart';
-import 'package:agthia/Restaurant_pages/Restaurant_changepassword.dart';
-import 'package:agthia/Admin_pages/aboutUsHomePage.dart';
-import 'package:agthia/Admin_pages/addWordsfromChairman.dart';
+import 'package:agthia/DeliveryPersonnel_pages/delivery_changepassword.dart';
+import 'package:agthia/DeliveryPersonnel_pages/delivery_home.dart';
+import 'package:agthia/DeliveryPersonnel_pages/delivery_neworders.dart';
+import 'package:agthia/DeliveryPersonnel_pages/delivery_previousorders.dart';
 import 'package:agthia/login.dart';
-import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
-import 'package:agthia/Admin_pages/subscripionViewPage.dart';
-import 'package:agthia/Admin_pages/visionhomepage.dart';
 import 'package:flutter/material.dart';
 
-class AddRestaurant extends StatefulWidget {
-  const AddRestaurant({super.key});
+class AddDelivery extends StatefulWidget {
+  const AddDelivery({super.key});
 
   @override
-  State<AddRestaurant> createState() => _AddRestaurantState();
+  State<AddDelivery> createState() => _AddDeliveryState();
 }
 
-class _AddRestaurantState extends State<AddRestaurant> {
+class _AddDeliveryState extends State<AddDelivery> {
   final _formKey = GlobalKey<FormState>();
-  String restaurantStatus = "Active";
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController registerNumberController =
+  final TextEditingController addressController =
       TextEditingController();
   final TextEditingController seatingCapacityController =
       TextEditingController();
-  String? selectedBrand;
-  final List<String> brands = [
-    "Beefbar",
-    "Dinand",
-    "Ferdi",
-    "Novikov",
-    "Philippe",
-    "Bu Masoud",
-    "Burger Inn",
-    "Fatayer Al Tayer",
-    "Namlet"
-  ];
+
+  
 
     void _submitForm() {
     if (_formKey.currentState!.validate()) {
       // Process the form submission
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Restaurant added successfully!')),
+        SnackBar(content: Text('Delivery Personal added successfully only after admin approval!')),
       );
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +56,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                         color: Colors.white)), // Profile Icon
                 SizedBox(width: 5),
                 Text(
-                  "Admin",
+                  "DELIVERY PERSONNEL",
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
@@ -86,7 +69,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => RestaurantChangepassword()));
+                        builder: (context) => DeliveryChangepassword()));
                 // Navigate to change password screen
               } else if (value == 'logout') {
                 Navigator.push(
@@ -99,7 +82,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
               PopupMenuItem<String>(
                 enabled: false,
                 child: Text(
-                  "Admin",
+                  "Delivery Personnel",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -154,7 +137,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                     height: 7,
                   ),
                   Text(
-                    "Admin",
+                    "Delivery Personnel",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -168,110 +151,46 @@ class _AddRestaurantState extends State<AddRestaurant> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AdminHome()));
-              },
-            ),
-            ExpansionTile(
-              //tilePadding: const EdgeInsets.only(left: 15, right: 15),
-              title: Text(
-                "About us",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-              ),
-              children: [
-                ListTile(
-                  title: Text(
-                    "About",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AboutUsHomePage()));
-                  },
-                  contentPadding: EdgeInsets.only(left: 60),
-                ),
-                ListTile(
-                  title: Text(
-                    "Our People",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Ourpeoplehomepage()));
-                  },
-                  contentPadding: EdgeInsets.only(left: 60),
-                ),
-                ListTile(
-                  title: Text(
-                    "Mission/Vision",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Visionhomepage()));
-                  },
-                  contentPadding: EdgeInsets.only(left: 60),
-                ),
-                ListTile(
-                  title: Text(
-                    "Word from Chairman",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Addwordsfromchairman()));
-                  },
-                  contentPadding: EdgeInsets.only(left: 60),
-                ),
-              ],
-            ),
-            ListTile(
-              title: Text("Media",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => addNewsPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>DeliveryHome()));
               },
             ),
             ListTile(
-              title: Text("Manage Restaurants",
+              title: Text("Add Delivery Personnel",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AddRestaurant()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddDelivery()));
               },
             ),
             ListTile(
-              title: Text("Subscriptions",
+              title: Text("New Orders",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Subscripionviewpage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DeliveryNeworders()));
               },
             ),
             ListTile(
-              title: Text("Careers",
+              title: Text("Previous Orders",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AddJobVaccancy()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DeliveryPreviousorders()));
               },
             ),
           ],
         ),
       ),
-      body: Container(
+               body: Container(
         
          width: double.infinity,
         height: double.infinity,
@@ -293,12 +212,12 @@ class _AddRestaurantState extends State<AddRestaurant> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
-                      child: Text("Add Restaurant",
+                      child: Text("Add Delivery Personnel",
                           style: TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold,))),
                   SizedBox(height: 20),
               
-                  // Restaurant Name
+                  
                   Center(
                     child: SizedBox(
                       width: 600,
@@ -306,12 +225,12 @@ class _AddRestaurantState extends State<AddRestaurant> {
                         controller: nameController,
                         validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter the restaurant name';
+                      return 'Please enter the name';
                     }
                     return null;
                   },
                         decoration: InputDecoration(
-                          labelText: "Restaurant Name",labelStyle: TextStyle(),
+                          labelText: "Name",labelStyle: TextStyle(),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide(color: Colors.white,width: 10),
@@ -323,128 +242,67 @@ class _AddRestaurantState extends State<AddRestaurant> {
                   ),
                   SizedBox(height: 20),
               
-                  // Register Number
+                 
                   Center(
                     child: SizedBox(
                       width: 600,
                       child: TextFormField(
-                        controller: registerNumberController,
+                        controller: addressController,
                         validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter the restaurant register number';
+                      return 'Please enter the address';
                     }
                     return null;
                   },
                         decoration: InputDecoration(
-                          labelText: "Register Number",labelStyle: TextStyle(),
+                          labelText: "Address",labelStyle: TextStyle(),
                           border: OutlineInputBorder(),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(height: 20),
-              
-                  SizedBox(height: 20),
-              
-                  // Restaurant Status
-                  Center(child: Text("Restaurant Status",style: TextStyle(),)),
-                  Center(
-                    child: SizedBox(
-                      width: 200,
-                      child: Center(
-                        child: Row(
-                          children: [
-                            Center(
-                              child: Radio(
-                                value: "Active",
-                                groupValue: restaurantStatus,
-                                onChanged: (value) {
-                                  setState(() {
-                                    restaurantStatus = value.toString();
-                                  });
-                                },
-                              ),
-                            ),
-                            Center(child: Text("Active",style: TextStyle(),)),
-                            SizedBox(width: 20),
-                            Center(
-                              child: Radio(
-                                value: "Inactive",
-                                groupValue: restaurantStatus,
-                                onChanged: (value) {
-                                  setState(() {
-                                    restaurantStatus = value.toString();
-                                  });
-                                },
-                              ),
-                            ),
-                            Center(child: Text("Inactive",style: TextStyle(),)),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  // Brands Dropdown
-                  SizedBox(
-                      width: 1000, child: Center(child: Text("Select Brand",style:  TextStyle(),))),
-                  SizedBox(height: 10),
-                  Center(
+              Center(
                     child: SizedBox(
                       width: 600,
-                      child: DropdownButtonFormField<String>(
-                        value: selectedBrand,
-                        items: brands.map((brand) {
-                          return DropdownMenuItem<String>(
-                            value: brand,
-                            child: Text(brand),
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            selectedBrand = value;
-                          });
-                        },
+                      child: TextFormField(
+                        controller: addressController,
                         validator: (value) {
-                    if (value == null) {
-                      return 'Please select a brand';
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the Phone number';
                     }
                     return null;
                   },
                         decoration: InputDecoration(
+                          labelText: "Phone number",labelStyle: TextStyle(),
                           border: OutlineInputBorder(),
-                          labelText: "Brand",labelStyle: TextStyle(),
                         ),
+                        keyboardType: TextInputType.number,
                       ),
                     ),
                   ),
                   SizedBox(height: 20),
-              
-                  // Seating Capacity
-                  Center(
+              Center(
                     child: SizedBox(
                       width: 600,
-                      child: Center(
-                        child: TextFormField(
-                          controller: seatingCapacityController,
-                          validator: (value) {
+                      child: TextFormField(
+                        controller: addressController,
+                        validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter the seating capacity';
-                    }
-                    if (int.tryParse(value) == null) {
-                      return 'Please enter a valid number';
+                      return 'Please enter the Driving License Number';
                     }
                     return null;
                   },
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            labelText: "Seating Capacity",labelStyle: TextStyle(),
-                            border: OutlineInputBorder(),
-                          ),
+                        decoration: InputDecoration(
+                          labelText: "Driving License Number",labelStyle: TextStyle(),
+                          border: OutlineInputBorder(),
                         ),
                       ),
                     ),
                   ),
+                 
+                 
+                
                   SizedBox(height: 20),
               
                   // Submit Button
@@ -459,7 +317,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                       ),
-                      child: Text("ADD RESTAURANT",
+                      child: Text("Add Delivery Personnel",
                           style: TextStyle(fontSize: 18, color: Colors.white)),
                     ),
                   ),
@@ -560,6 +418,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
           ),
         ),
       ),
+
     );
   }
 }

@@ -1,3 +1,6 @@
+// 
+
+
 import 'package:agthia/User_pages/About.dart';
 import 'package:agthia/User_pages/brandspage.dart';
 import 'package:agthia/User_pages/carreerpage.dart';
@@ -5,9 +8,8 @@ import 'package:agthia/User_pages/contactus.dart';
 import 'package:agthia/User_pages/homescreen.dart';
 import 'package:agthia/User_pages/mediapage.dart';
 import 'package:agthia/User_pages/mission.dart';
-import 'package:agthia/User_pages/user_changepassword.dart';
 import 'package:agthia/User_pages/words_from_chairman.dart';
-import 'package:agthia/backend_pages/backend_new/loginpage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Ourpeople extends StatelessWidget {
@@ -29,75 +31,6 @@ class Ourpeople extends StatelessWidget {
         ),
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFF282d37),
-        actions: [
-          PopupMenuButton<String>(
-            child: Row(
-              children: [
-                CircleAvatar(
-                    backgroundColor: const Color.fromARGB(255, 188, 187, 187),
-                    child: Icon(Icons.person,
-                        color: Colors.white)), // Profile Icon
-                SizedBox(width: 5),
-                Text(
-                  "User",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(width: 5),
-                Icon(Icons.arrow_drop_down)
-              ],
-            ),
-            onSelected: (value) {
-              if (value == 'change_password') {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => UserChangepassword()));
-                // Navigate to change password screen
-              } else if (value == 'logout') {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => LoginPage()));
-                // Perform logout action
-              }
-            },
-            itemBuilder: (BuildContext context) => [
-              // Title Item (Non-clickable)
-              PopupMenuItem<String>(
-                enabled: false,
-                child: Text(
-                  "User",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              PopupMenuDivider(),
-
-              // Change Password
-              PopupMenuItem<String>(
-                value: 'change_password',
-                child: Row(
-                  children: [
-                    Icon(Icons.lock, color: Colors.black),
-                    SizedBox(width: 10),
-                    Text("Change Password"),
-                  ],
-                ),
-              ),
-
-              // Logout
-              PopupMenuItem<String>(
-                value: 'logout',
-                child: Row(
-                  children: [
-                    Icon(Icons.logout, color: Colors.black),
-                    SizedBox(width: 10),
-                    Text("Logout"),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(width: 10),
-        ],
       ),
 
       drawer: Drawer(
@@ -287,9 +220,36 @@ class Ourpeople extends StatelessWidget {
                     Divider(color: Colors.orange,),
                     SizedBox(height: 5,),
                     Center(
-                      child: Text(
-                        "With over 800 employees, the company's success is attributed to its dedicated workforce and senior management, emphasizing diversity and collaboration to foster innovation.",
-                      ),
+                    child:   StreamBuilder<DocumentSnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('ourPeople')
+            .doc('ourPeopleText') // Changed document name here
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return Center(child: Text('Error loading text'));
+          }
+
+          if (!snapshot.hasData || !snapshot.data!.exists) {
+            return Center(child: Text('No data available'));
+          }
+
+          var data = snapshot.data!.data() as Map<String, dynamic>;
+          String text = data['text'] ?? 'No text available';
+
+          return Padding(
+            padding: EdgeInsets.all(16),
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 18),
+            ),
+          );
+        },
+      )
                     ),
                   ],
                 ),

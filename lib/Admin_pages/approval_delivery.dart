@@ -1,3 +1,13 @@
+import 'package:agthia/Restaurant_pages/Add_Restaurant.dart';
+import 'package:agthia/Admin_pages/aboutUsHomePage.dart';
+import 'package:agthia/Admin_pages/addJobVaccancy.dart';
+import 'package:agthia/Admin_pages/addNewsPage.dart';
+import 'package:agthia/Admin_pages/addWordsfromChairman.dart';
+import 'package:agthia/Admin_pages/admin_home.dart';
+import 'package:agthia/Admin_pages/approval_restaurant.dart';
+import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
+import 'package:agthia/Admin_pages/subscripionViewPage.dart';
+import 'package:agthia/Admin_pages/visionhomepage.dart';
 import 'package:agthia/Restaurant_pages/Restaurant_changepassword.dart';
 import 'package:agthia/login.dart';
 import 'package:flutter/material.dart';
@@ -125,7 +135,7 @@ class ApprovalDelivery extends StatelessWidget {
       //               height: 7,
       //             ),
       //             Text(
-      //               "Restaurant",
+      //               "Admin",
       //               style: TextStyle(
       //                   fontSize: 20,
       //                   fontWeight: FontWeight.bold,
@@ -139,54 +149,139 @@ class ApprovalDelivery extends StatelessWidget {
       //             style: TextStyle(
       //                 fontWeight: FontWeight.bold, color: Colors.white)),
       //         onTap: () {
-      //           Navigator.push(
-      //               context,
-      //               MaterialPageRoute(
-      //                   builder: (context) => RestaurantHome()));
+      //           Navigator.push(context,
+      //               MaterialPageRoute(builder: (context) => AdminHome()));
       //         },
       //       ),
+      //       ExpansionTile(
+      //         //tilePadding: const EdgeInsets.only(left: 15, right: 15),
+      //         title: Text(
+      //           "About us",
+      //           style:
+      //               TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+      //         ),
+      //         children: [
+      //           ListTile(
+      //             title: Text(
+      //               "About",
+      //               style: TextStyle(
+      //                   fontWeight: FontWeight.bold, color: Colors.white),
+      //             ),
+      //             onTap: () {
+      //               Navigator.push(context,
+      //                   MaterialPageRoute(builder: (context) => AboutUsHomePage()));
+      //             },
+      //             contentPadding: EdgeInsets.only(left: 60),
+      //           ),
+      //           ListTile(
+      //             title: Text(
+      //               "Our People",
+      //               style: TextStyle(
+      //                   fontWeight: FontWeight.bold, color: Colors.white),
+      //             ),
+      //             onTap: () {
+      //               Navigator.push(context,
+      //                   MaterialPageRoute(builder: (context) => Ourpeoplehomepage()));
+      //             },
+      //             contentPadding: EdgeInsets.only(left: 60),
+      //           ),
+      //           ListTile(
+      //             title: Text(
+      //               "Mission/Vision",
+      //               style: TextStyle(
+      //                   fontWeight: FontWeight.bold, color: Colors.white),
+      //             ),
+      //             onTap: () {
+      //               Navigator.push(context,
+      //                   MaterialPageRoute(builder: (context) => Visionhomepage()));
+      //             },
+      //             contentPadding: EdgeInsets.only(left: 60),
+      //           ),
+      //           ListTile(
+      //             title: Text(
+      //               "Word from Chairman",
+      //               style: TextStyle(
+      //                   fontWeight: FontWeight.bold, color: Colors.white),
+      //             ),
+      //             onTap: () {
+      //               Navigator.push(
+      //                   context,
+      //                   MaterialPageRoute(
+      //                       builder: (context) => Addwordsfromchairman()));
+      //             },
+      //             contentPadding: EdgeInsets.only(left: 60),
+      //           ),
+      //         ],
+      //       ),
       //       ListTile(
-      //         title: Text("Add Restaurant",
+      //         title: Text("Media",
       //             style: TextStyle(
       //                 fontWeight: FontWeight.bold, color: Colors.white)),
       //         onTap: () {
-      //           Navigator.push(
-      //               context,
-      //               MaterialPageRoute(
-      //                   builder: (context) => AddRestaurant()));
+      //           Navigator.push(context,
+      //               MaterialPageRoute(builder: (context) => addNewsPage()));
       //         },
       //       ),
       //       ListTile(
-      //         title: Text("View Orders",
+      //         title: Text("Manage Restaurants",
       //             style: TextStyle(
       //                 fontWeight: FontWeight.bold, color: Colors.white)),
       //         onTap: () {
-      //           Navigator.push(
-      //               context,
-      //               MaterialPageRoute(
-      //                   builder: (context) => RestaurantVieworders()));
+      //           Navigator.push(context,
+      //               MaterialPageRoute(builder: (context) => AddRestaurant()));
+      //         },
+      //       ),
+      //       ExpansionTile(
+      //         //tilePadding: const EdgeInsets.only(left: 15, right: 15),
+      //         title: Text(
+      //           "Approvals",
+      //           style:
+      //               TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+      //         ),
+      //         children: [
+      //           ListTile(
+      //             title: Text(
+      //               "Restaurant",
+      //               style: TextStyle(
+      //                   fontWeight: FontWeight.bold, color: Colors.white),
+      //             ),
+      //             onTap: () {
+      //               Navigator.push(context,
+      //                   MaterialPageRoute(builder: (context) => ApprovalRestaurant()));
+      //             },
+      //             contentPadding: EdgeInsets.only(left: 60),
+      //           ),
+      //           ListTile(
+      //             title: Text(
+      //               "Delivery Personnel",
+      //               style: TextStyle(
+      //                   fontWeight: FontWeight.bold, color: Colors.white),
+      //             ),
+      //             onTap: () {
+      //               Navigator.push(context,
+      //                   MaterialPageRoute(builder: (context) => ApprovalDelivery()));
+      //             },
+      //             contentPadding: EdgeInsets.only(left: 60),
+      //           ),
+                
+      //         ],
+      //       ),
+      //       ListTile(
+      //         title: Text("Subscriptions",
+      //             style: TextStyle(
+      //                 fontWeight: FontWeight.bold, color: Colors.white)),
+      //         onTap: () {
+      //           Navigator.push(context,
+      //               MaterialPageRoute(builder: (context) => Subscripionviewpage()));
       //         },
       //       ),
       //       ListTile(
-      //         title: Text("View Delivery Personnel",
+      //         title: Text("Careers",
       //             style: TextStyle(
       //                 fontWeight: FontWeight.bold, color: Colors.white)),
       //         onTap: () {
-      //           Navigator.push(
-      //               context,
-      //               MaterialPageRoute(
-      //                   builder: (context) => RestaurantViewdelivery()));
-      //         },
-      //       ),
-      //       ListTile(
-      //         title: Text("Allocate Delivery Personnel",
-      //             style: TextStyle(
-      //                 fontWeight: FontWeight.bold, color: Colors.white)),
-      //         onTap: () {
-      //           Navigator.push(
-      //               context,
-      //               MaterialPageRoute(
-      //                   builder: (context) => DeliveryAllocation()));
+      //           Navigator.push(context,
+      //               MaterialPageRoute(builder: (context) => AddJobVaccancy()));
       //         },
       //       ),
       //     ],

@@ -372,7 +372,7 @@ class Burgerinn extends StatelessWidget {
                               builder: (context) => BurgerinnReservation()));
                     },
                     child: Text(
-                      "Reservation",
+                      "Order",
                       style: TextStyle(color: Colors.green),
                     )),
               ),
