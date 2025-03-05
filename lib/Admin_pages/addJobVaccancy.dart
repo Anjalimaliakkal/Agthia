@@ -463,9 +463,13 @@ import 'package:agthia/Admin_pages/addBrands.dart';
 import 'package:agthia/Admin_pages/addNewsPage.dart';
 import 'package:agthia/Admin_pages/addWordsfromChairman.dart';
 import 'package:agthia/Admin_pages/admin_home.dart';
+import 'package:agthia/Admin_pages/approval_delivery.dart';
+import 'package:agthia/Admin_pages/approval_restaurant.dart';
 import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
 import 'package:agthia/Admin_pages/subscripionViewPage.dart';
+import 'package:agthia/Admin_pages/viewRestaurants.dart';
 import 'package:agthia/Admin_pages/viewapplications.dart';
+import 'package:agthia/Admin_pages/viewbrands.dart';
 import 'package:agthia/Admin_pages/visionhomepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -565,7 +569,7 @@ final TextEditingController brandController = TextEditingController();
           ),
         ),
         backgroundColor: Color(0xFF282d37),
-        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.settings))],
+        // actions: [IconButton(onPressed: (){}, icon: Icon(Icons.settings))],
       ),
       drawer: Drawer(
         width: 200,
@@ -682,6 +686,63 @@ final TextEditingController brandController = TextEditingController();
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Addbrands()));
+              },
+            ),
+            ExpansionTile(
+              //tilePadding: const EdgeInsets.only(left: 15, right: 15),
+              title: Text(
+                "Approvals",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              children: [
+                ListTile(
+                  title: Text(
+                    "Restaurant",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ApprovalRestaurant()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                ListTile(
+                  title: Text(
+                    "Delivery Personnel",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ApprovalDelivery()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                
+              ],
+            ),
+            ListTile(
+              title: Text("View Restaurants",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Viewrestaurants()));
+              },
+            ),
+          ListTile(
+              title: Text("View Brands",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Viewbrands()));
               },
             ),
             ListTile(
@@ -932,13 +993,13 @@ final TextEditingController brandController = TextEditingController();
               ),
                 onPressed: saveJobDetails, child: Text("Save",style: TextStyle(color: Colors.white,fontSize: 15),)),
             SizedBox(width: 10,),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                    backgroundColor: Colors.blue
-                ),
-                onPressed: (){}, child: Text("      View \nVaccancies",style: TextStyle(color: Colors.white,fontSize: 15),)),
-            SizedBox(width: 10,),
+            // ElevatedButton(
+            //     style: ElevatedButton.styleFrom(
+            //         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            //         backgroundColor: Colors.blue
+            //     ),
+            //     onPressed: (){}, child: Text("      View \nVaccancies",style: TextStyle(color: Colors.white,fontSize: 15),)),
+            // SizedBox(width: 10,),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -946,7 +1007,7 @@ final TextEditingController brandController = TextEditingController();
                 ),
                 onPressed: (){
                    Navigator.push(context, MaterialPageRoute(builder: (context) => ViewApplications()));
-                }, child: Text("      View \nApplication",style: TextStyle(color: Colors.white,fontSize: 15),))
+                }, child: Text("      View Application",style: TextStyle(color: Colors.white,fontSize: 15),))
           ],
         ),
       ),

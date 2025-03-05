@@ -1,4 +1,7 @@
 import 'package:agthia/Admin_pages/addBrands.dart';
+import 'package:agthia/Admin_pages/adminChangepassword.dart';
+import 'package:agthia/Admin_pages/viewRestaurants.dart';
+import 'package:agthia/Admin_pages/viewbrands.dart';
 import 'package:agthia/Restaurant_pages/Add_Restaurant.dart';
 import 'package:agthia/Admin_pages/aboutUsHomePage.dart';
 import 'package:agthia/Admin_pages/addJobVaccancy.dart';
@@ -10,6 +13,7 @@ import 'package:agthia/Admin_pages/approval_delivery.dart';
 import 'package:agthia/Admin_pages/approval_restaurant.dart';
 import 'package:agthia/Admin_pages/subscripionViewPage.dart';
 import 'package:agthia/Admin_pages/visionhomepage.dart';
+import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:flutter/material.dart';
 
 class Ourpeoplehomepage extends StatelessWidget {
@@ -188,6 +192,28 @@ class Ourpeoplehomepage extends StatelessWidget {
               ],
             ),
             ListTile(
+              title: Text("View Restaurants",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Viewrestaurants()));
+              },
+            ),
+           ListTile(
+              title: Text("View Brands",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Viewbrands()));
+              },
+            ),
+            ListTile(
               title: Text("Subscriptions",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
@@ -254,7 +280,9 @@ class Ourpeoplehomepage extends StatelessWidget {
                         size: 5,
                       ),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Adminchangepassword()));
+                          },
                           child: Text(
                             "Change password",
                             style: TextStyle(color: Colors.blue, fontSize: 14),
@@ -268,7 +296,9 @@ class Ourpeoplehomepage extends StatelessWidget {
                         size: 5,
                       ),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                          },
                           child: Text(
                             "Logout",
                             style: TextStyle(color: Colors.blue, fontSize: 14),

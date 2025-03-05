@@ -274,7 +274,6 @@
 //   }
 // }
 
-
 import 'package:agthia/Admin_pages/aboutUsHomePage.dart';
 import 'package:agthia/Admin_pages/addBrands.dart';
 import 'package:agthia/Admin_pages/addJobVaccancy.dart';
@@ -284,6 +283,8 @@ import 'package:agthia/Admin_pages/approval_delivery.dart';
 import 'package:agthia/Admin_pages/approval_restaurant.dart';
 import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
 import 'package:agthia/Admin_pages/subscripionViewPage.dart';
+import 'package:agthia/Admin_pages/viewRestaurants.dart';
+import 'package:agthia/Admin_pages/viewbrands.dart';
 import 'package:agthia/Admin_pages/visionhomepage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -297,77 +298,82 @@ class Addwordsfromchairman extends StatefulWidget {
 }
 
 class _AddwordsfromchairmanState extends State<Addwordsfromchairman> {
-  final TextEditingController _messageController = TextEditingController();
+  final TextEditingController _wordsController = TextEditingController();
 
   // Function to save CEO message
-  void saveCEOMessage(String message) async {
-    if (message.isNotEmpty) {
-      try {
-        await FirebaseFirestore.instance.collection('chairmanWords').doc('ceoMessage').set({
-          'message': message,
-          'timestamp': FieldValue.serverTimestamp(),
-          'addedBy': FirebaseAuth.instance.currentUser?.uid ?? 'admin',
-        });
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("CEO message saved successfully")));
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error saving CEO message: $e")));
-      }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Message is empty, cannot save.")));
+  Future<void> _saveWords(String words) async {
+    try {
+      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+      await _firestore
+          .collection('words_from_chairman')
+          .doc('chairmanMessage')
+          .set({
+        'content': words,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Successfully Added')),
+      );
+    } catch (e) {
+      print('Error updating Words from Chairman: $e');
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to save: ${e.toString()}')),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.white),
-          title: Center(
-            child: Transform.translate(
-              offset: Offset(12.0, 0.0),
-              child: Image.asset(
-                'asset/logo_agthia.jpg',
-                height: 43, 
-                fit: BoxFit.contain, 
-              ),
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
+        title: Center(
+          child: Transform.translate(
+            offset: Offset(12.0, 0.0),
+            child: Image.asset(
+              'asset/logo_agthia.jpg',
+              height: 43,
+              fit: BoxFit.contain,
             ),
           ),
-          backgroundColor: Color(0xFF282d37),
-          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
         ),
-        backgroundColor: const Color.fromARGB(255, 189, 195, 181),
-        
-        drawer: Drawer(
-          width: 200,
-          backgroundColor: Color(0xFF282d37),
-          child: ListView(
-            padding: EdgeInsets.all(12),
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(color: Color(0xFF282d37)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Colors.white,
-                      child: Icon(Icons.person),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    Text(
-                      "Admin",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    )
-                  ],
-                ),
+        backgroundColor: Color(0xFF282d37),
+        // actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
+      ),
+      backgroundColor: const Color.fromARGB(255, 189, 195, 181),
+      drawer: Drawer(
+        width: 200,
+        backgroundColor: Color(0xFF282d37),
+        child: ListView(
+          padding: EdgeInsets.all(12),
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Color(0xFF282d37)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.person),
+                  ),
+                  SizedBox(
+                    height: 7,
+                  ),
+                  Text(
+                    "Admin",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  )
+                ],
               ),
-               ListTile(
+            ),
+            ListTile(
               title: Text("Home",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
@@ -490,6 +496,28 @@ class _AddwordsfromchairmanState extends State<Addwordsfromchairman> {
               ],
             ),
             ListTile(
+              title: Text("View Restaurants",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Viewrestaurants()));
+              },
+            ),
+        ListTile(
+              title: Text("View Brands",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Viewbrands()));
+              },
+            ),
+            ListTile(
               title: Text("Subscriptions",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
@@ -507,53 +535,56 @@ class _AddwordsfromchairmanState extends State<Addwordsfromchairman> {
                     MaterialPageRoute(builder: (context) => AddJobVaccancy()));
               },
             ),
-           
+            // Other Drawer items...
+          ],
+        ),
+      ),
+      body: Center(
+        child: Container(
+          height: 400,
+          width: 600,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 245, 247, 243),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6,
+                spreadRadius: 2,
+                offset: Offset(2, 4),
+              ),
             ],
           ),
-        ),
-        
-        body: Center(
-          child: Container(
-            height: 400,
-            width: 600,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 245, 247, 243),
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 6,
-                  spreadRadius: 2,
-                  offset: Offset(2, 4),
-                ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Add CEO Word", style: TextStyle(fontFamily: 'Timesnewroman', fontSize: 20, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 20),
-                  Text("CEO", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300)),
-                  SizedBox(height: 15),
-                  Container(
-                    height: 150,
-                    width: 800,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey, width: 1)
-                    ),
-                    child: TextFormField(
-                      controller: _messageController,
-                      decoration: InputDecoration(
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Add CEO Word",
+                    style: TextStyle(
+                        fontFamily: 'Timesnewroman',
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
+                SizedBox(height: 20),
+                Text("CEO",
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w300)),
+                SizedBox(height: 15),
+                Container(
+                  height: 150,
+                  width: 800,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey, width: 1)),
+                  child: TextFormField(
+                    controller: _wordsController,
+                    decoration: InputDecoration(
                         labelText: '',
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(5)
-                      ),
-                    ),
+                        contentPadding: EdgeInsets.all(5)),
                   ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
@@ -561,16 +592,15 @@ class _AddwordsfromchairmanState extends State<Addwordsfromchairman> {
                       ),
                     ),
                     onPressed: () {
-                      saveCEOMessage(_messageController.text);
-                      _messageController.clear(); // Clear the input after saving
-                    }, 
-                    child: Text("Save", style: TextStyle(color: Colors.white))
-                  )
-                ],
-              ),
+                      _saveWords(_wordsController.text);
+                      _wordsController.clear(); // Clear the input after saving
+                    },
+                    child: Text("Save", style: TextStyle(color: Colors.white)))
+              ],
             ),
           ),
         ),
+      ),
     );
   }
 }

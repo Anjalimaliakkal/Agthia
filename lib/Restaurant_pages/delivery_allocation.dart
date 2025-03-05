@@ -2,6 +2,7 @@ import 'package:agthia/Restaurant_pages/Restaurant_changepassword.dart';
 import 'package:agthia/Restaurant_pages/Restaurant_viewdelivery.dart';
 import 'package:agthia/Restaurant_pages/Restaurant_vieworders.dart';
 import 'package:agthia/Restaurant_pages/assign_order.dart';
+import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:agthia/login.dart';
 import 'package:agthia/Restaurant_pages/restaurant_home.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,7 @@ class _DeliveryAllocationState extends State<DeliveryAllocation> {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>RestaurantChangepassword()));
                 // Navigate to change password screen
               } else if (value == 'logout') {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
                 // Perform logout action
               }
             },
@@ -147,6 +148,17 @@ class _DeliveryAllocationState extends State<DeliveryAllocation> {
             ),
             ListTile(
               title: Text("Home",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RestaurantHome()));
+              },
+            ),
+             ListTile(
+              title: Text("Add Restaurant",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {

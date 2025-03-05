@@ -1,3 +1,4 @@
+import 'package:agthia/Admin_pages/adminChangepassword.dart';
 import 'package:agthia/Restaurant_pages/Add_Restaurant.dart';
 import 'package:agthia/Admin_pages/aboutUsHomePage.dart';
 import 'package:agthia/Admin_pages/addJobVaccancy.dart';
@@ -67,7 +68,7 @@ class ApprovalDelivery extends StatelessWidget {
             ),
             onSelected: (value) {
               if (value == 'change_password') {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>RestaurantChangepassword()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Adminchangepassword()));
                 // Navigate to change password screen
               } else if (value == 'logout') {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));

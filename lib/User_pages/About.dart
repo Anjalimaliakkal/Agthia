@@ -339,6 +339,7 @@ import 'package:agthia/User_pages/user_changepassword.dart';
 import 'package:agthia/User_pages/words_from_chairman.dart';
 import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class About extends StatefulWidget {
@@ -349,6 +350,7 @@ class About extends StatefulWidget {
 }
 
 class _AboutState extends State<About> {
+  
   String paragraph1 = '';
   String paragraph2 = '';
    @override
@@ -375,6 +377,60 @@ class _AboutState extends State<About> {
       print("Error fetching About Us content: $e");
     }
   }
+
+   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  // Function to add user subscription to Firestore
+Future<void> subscribeUser() async {
+  User? user = _auth.currentUser;
+
+  if (user != null) {
+    String userEmail = user.email ?? 'No Email';
+
+    try {
+      // Check if user is already subscribed
+      DocumentSnapshot doc = await _firestore.collection('subscriptions').doc(userEmail).get();
+
+      if (doc.exists) {
+        print('User is already subscribed');
+      } else {
+        // Add subscription with email as document ID (avoids duplicates)
+        await _firestore.collection('subscriptions').doc(userEmail).set({
+          'email': userEmail,
+          'subscriptionDate': Timestamp.now(),
+        });
+        print('Subscription successful!');
+      }
+    } catch (e) {
+      print('Error subscribing user: $e');
+    }
+  } else {
+    print('No user logged in');
+  }
+}
+  //  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // // Function to add user subscription to Firestore
+  // Future<void> subscribeUser() async {
+  //   User? user = _auth.currentUser;
+
+  //   // If user is logged in
+  //   if (user != null) {
+  //     String userEmail = user.email ?? 'No Email'; // Get user email
+
+  //     // Adding subscription to Firestore
+  //     await _firestore.collection('subscriptions').add({
+  //       'email': userEmail,
+  //       'subscriptionDate': Timestamp.now(),
+  //     });
+  //   } else {
+  //     // Show error if the user is not authenticated
+  //     print('No user logged in');
+  //   }
+  // }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -634,7 +690,7 @@ class _AboutState extends State<About> {
               // width: MediaQuery.of(context).size.width,
               //color: Color(0xFFf3eddf),
               width: 1000,
-              height: 200,
+              height: 250,
               child: Padding(
                 padding: EdgeInsets.all(20),
                 child: Column(
@@ -726,6 +782,22 @@ class _AboutState extends State<About> {
                   SizedBox(
                     height: 10,
                   ),
+                  // Container(
+                  //   decoration:
+                  //       BoxDecoration(border: Border.all(color: Colors.red)),
+                  //   width: MediaQuery.of(context).size.width / 1.1,
+                  //   height: 40,
+                  //   child: ElevatedButton(
+                  //       style: ElevatedButton.styleFrom(
+                  //           minimumSize: Size(
+                  //               MediaQuery.of(context).size.width / 1.1, 40),
+                  //           shape: RoundedRectangleBorder()),
+                  //       onPressed: () {},
+                  //       child: Text(
+                  //         "Subscribe",
+                  //         style: TextStyle(color: Colors.black),
+                  //       )),
+                  // ),
                   Container(
                     decoration:
                         BoxDecoration(border: Border.all(color: Colors.red)),
@@ -736,7 +808,14 @@ class _AboutState extends State<About> {
                             minimumSize: Size(
                                 MediaQuery.of(context).size.width / 1.1, 40),
                             shape: RoundedRectangleBorder()),
-                        onPressed: () {},
+                        onPressed: () async {
+           
+            await subscribeUser();
+            
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Subscription Successful")),
+            );
+          },
                         child: Text(
                           "Subscribe",
                           style: TextStyle(color: Colors.black),

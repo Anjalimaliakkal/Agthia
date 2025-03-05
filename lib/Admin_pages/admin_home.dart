@@ -1,4 +1,6 @@
 import 'package:agthia/Admin_pages/addBrands.dart';
+import 'package:agthia/Admin_pages/viewRestaurants.dart';
+import 'package:agthia/Admin_pages/viewbrands.dart';
 import 'package:agthia/Restaurant_pages/Add_Restaurant.dart';
 import 'package:agthia/Admin_pages/aboutUsHomePage.dart';
 import 'package:agthia/Admin_pages/addJobVaccancy.dart';
@@ -9,6 +11,7 @@ import 'package:agthia/Admin_pages/approval_restaurant.dart';
 import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
 import 'package:agthia/Admin_pages/subscripionViewPage.dart';
 import 'package:agthia/Admin_pages/visionhomepage.dart';
+import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:flutter/material.dart';
 
 class AdminHome extends StatelessWidget {
@@ -31,7 +34,7 @@ class AdminHome extends StatelessWidget {
           ),
         ),
         backgroundColor: Color(0xFF282d37),
-        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.settings))],
+        // actions: [IconButton(onPressed: (){}, icon: Icon(Icons.settings))],
       ),
       drawer: Drawer(
         width: 200,
@@ -185,6 +188,28 @@ class AdminHome extends StatelessWidget {
                 
               ],
             ),
+          
+            ListTile(
+              title: Text("View Restaurants",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Viewrestaurants()));
+              },
+            ),
+           
+              ListTile(
+              title: Text("View Brands",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Viewbrands()));
+              },
+            ),
             ListTile(
               title: Text("Subscriptions",
                   style: TextStyle(
@@ -256,7 +281,9 @@ class AdminHome extends StatelessWidget {
                   Row(
                     children: [
                       Icon(Icons.circle,size: 5,),
-                      TextButton(onPressed: (){}, child: Text("Logout",style: TextStyle(color: Colors.blue,fontSize: 14),)),
+                      TextButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                      }, child: Text("Logout",style: TextStyle(color: Colors.blue,fontSize: 14),)),
                     ],
                   ),
                 
