@@ -1,7 +1,6 @@
 import 'package:agthia/Admin_pages/addBrands.dart';
 import 'package:agthia/Admin_pages/viewRestaurants.dart';
 import 'package:agthia/Admin_pages/viewbrands.dart';
-import 'package:agthia/Restaurant_pages/Add_Restaurant.dart';
 import 'package:agthia/Admin_pages/aboutUsAddContent.dart';
 import 'package:agthia/Admin_pages/addJobVaccancy.dart';
 import 'package:agthia/Admin_pages/addNewsPage.dart';

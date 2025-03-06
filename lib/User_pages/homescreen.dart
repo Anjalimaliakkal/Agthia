@@ -1054,25 +1054,62 @@ class _HomescreenState extends State<Homescreen> {
   // Firestore instance
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
   // Function to add user subscription to Firestore
-  Future<void> subscribeUser() async {
-    User? user = _auth.currentUser;
+Future<void> subscribeUser() async {
+  User? user = _auth.currentUser;
 
-    // If user is logged in
-    if (user != null) {
-      String userEmail = user.email ?? 'No Email'; // Get user email
+  if (user != null) {
+    String userEmail = user.email!.toLowerCase(); // Convert email to lowercase
 
-      // Adding subscription to Firestore
-      await _firestore.collection('subscriptions').add({
-        'email': userEmail,
-        'subscriptionDate': Timestamp.now(),
-      });
-    } else {
-      // Show error if the user is not authenticated
-      print('No user logged in');
+    try {
+      // Reference to the Firestore collection
+      CollectionReference subscriptions = _firestore.collection('subscriptions');
+
+      // Check if the user already exists in the 'subscriptions' collection
+      QuerySnapshot querySnapshot = await subscriptions
+          .where('email', isEqualTo: userEmail)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // User is already subscribed, do not add again
+        print('User is already subscribed.');
+      } else {
+        // User is not subscribed, add them
+        await subscriptions.add({
+          'email': userEmail,
+          'subscriptionDate': Timestamp.now(),
+        });
+        print('Subscription successful!');
+      }
+    } catch (e) {
+      print('Error subscribing user: $e');
     }
+  } else {
+    print('No user logged in');
   }
+}
+
+  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // // Function to add user subscription to Firestore
+  // Future<void> subscribeUser() async {
+  //   User? user = _auth.currentUser;
+
+  //   // If user is logged in
+  //   if (user != null) {
+  //     String userEmail = user.email ?? 'No Email'; // Get user email
+
+  //     // Adding subscription to Firestore
+  //     await _firestore.collection('subscriptions').add({
+  //       'email': userEmail,
+  //       'subscriptionDate': Timestamp.now(),
+  //     });
+  //   } else {
+  //     // Show error if the user is not authenticated
+  //     print('No user logged in');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

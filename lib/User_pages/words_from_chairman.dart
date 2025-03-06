@@ -499,9 +499,46 @@ import 'package:agthia/User_pages/user_changepassword.dart';
 import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class WordsFromChairman extends StatelessWidget {
-  const WordsFromChairman({super.key});
+   WordsFromChairman({super.key});
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  // Function to add user subscription to Firestore
+Future<void> subscribeUser() async {
+  User? user = _auth.currentUser;
+
+  if (user != null) {
+    String userEmail = user.email!.toLowerCase(); // Convert email to lowercase
+
+    try {
+      // Reference to the Firestore collection
+      CollectionReference subscriptions = _firestore.collection('subscriptions');
+
+      // Check if the user already exists in the 'subscriptions' collection
+      QuerySnapshot querySnapshot = await subscriptions
+          .where('email', isEqualTo: userEmail)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // User is already subscribed, do not add again
+        print('User is already subscribed.');
+      } else {
+        // User is not subscribed, add them
+        await subscriptions.add({
+          'email': userEmail,
+          'subscriptionDate': Timestamp.now(),
+        });
+        print('Subscription successful!');
+      }
+    } catch (e) {
+      print('Error subscribing user: $e');
+    }
+  } else {
+    print('No user logged in');
+  }
+}
 
   Future<Map<String, dynamic>> fetchWordsFromChairman() async {
     DocumentSnapshot snapshot = await FirebaseFirestore.instance
@@ -934,23 +971,46 @@ class WordsFromChairman extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
+                      // Container(
+                      //   decoration: BoxDecoration(
+                      //       border: Border.all(color: Colors.red)),
+                      //   width: MediaQuery.of(context).size.width / 1.1,
+                      //   height: 40,
+                      //   child: ElevatedButton(
+                      //       style: ElevatedButton.styleFrom(
+                      //           minimumSize: Size(
+                      //               MediaQuery.of(context).size.width / 1.1,
+                      //               40),
+                      //           shape: RoundedRectangleBorder()),
+                      //       onPressed: () {},
+                      //       child: Text(
+                      //         "Subscribe",
+                      //         style: TextStyle(color: Colors.black),
+                      //       )),
+                      // ),
                       Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.red)),
-                        width: MediaQuery.of(context).size.width / 1.1,
-                        height: 40,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                minimumSize: Size(
-                                    MediaQuery.of(context).size.width / 1.1,
-                                    40),
-                                shape: RoundedRectangleBorder()),
-                            onPressed: () {},
-                            child: Text(
-                              "Subscribe",
-                              style: TextStyle(color: Colors.black),
-                            )),
-                      ),
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.red)),
+                    width: MediaQuery.of(context).size.width / 1.1,
+                    height: 40,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                                MediaQuery.of(context).size.width / 1.1, 40),
+                            shape: RoundedRectangleBorder()),
+                        onPressed: () async {
+           
+            await subscribeUser();
+            
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Subscription Successful")),
+            );
+          },
+                        child: Text(
+                          "Subscribe",
+                          style: TextStyle(color: Colors.black),
+                        )),
+                  ),
                       SizedBox(height: 15),
                       Text("22260445",
                           style: TextStyle(

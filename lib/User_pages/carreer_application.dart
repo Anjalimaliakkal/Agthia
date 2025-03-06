@@ -884,6 +884,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CarreerApplication extends StatefulWidget {
   final String jobId;
@@ -997,14 +998,64 @@ Future<void> pickFile() async {
     }
   }
 
+   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  // Function to add user subscription to Firestore
+Future<void> subscribeUser() async {
+  User? user = _auth.currentUser;
+
+  if (user != null) {
+    String userEmail = user.email!.toLowerCase(); // Convert email to lowercase
+
+    try {
+      // Reference to the Firestore collection
+      CollectionReference subscriptions = _firestore.collection('subscriptions');
+
+      // Check if the user already exists in the 'subscriptions' collection
+      QuerySnapshot querySnapshot = await subscriptions
+          .where('email', isEqualTo: userEmail)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // User is already subscribed, do not add again
+        print('User is already subscribed.');
+      } else {
+        // User is not subscribed, add them
+        await subscriptions.add({
+          'email': userEmail,
+          'subscriptionDate': Timestamp.now(),
+        });
+        print('Subscription successful!');
+      }
+    } catch (e) {
+      print('Error subscribing user: $e');
+    }
+  } else {
+    print('No user logged in');
+  }
+}
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Apply for ${widget.jobTitle}"),
-        iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Color(0xFF282d37),
+         
+        title: Center(
+          child: Transform.translate(
+            offset: Offset(-10.0, 0.0),
+            child: Image.asset(
+              "asset/logo_agthia.jpg",
+              height: 50,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: const Color(0xFF282d37),
+        // title: Text("Apply for ${widget.jobTitle}"),
+       
         actions: [
           PopupMenuButton<String>(
             child: Row(
@@ -1182,7 +1233,7 @@ Future<void> pickFile() async {
                 ],
               ),
               width: 500,
-              height: 800,
+              height: 600,
               child: Padding(
                 padding: EdgeInsets.all(20),
                 child: Form(
@@ -1190,12 +1241,14 @@ Future<void> pickFile() async {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      //Center(child: Text("Apply for ${widget.jobTitle}",style: TextStyle(fontWeight: FontWeight.bold),)),
                       Center(
                         child: Text(
                           "Job Application Form",
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
                         ),
                       ),
+                      Center(child: Text("Apply for ${widget.jobTitle}",style: TextStyle(fontWeight: FontWeight.bold),)),
                       SizedBox(height: 10),
                       Divider(color: Colors.orange),
                       SizedBox(height: 10),
@@ -1353,17 +1406,40 @@ Future<void> pickFile() async {
                     ),
                   ),
                   SizedBox(height: 10),
+                  // Container(
+                  //   decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+                  //   width: MediaQuery.of(context).size.width / 1.1,
+                  //   height: 40,
+                  //   child: ElevatedButton(
+                  //     style: ElevatedButton.styleFrom(
+                  //         minimumSize: Size(MediaQuery.of(context).size.width / 1.1, 40),
+                  //         shape: RoundedRectangleBorder()),
+                  //     onPressed: () {},
+                  //     child: Text("Subscribe", style: TextStyle(color: Colors.black)),
+                  //   ),
+                  // ),
                   Container(
-                    decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.red)),
                     width: MediaQuery.of(context).size.width / 1.1,
                     height: 40,
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          minimumSize: Size(MediaQuery.of(context).size.width / 1.1, 40),
-                          shape: RoundedRectangleBorder()),
-                      onPressed: () {},
-                      child: Text("Subscribe", style: TextStyle(color: Colors.black)),
-                    ),
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                                MediaQuery.of(context).size.width / 1.1, 40),
+                            shape: RoundedRectangleBorder()),
+                        onPressed: () async {
+           
+            await subscribeUser();
+            
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Subscription Successful")),
+            );
+          },
+                        child: Text(
+                          "Subscribe",
+                          style: TextStyle(color: Colors.black),
+                        )),
                   ),
                   SizedBox(height: 15),
                   Text("22260445",

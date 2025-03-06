@@ -4,7 +4,6 @@ import 'package:agthia/Restaurant_pages/Restaurant_viewdelivery.dart';
 import 'package:agthia/Restaurant_pages/Restaurant_vieworders.dart';
 import 'package:agthia/Restaurant_pages/delivery_allocation.dart';
 import 'package:agthia/backend_pages/backend_new/loginpage.dart';
-import 'package:agthia/login.dart';
 import 'package:flutter/material.dart';
 
 class RestaurantHome extends StatelessWidget {

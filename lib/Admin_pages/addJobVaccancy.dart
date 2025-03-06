@@ -1007,7 +1007,7 @@ final TextEditingController brandController = TextEditingController();
                 ),
                 onPressed: (){
                    Navigator.push(context, MaterialPageRoute(builder: (context) => ViewApplications()));
-                }, child: Text("      View Application",style: TextStyle(color: Colors.white,fontSize: 15),))
+                }, child: Text("      View Applications",style: TextStyle(color: Colors.white,fontSize: 15),))
           ],
         ),
       ),

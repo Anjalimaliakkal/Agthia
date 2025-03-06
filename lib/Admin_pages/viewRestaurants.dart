@@ -221,6 +221,8 @@
 //   }
 // }
 
+//import 'dart:ffi';
+
 import 'package:agthia/Admin_pages/aboutUsHomePage.dart';
 import 'package:agthia/Admin_pages/addBrands.dart';
 import 'package:agthia/Admin_pages/addJobVaccancy.dart';
@@ -611,6 +613,12 @@ class Viewrestaurants extends StatelessWidget {
         String twitterUrl = restaurant['twitterUrl'] ?? 'No twitterUrl';
         String description1 = restaurant['description1'] ?? 'No description1';
         String description2 = restaurant['description2'] ?? 'No description2';
+        String menuItems = (restaurant['menuItems'] as List?)?.join(", ") ?? 'No menu items';
+        String locations = (restaurant['locations'] as List?)?.join(", ") ?? 'No locations';
+        
+
+        // String menuItems = restaurant['menuItems'] ?? 'No menuitems';
+        // String locations = restaurant['locations'] ?? 'No locations';
         String status = restaurant['status'] ?? 'No status';
         Timestamp? timestamp = restaurant['createdAt'] as Timestamp?;
         String date = timestamp != null ? timestamp.toDate().toString() : 'No Date Available';
@@ -624,17 +632,33 @@ class Viewrestaurants extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("Restaurant Name: $name", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                Text("Brand Type: $brandType"),
+                SizedBox(height: 10,),
+                Text("Brand Type: $brandType",),
+                SizedBox(height: 10,),
                 Text("Register No: $registerNo"),
+                SizedBox(height: 10,),
                 Text("Seating Capacity: $seatingCapacity"),
+                SizedBox(height: 10,),
                 Text("Reservation URL: $reservationUrl"),
+                SizedBox(height: 10,),
                 Text("Instagram: $instagramUrl"),
+                SizedBox(height: 10,),
                 Text("Facebook: $facebookUrl"),
+                SizedBox(height: 10,),
                 Text("Twitter: $twitterUrl"),
+                SizedBox(height: 10,),
                 Text("Description: $description1"),
+                SizedBox(height: 10,),
                 Text("Additional Info: $description2"),
+                SizedBox(height: 10,),
+                Text("Menu Items: $menuItems"),
+                SizedBox(height: 10,),
+                Text("Location: $locations"),
+                SizedBox(height: 10,),
                 Text("Status: $status"),
+                SizedBox(height: 10,),
                 Text("Date: $date"),
+                
               ],
             ),
           ),

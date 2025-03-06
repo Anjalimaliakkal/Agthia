@@ -385,17 +385,23 @@ Future<void> subscribeUser() async {
   User? user = _auth.currentUser;
 
   if (user != null) {
-    String userEmail = user.email ?? 'No Email';
+    String userEmail = user.email!.toLowerCase(); // Convert email to lowercase
 
     try {
-      // Check if user is already subscribed
-      DocumentSnapshot doc = await _firestore.collection('subscriptions').doc(userEmail).get();
+      // Reference to the Firestore collection
+      CollectionReference subscriptions = _firestore.collection('subscriptions');
 
-      if (doc.exists) {
-        print('User is already subscribed');
+      // Check if the user already exists in the 'subscriptions' collection
+      QuerySnapshot querySnapshot = await subscriptions
+          .where('email', isEqualTo: userEmail)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // User is already subscribed, do not add again
+        print('User is already subscribed.');
       } else {
-        // Add subscription with email as document ID (avoids duplicates)
-        await _firestore.collection('subscriptions').doc(userEmail).set({
+        // User is not subscribed, add them
+        await subscriptions.add({
           'email': userEmail,
           'subscriptionDate': Timestamp.now(),
         });
@@ -408,6 +414,7 @@ Future<void> subscribeUser() async {
     print('No user logged in');
   }
 }
+
   //  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   // final FirebaseAuth _auth = FirebaseAuth.instance;
 

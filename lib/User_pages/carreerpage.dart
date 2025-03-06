@@ -499,10 +499,48 @@ import 'package:agthia/User_pages/mission.dart';
 import 'package:agthia/User_pages/ourpeople.dart';
 import 'package:agthia/User_pages/words_from_chairman.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Carreerpage extends StatelessWidget {
-  const Carreerpage({super.key});
+   Carreerpage({super.key});
+   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  // Function to add user subscription to Firestore
+Future<void> subscribeUser() async {
+  User? user = _auth.currentUser;
+
+  if (user != null) {
+    String userEmail = user.email!.toLowerCase(); // Convert email to lowercase
+
+    try {
+      // Reference to the Firestore collection
+      CollectionReference subscriptions = _firestore.collection('subscriptions');
+
+      // Check if the user already exists in the 'subscriptions' collection
+      QuerySnapshot querySnapshot = await subscriptions
+          .where('email', isEqualTo: userEmail)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // User is already subscribed, do not add again
+        print('User is already subscribed.');
+      } else {
+        // User is not subscribed, add them
+        await subscriptions.add({
+          'email': userEmail,
+          'subscriptionDate': Timestamp.now(),
+        });
+        print('Subscription successful!');
+      }
+    } catch (e) {
+      print('Error subscribing user: $e');
+    }
+  } else {
+    print('No user logged in');
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -777,20 +815,28 @@ class Carreerpage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.9,
+                  Container(
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.red)),
+                    width: MediaQuery.of(context).size.width / 1.1,
                     height: 40,
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: const RoundedRectangleBorder(),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        "Subscribe",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                                MediaQuery.of(context).size.width / 1.1, 40),
+                            shape: RoundedRectangleBorder()),
+                        onPressed: () async {
+           
+            await subscribeUser();
+            
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Subscription Successful")),
+            );
+          },
+                        child: Text(
+                          "Subscribe",
+                          style: TextStyle(color: Colors.black),
+                        )),
                   ),
                   const SizedBox(height: 15),
                   Text("22260445",
