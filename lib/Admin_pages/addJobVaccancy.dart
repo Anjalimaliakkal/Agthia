@@ -467,6 +467,7 @@ import 'package:agthia/Admin_pages/approval_delivery.dart';
 import 'package:agthia/Admin_pages/approval_restaurant.dart';
 import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
 import 'package:agthia/Admin_pages/subscripionViewPage.dart';
+import 'package:agthia/Admin_pages/viewDelivery.dart';
 import 'package:agthia/Admin_pages/viewRestaurants.dart';
 import 'package:agthia/Admin_pages/viewapplications.dart';
 import 'package:agthia/Admin_pages/viewbrands.dart';
@@ -732,6 +733,17 @@ final TextEditingController brandController = TextEditingController();
                     context,
                     MaterialPageRoute(
                         builder: (context) => Viewrestaurants()));
+              },
+            ),
+            ListTile(
+              title: Text("View Delivery Personnel",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Viewdelivery()));
               },
             ),
           ListTile(

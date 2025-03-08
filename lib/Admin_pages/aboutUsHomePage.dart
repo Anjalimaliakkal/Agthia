@@ -1,4 +1,5 @@
 import 'package:agthia/Admin_pages/addBrands.dart';
+import 'package:agthia/Admin_pages/viewDelivery.dart';
 import 'package:agthia/Admin_pages/viewRestaurants.dart';
 import 'package:agthia/Admin_pages/viewbrands.dart';
 import 'package:agthia/Admin_pages/aboutUsAddContent.dart';
@@ -197,6 +198,17 @@ class AboutUsHomePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Viewrestaurants()));
+              },
+            ),
+             ListTile(
+              title: Text("View Delivery Personnel",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Viewdelivery()));
               },
             ),
        ListTile(

@@ -355,7 +355,7 @@ class Brandspage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Beefbar()));
+                                    builder: (context) => beefbar()));
                           },
                           child: MouseRegion(
                             cursor: SystemMouseCursors.click,

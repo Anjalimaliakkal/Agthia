@@ -283,6 +283,7 @@ import 'package:agthia/Admin_pages/approval_delivery.dart';
 import 'package:agthia/Admin_pages/approval_restaurant.dart';
 import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
 import 'package:agthia/Admin_pages/subscripionViewPage.dart';
+import 'package:agthia/Admin_pages/viewDelivery.dart';
 import 'package:agthia/Admin_pages/viewRestaurants.dart';
 import 'package:agthia/Admin_pages/viewbrands.dart';
 import 'package:agthia/Admin_pages/visionhomepage.dart';
@@ -515,6 +516,17 @@ class _AddwordsfromchairmanState extends State<Addwordsfromchairman> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Viewbrands()));
+              },
+            ),
+            ListTile(
+              title: Text("View Delivery Personnel",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Viewdelivery()));
               },
             ),
             ListTile(

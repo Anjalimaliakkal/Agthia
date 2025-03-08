@@ -1454,6 +1454,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
         backgroundColor: Color(0xFF282d37),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
       ),
+      backgroundColor: const Color.fromARGB(255, 213, 220, 226),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(15),
         child: Column(

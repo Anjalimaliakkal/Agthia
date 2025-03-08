@@ -262,9 +262,13 @@
 // }
 
 
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
+
+
 
 class ReservationScreen extends StatefulWidget {
   final String restaurantId;
@@ -285,18 +289,20 @@ class _ReservationScreenState extends State<ReservationScreen> {
   List<String> availableTimes = [];
   List<String> menuItems = [];
   List<String> locations = [];
-
   String selectedTime = "10:00 AM";
-  DateTime selectedDate = DateTime.now();  // Store the selected date
+  DateTime selectedDate = DateTime.now();
   int selectedGuests = 2;
-  String? selectedMenuItem;
+  List<String> selectedMenuItems = [];
   String? selectedLocation;
-
   bool isLoading = true;
 
   // Predefined time slots
   final List<String> predefinedTimeSlots = [
-"10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM,1:00 PM", "1:30 PM", "2:00 PM", "2:30 APM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM,5:00 PM", "5:30 PM", "6:00 PM", "6:30 APM", "7:00 PM", "7:30 PM","8:00 PM", "8:30 APM", "9:00 PM", "9:30 PM", "10:00 PM", "10:30 PM,11:00 PM", "11:30 PM"
+    "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM",
+    "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM",
+    "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM",
+    "8:00 PM", "8:30 PM", "9:00 PM", "9:30 PM", "10:00 PM", "10:30 PM", "11:00 PM",
+    "11:30 PM"
   ];
 
   @override
@@ -334,11 +340,9 @@ class _ReservationScreenState extends State<ReservationScreen> {
           locations = List<String>.from(restaurantDoc['locations'] ?? []);
           availableSeats = seatingCapacity;
 
-          if (menuItems.isNotEmpty) selectedMenuItem = menuItems.first;
           if (locations.isNotEmpty) selectedLocation = locations.first;
         });
 
-        // After fetching the restaurant details, get the reserved seats
         await _fetchReservedSeats();
       } else {
         _showError("Restaurant not found.");
@@ -353,92 +357,116 @@ class _ReservationScreenState extends State<ReservationScreen> {
     try {
       final reservedSeatsSnapshot = await FirebaseFirestore.instance
           .collection('reservations')
-          .where('restaurantId', isEqualTo: 'NdVJoWHf1f0YKradPOFX')
+          .where('restaurantId', isEqualTo: widget.restaurantId)
           .where('selectedDate', isEqualTo: Timestamp.fromDate(_startOfDay(selectedDate)))
           .get();
 
       int reservedSeats = 0;
-
-      reservedSeatsSnapshot.docs.forEach((doc) {
-        // Ensure 'seats' field is an integer
+      for (var doc in reservedSeatsSnapshot.docs) {
         if (doc['seats'] is int) {
-          reservedSeats += (doc['seats'] as int);  // Safely cast to int
-        } else {
-          print("Warning: 'seats' field is not an integer in this document.");
+          reservedSeats += (doc['seats'] as int);
         }
-      });
+      }
 
       setState(() {
         availableSeats = seatingCapacity - reservedSeats;
       });
-
     } catch (e) {
       _showError("Error calculating reserved seats: $e");
     } finally {
       setState(() {
-        isLoading = false;  // End loading after fetching reserved seats
+        isLoading = false;
       });
     }
   }
 
   // Reserve seats
+  // void _reserveSeats() async {
+  //   int requestedSeats = int.tryParse(_seatsController.text) ?? 0;
+
+  //   if (requestedSeats <= 0 || requestedSeats > availableSeats) {
+  //     _showError("Invalid number of seats.");
+  //     return;
+  //   }
+
+  //   bool timeConflict = await _checkTimeConflict();
+  //   if (timeConflict) {
+  //     _showError("Time slot already taken.");
+  //     return;
+  //   }
+
+  //   try {
+  //     //await FirebaseFirestore.instance.collection('reservations').add({
+  //     await FirebaseFirestore.instance.collection('reservations').doc('NdVJoWHf1f0YKradPOFX').set({
+  //       'restaurantId': widget.restaurantId,
+  //       'userId': userId,
+  //       'name': _nameController.text,
+  //       'seats': requestedSeats,
+  //       'selectedTime': selectedTime,
+  //       'selectedDate': Timestamp.fromDate(selectedDate),
+  //       'menuItem': selectedMenuItems,
+  //       'location': selectedLocation,
+  //       'timestamp': FieldValue.serverTimestamp(),
+  //     });
+
+  //     await _updateAvailableSeats(requestedSeats);
+
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text("Reservation successful!")),
+  //     );
+  //   } catch (e) {
+  //     _showError("Failed to make a reservation. Please try again.");
+  //   }
+  // }
+
   void _reserveSeats() async {
-    int requestedSeats = int.tryParse(_seatsController.text) ?? 0;
+  int requestedSeats = int.tryParse(_seatsController.text) ?? 0;
 
-    if (requestedSeats <= 0 || requestedSeats > availableSeats) {
-      _showError("Invalid number of seats.");
-      return;
-    }
-
-    bool timeConflict = await _checkTimeConflict();
-    if (timeConflict) {
-      _showError("Time slot already taken.");
-      return;
-    }
-
-    try {
-      // Debugging: Check values before attempting to add reservation
-      print("Adding reservation with:");
-      print("Restaurant ID: ${widget.restaurantId}");
-      print("User ID: $userId");
-      print("Requested Seats: $requestedSeats");
-      print("Selected Time: $selectedTime");
-      print("Selected Date: $selectedDate");
-      print("Menu Item: $selectedMenuItem");
-      print("Location: $selectedLocation");
-
-      await FirebaseFirestore.instance.collection('reservations').add({
-        'restaurantId': widget.restaurantId,
-        'userId': userId,
-        'name': _nameController.text,
-        'seats': requestedSeats,
-        'selectedTime': selectedTime,
-        'selectedDate': Timestamp.fromDate(selectedDate),
-        'menuItem': selectedMenuItem,
-        'location': selectedLocation,
-        'timestamp': FieldValue.serverTimestamp(),
-      });
-
-      // After adding the reservation, we need to update the available seats
-      await _updateAvailableSeats(requestedSeats);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Reservation successful!")),
-      );
-    } catch (e) {
-      print("Error details: $e");  // Debugging: log the full error
-      _showError("Failed to make a reservation. Please try again.");
-    }
+  if (requestedSeats <= 0 || requestedSeats > availableSeats) {
+    _showError("Invalid number of seats.");
+    return;
   }
 
-  // Update available seats in the restaurant document
+  bool timeConflict = await _checkTimeConflict();
+  if (timeConflict) {
+    _showError("Time slot already taken.");
+    return;
+  }
+
+  try {
+    // Use the specific reservation ID 'NdVJoWHf1f0YKradPOFX'
+    await FirebaseFirestore.instance.collection('reservations').doc('NdVJoWHf1f0YKradPOFX').set({
+      'restaurantId': widget.restaurantId,
+      'userId': userId,
+      'name': _nameController.text,
+      'seats': requestedSeats,
+      'selectedTime': selectedTime,
+      'selectedDate': Timestamp.fromDate(selectedDate),
+      'menuItem': selectedMenuItems,
+      'location': selectedLocation,
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+
+    await _updateAvailableSeats(requestedSeats);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Reservation successful!")),
+    );
+  } catch (e) {
+    _showError("Failed to make a reservation. Please try again.");
+  }
+}
+
+
+
+
+  // Update available seats
   Future<void> _updateAvailableSeats(int reservedSeats) async {
     try {
       await FirebaseFirestore.instance.collection('restaurants').doc(widget.restaurantId).update({
-        'seatingCapacity': seatingCapacity - reservedSeats, // Update seating capacity
+        'seatingCapacity': seatingCapacity - reservedSeats,
       });
 
-      // Recalculate available seats
       await _fetchReservedSeats();
     } catch (e) {
       _showError("Error updating available seats.");
@@ -449,7 +477,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
   Future<bool> _checkTimeConflict() async {
     final snapshot = await FirebaseFirestore.instance
         .collection('reservations')
-        .where('restaurantId', isEqualTo: 'NdVJoWHf1f0YKradPOFX')
+        .where('restaurantId', isEqualTo: widget.restaurantId)
         .where('selectedDate', isEqualTo: Timestamp.fromDate(_startOfDay(selectedDate)))
         .where('selectedTime', isEqualTo: selectedTime)
         .get();
@@ -469,108 +497,101 @@ class _ReservationScreenState extends State<ReservationScreen> {
     );
   }
 
-  // Open date picker
-  Future<void> _selectDate(BuildContext context) async {
-    DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
-    );
-    if (pickedDate != null && pickedDate != selectedDate) {
-      setState(() {
-        selectedDate = pickedDate;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Reserve at ${widget.restaurantId}")),
-      body: Padding(
+      appBar: AppBar(title: Text("Dinand par Ferdi Kuwait",style: TextStyle(fontWeight: FontWeight.bold),)),
+      backgroundColor: const Color.fromARGB(255, 198, 212, 224),
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
+            // if (isLoading) Center(child: CircularProgressIndicator()),
             if (isLoading)
-              Center(child: CircularProgressIndicator())
-            else
-              Text(
-                "Available Seats: $availableSeats",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: "Your Name"),
+                Center(child: CircularProgressIndicator())
+              else
+                Text(
+                  "Available Seats: $availableSeats",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              SizedBox(height: 10),
+            Center(
+              child: SizedBox(
+                width: 500,
+               child:  TextField(controller: _nameController, decoration: InputDecoration(labelText: "Your Name"))),
             ),
-            TextField(
-              controller: _seatsController,
-              decoration: InputDecoration(labelText: "Seats to Reserve"),
-              keyboardType: TextInputType.number,
+            Center(
+              child: SizedBox(
+                width: 500,
+                child: TextField(controller: _seatsController, decoration: InputDecoration(labelText: "Seats to Reserve"), keyboardType: TextInputType.number)),
             ),
+            SizedBox(height: 20),
+
+            // TableCalendar for date selection
+            TableCalendar(
+              focusedDay: selectedDate,
+              firstDay: DateTime.now(),
+              lastDay: DateTime(2100),
+              selectedDayPredicate: (day) => isSameDay(selectedDate, day),
+              onDaySelected: (selectedDay, _) {
+                if (selectedDay.isBefore(DateTime.now())) {
+                  _showError("You cannot select a past date!");
+                } else {
+                  setState(() => selectedDate = selectedDay);
+                }
+              },
+            ),
+
             SizedBox(height: 20),
             DropdownButton<String>(
               value: selectedTime,
-              onChanged: (newValue) {
-                setState(() {
-                  selectedTime = newValue!;
-                });
-              },
-              items: availableTimes.map((time) {
-                return DropdownMenuItem<String>(value: time, child: Text(time));
-              }).toList(),
+              onChanged: (newValue) => setState(() => selectedTime = newValue!),
+              items: availableTimes.map((time) => DropdownMenuItem(value: time, child: Text(time))).toList(),
             ),
             SizedBox(height: 20),
-            DropdownButton<String>(
-              value: selectedMenuItem,
-              onChanged: (newValue) {
-                setState(() {
-                  selectedMenuItem = newValue!;
-                });
-              },
-              hint: Text("Select a menu item"),
-              items: menuItems.map((item) {
-                return DropdownMenuItem<String>(value: item, child: Text(item));
+              DropdownButton<String>(
+                value: selectedLocation,
+                onChanged: (newValue) {
+                  setState(() {
+                    selectedLocation = newValue!;
+                  });
+                },
+                hint: Text("Location"),
+                items: locations.map((location) {
+                  return DropdownMenuItem<String>(value: location, child: Text(location));
+                }).toList(),
+              ),
+               SizedBox(height: 20),
+            Wrap(
+              spacing: 8.0,
+              children: menuItems.map((menuItem) {
+                return ChoiceChip(
+                  label: Text(menuItem),
+                  selected: selectedMenuItems.contains(menuItem),
+                  onSelected: (selected) {
+                    setState(() {
+                      if (selected) {
+                        selectedMenuItems.add(menuItem);
+                      } else {
+                        selectedMenuItems.remove(menuItem);
+                      }
+                    });
+                  },
+                );
               }).toList(),
             ),
-            SizedBox(height: 20),
-            DropdownButton<String>(
-              value: selectedLocation,
-              onChanged: (newValue) {
-                setState(() {
-                  selectedLocation = newValue!;
-                });
-              },
-              hint: Text("Select a location"),
-              items: locations.map((location) {
-                return DropdownMenuItem<String>(value: location, child: Text(location));
-              }).toList(),
-            ),
+            
             SizedBox(height: 20),
             Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Selected Date: ${selectedDate.toLocal().toString().split(' ')[0]}",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.calendar_today),
-                    onPressed: () => _selectDate(context),
-                  ),
-                ],
-              ),
+              child: ElevatedButton(onPressed: _reserveSeats, child: 
+              Text("Reserve Now",style: TextStyle(color: Colors.white),),
+              style: ElevatedButton.styleFrom(shape: BeveledRectangleBorder(),backgroundColor: Colors.green),),
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _reserveSeats,
-              child: Text("Reserve Now"),
-            ),
+            
           ],
         ),
       ),
     );
   }
 }
+

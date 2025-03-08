@@ -1357,7 +1357,7 @@ Future<void> subscribeUser() async {
                             onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Beefbar())),
+                                    builder: (context) => beefbar())),
                             child: MouseRegion(
                               cursor: SystemMouseCursors.click,
                               child: Container(

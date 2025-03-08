@@ -2,6 +2,7 @@ import 'package:agthia/DeliveryPersonnel_pages/add_Delivery.dart';
 import 'package:agthia/DeliveryPersonnel_pages/delivery_changepassword.dart';
 import 'package:agthia/DeliveryPersonnel_pages/delivery_neworders.dart';
 import 'package:agthia/DeliveryPersonnel_pages/delivery_previousorders.dart';
+import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:agthia/login.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,7 @@ class DeliveryHome extends StatelessWidget {
                 // Navigate to change password screen
               } else if (value == 'logout') {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Login()));
+                    context, MaterialPageRoute(builder: (context) => LoginPage()));
                 // Perform logout action
               }
             },
@@ -224,7 +225,7 @@ class DeliveryHome extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 50),
+            const SizedBox(height: 120),
 
             Container(
               color: Colors.black,
@@ -254,49 +255,49 @@ class DeliveryHome extends StatelessWidget {
                     style: TextStyle(color: Colors.white70, fontSize: 14),
                   ),
                   SizedBox(height: 10),
-                  Padding(
-                    padding: EdgeInsets.only(),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 1.1,
-                          child: Center(
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                hintText: "Email",
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.red)),
-                    width: MediaQuery.of(context).size.width / 1.1,
-                    height: 40,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            minimumSize: Size(
-                                MediaQuery.of(context).size.width / 1.1, 40),
-                            shape: RoundedRectangleBorder()),
-                        onPressed: () {},
-                        child: Text(
-                          "Subscribe",
-                          style: TextStyle(color: Colors.black),
-                        )),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       SizedBox(
+                  //         width: MediaQuery.of(context).size.width / 1.1,
+                  //         child: Center(
+                  //           child: TextField(
+                  //             textAlign: TextAlign.center,
+                  //             decoration: InputDecoration(
+                  //               hintText: "Email",
+                  //               filled: true,
+                  //               fillColor: Colors.white,
+                  //               border: OutlineInputBorder(
+                  //                 borderRadius: BorderRadius.only(),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
+                  // Container(
+                  //   decoration:
+                  //       BoxDecoration(border: Border.all(color: Colors.red)),
+                  //   width: MediaQuery.of(context).size.width / 1.1,
+                  //   height: 40,
+                  //   child: ElevatedButton(
+                  //       style: ElevatedButton.styleFrom(
+                  //           minimumSize: Size(
+                  //               MediaQuery.of(context).size.width / 1.1, 40),
+                  //           shape: RoundedRectangleBorder()),
+                  //       onPressed: () {},
+                  //       child: Text(
+                  //         "Subscribe",
+                  //         style: TextStyle(color: Colors.black),
+                  //       )),
+                  // ),
                   SizedBox(height: 15),
                   Text("22260445",
                       style: TextStyle(

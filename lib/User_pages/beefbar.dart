@@ -595,7 +595,7 @@ import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Beefbar extends StatelessWidget {
+class beefbar extends StatelessWidget {
   final CollectionReference restaurants =
       FirebaseFirestore.instance.collection('restaurants');
 

@@ -230,6 +230,7 @@ import 'package:agthia/Admin_pages/admin_home.dart';
 import 'package:agthia/Admin_pages/approval_delivery.dart';
 import 'package:agthia/Admin_pages/approval_restaurant.dart';
 import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
+import 'package:agthia/Admin_pages/viewDelivery.dart';
 import 'package:agthia/Admin_pages/viewRestaurants.dart';
 import 'package:agthia/Admin_pages/viewbrands.dart';
 import 'package:agthia/Admin_pages/visionhomepage.dart';
@@ -426,6 +427,17 @@ class Subscripionviewpage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Viewrestaurants()));
+              },
+            ),
+            ListTile(
+              title: Text("View Delivery Personnel",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Viewdelivery()));
               },
             ),
            ListTile(
