@@ -3,6 +3,7 @@ import 'package:agthia/User_pages/brandspage.dart';
 import 'package:agthia/User_pages/bumasoud_reservation.dart';
 import 'package:agthia/User_pages/carreerpage.dart';
 import 'package:agthia/User_pages/contactus.dart';
+import 'package:agthia/User_pages/foodlists.dart';
 import 'package:agthia/User_pages/homescreen.dart';
 import 'package:agthia/User_pages/mediapage.dart';
 import 'package:agthia/User_pages/mission.dart';
@@ -361,7 +362,7 @@ class Bumasoud extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Center(
+               Center(
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         shape: BeveledRectangleBorder()),
@@ -369,13 +370,28 @@ class Bumasoud extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => BumasoudReservation()));
+                              builder: (context) => FoodItemsPage(restaurantId: 'O45CERXVHcj7mpFxTjMA',)));
                     },
                     child: Text(
-                      "Order",
+                      "Online Order",
                       style: TextStyle(color: Colors.green),
                     )),
               ),
+              // Center(
+              //   child: ElevatedButton(
+              //       style: ElevatedButton.styleFrom(
+              //           shape: BeveledRectangleBorder()),
+              //       onPressed: () {
+              //         Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //                 builder: (context) => BumasoudReservation()));
+              //       },
+              //       child: Text(
+              //         "Order",
+              //         style: TextStyle(color: Colors.green),
+              //       )),
+              // ),
               SizedBox(
                 height: 30,
               ),

@@ -2,6 +2,7 @@ import 'package:agthia/User_pages/About.dart';
 import 'package:agthia/User_pages/brandspage.dart';
 import 'package:agthia/User_pages/carreerpage.dart';
 import 'package:agthia/User_pages/contactus.dart';
+import 'package:agthia/User_pages/foodlists.dart';
 import 'package:agthia/User_pages/homescreen.dart';
 import 'package:agthia/User_pages/mediapage.dart';
 import 'package:agthia/User_pages/mission.dart';
@@ -361,7 +362,22 @@ class Namlet extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Center(
+              // Center(
+              //   child: ElevatedButton(
+              //       style: ElevatedButton.styleFrom(
+              //           shape: BeveledRectangleBorder()),
+              //       onPressed: () {
+              //         Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //                 builder: (context) => NamletReservation()));
+              //       },
+              //       child: Text(
+              //         "Order",
+              //         style: TextStyle(color: Colors.green),
+              //       )),
+              // ),
+               Center(
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         shape: BeveledRectangleBorder()),
@@ -369,10 +385,10 @@ class Namlet extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => NamletReservation()));
+                              builder: (context) => FoodItemsPage(restaurantId: '2IZp2N00orbsWOKNXTzq',)));
                     },
                     child: Text(
-                      "Order",
+                      "Online Order",
                       style: TextStyle(color: Colors.green),
                     )),
               ),

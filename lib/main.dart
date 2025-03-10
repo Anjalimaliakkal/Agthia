@@ -3,12 +3,14 @@ import 'package:agthia/Admin_pages/admin_home.dart';
 import 'package:agthia/DeliveryPersonnel_pages/delivery_home.dart';
 import 'package:agthia/Restaurant_pages/restaurant_home.dart';
 import 'package:agthia/User_pages/beefbar_reservation.dart';
+import 'package:agthia/User_pages/cart_provider.dart';
 import 'package:agthia/User_pages/homescreen.dart';
 import 'package:agthia/User_pages/payment.dart';
 import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:agthia/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() 
 async{
@@ -25,7 +27,12 @@ async{
   } catch (e) {
     print("error initialisation$e");
   }
-  runApp(const Agthia());
+  
+  runApp(
+    ChangeNotifierProvider(create:(context)=>CartProvider(),
+    child:Agthia()),
+  );
+  // runApp(const Agthia());
 }
 class Agthia extends StatelessWidget {
   const Agthia({super.key});

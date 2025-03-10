@@ -1,6 +1,7 @@
 import 'package:agthia/User_pages/About.dart';
 import 'package:agthia/User_pages/brandspage.dart';
 import 'package:agthia/User_pages/fatayer_reservation.dart';
+import 'package:agthia/User_pages/foodlists.dart';
 import 'package:agthia/User_pages/homescreen.dart';
 import 'package:agthia/User_pages/mission.dart';
 import 'package:agthia/User_pages/ourpeople.dart';
@@ -361,7 +362,22 @@ class Fatayer extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Center(
+              // Center(
+              //   child: ElevatedButton(
+              //       style: ElevatedButton.styleFrom(
+              //           shape: BeveledRectangleBorder()),
+              //       onPressed: () {
+              //         Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //                 builder: (context) => FatayerReservation()));
+              //       },
+              //       child: Text(
+              //         "Order",
+              //         style: TextStyle(color: Colors.green),
+              //       )),
+              // ),
+               Center(
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         shape: BeveledRectangleBorder()),
@@ -369,10 +385,10 @@ class Fatayer extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => FatayerReservation()));
+                              builder: (context) => FoodItemsPage(restaurantId: 'hR9lXcuN27tITgbRtnf6',)));
                     },
                     child: Text(
-                      "Order",
+                      "Online Order",
                       style: TextStyle(color: Colors.green),
                     )),
               ),
