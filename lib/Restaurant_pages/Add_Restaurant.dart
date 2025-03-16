@@ -1774,7 +1774,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker_web/image_picker_web.dart';
 
 class AddRestaurant extends StatefulWidget {
   const AddRestaurant({super.key});
@@ -1894,20 +1893,20 @@ class _AddRestaurantState extends State<AddRestaurant> {
     }
   }
 
-  Future<void> pickImage(bool isLogo, {int? index}) async {
-    Uint8List? bytes = await ImagePickerWeb.getImageAsBytes();
-    if (bytes != null) {
-      setState(() {
-        if (isLogo) {
-          logoBytes = bytes;
-        } else if (index != null) {
-          menuImages[index] = bytes;
-        } else {
-          imageBytes = bytes;
-        }
-      });
-    }
-  }
+  // Future<void> pickImage(bool isLogo, {int? index}) async {
+  //   Uint8List? bytes = await ImagePickerWeb.getImageAsBytes();
+  //   if (bytes != null) {
+  //     setState(() {
+  //       if (isLogo) {
+  //         logoBytes = bytes;
+  //       } else if (index != null) {
+  //         menuImages[index] = bytes;
+  //       } else {
+  //         imageBytes = bytes;
+  //       }
+  //     });
+  //   }
+  // }
 
   void addMenuItem() {
     setState(() {

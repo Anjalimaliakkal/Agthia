@@ -964,8 +964,496 @@
 // }
 
 
+// import 'package:agthia/Restaurant_pages/Restaurant_changepassword.dart';
+// import 'package:agthia/backend_pages/backend_new/loginpage.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/material.dart';
+
+// class ApprovalDelivery extends StatefulWidget {
+//   ApprovalDelivery({super.key});
+
+//   @override
+//   State<ApprovalDelivery> createState() => _ApprovalDeliveryState();
+// }
+
+// class _ApprovalDeliveryState extends State<ApprovalDelivery> {
+//   final CollectionReference delivery_boys =
+//       FirebaseFirestore.instance.collection('delivery_boys');
+
+//   Future<void> ApprovalDelivery(String id, String adminId) async {
+//     await delivery_boys.doc(id).update({
+//       'status': 'active', // ✅ Marks as approved
+//       'approvedBy': adminId,
+//       'updatedAt': FieldValue.serverTimestamp(),
+//     });
+//   }
+
+//   Future<void> rejectdelivery(String id) async {
+//     await delivery_boys.doc(id).delete(); // ✅ Removes from Firestore
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Center(
+//           child: Transform.translate(
+//             offset: Offset(-10.0, 0.0),
+//             child: Image(
+//               image: AssetImage("asset/logo_agthia.jpg"),
+//               height: 50,
+//               fit: BoxFit.contain,
+//             ),
+//           ),
+//         ),
+//         iconTheme: IconThemeData(color: Colors.white),
+//         backgroundColor: Color(0xFF282d37),
+//         actions: [
+//           PopupMenuButton<String>(
+//             icon: Row(
+//               children: [
+//                 CircleAvatar(
+//                   backgroundColor: Color.fromARGB(255, 188, 187, 187),
+//                   child: Icon(Icons.person, color: Colors.white),
+//                 ),
+//                 SizedBox(width: 5),
+//                 Text(
+//                   "ADMIN",
+//                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+//                 ),
+//                 SizedBox(width: 5),
+//                 Icon(Icons.arrow_drop_down, color: Colors.white),
+//               ],
+//             ),
+//             onSelected: (value) {
+//               if (value == 'change_password') {
+//                 Navigator.push(context, MaterialPageRoute(builder: (context) => RestaurantChangepassword()));
+//               } else if (value == 'logout') {
+//                 Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+//               }
+//             },
+//             itemBuilder: (context) => [
+//               PopupMenuItem<String>(
+//                 enabled: false,
+//                 child: Text(
+//                   "ADMIN",
+//                   style: TextStyle(fontWeight: FontWeight.bold),
+//                 ),
+//               ),
+//               PopupMenuDivider(),
+//               PopupMenuItem<String>(
+//                 value: 'change_password',
+//                 child: Row(
+//                   children: [
+//                     Icon(Icons.lock, color: Colors.black),
+//                     SizedBox(width: 10),
+//                     Text("Change Password"),
+//                   ],
+//                 ),
+//               ),
+//               PopupMenuItem<String>(
+//                 value: 'logout',
+//                 child: Row(
+//                   children: [
+//                     Icon(Icons.logout, color: Colors.black),
+//                     SizedBox(width: 10),
+//                     Text("Logout"),
+//                   ],
+//                 ),
+//               ),
+//             ],
+//           ),
+//           SizedBox(width: 10),
+//         ],
+//       ),
+//       body: Container(
+//         width: double.infinity,
+//         height: double.infinity,
+//         decoration: BoxDecoration(
+//           image: DecorationImage(
+//             image: AssetImage("asset/background_image1.jpg"),
+//             fit: BoxFit.cover,
+//           ),
+//         ),
+//         child: SingleChildScrollView(
+//           child: Column(
+//             children: [
+//               SizedBox(height: 20),
+//               Text(
+//                 'Registered Delivery Personnels',
+//                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
+//               ),
+//               SizedBox(height: 30),
+//               SizedBox(
+//                 height: 400, // Fixed height for ListView.builder
+//                 child: StreamBuilder<QuerySnapshot>(
+//                   stream: FirebaseFirestore.instance
+//                       .collection('delivery_boys')
+//                       .where('status', isEqualTo: 'pending') // ✅ Only fetch pending delivery boys
+//                       .snapshots(),
+//                   builder: (context, snapshot) {
+//                     if (snapshot.connectionState == ConnectionState.waiting) {
+//                       return Center(child: CircularProgressIndicator());
+//                     }
+
+//                     if (snapshot.hasError) {
+//                       return Center(child: Text("Error: ${snapshot.error}"));
+//                     }
+
+//                     if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+//                       return Center(child: Text("No pending delivery personnel", style: TextStyle(color: Colors.white)));
+//                     }
+
+//                     var deliveryBoys = snapshot.data!.docs;
+
+//                     return ListView.builder(
+//                       shrinkWrap: true,
+//                       itemCount: deliveryBoys.length,
+//                       itemBuilder: (context, index) {
+//                         var deliveryBoy = deliveryBoys[index];
+
+//                         return Card(
+//                           margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+//                           elevation: 3,
+//                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+//                           child: ListTile(
+//                             title: Text(deliveryBoy['name'], style: TextStyle(fontWeight: FontWeight.bold)),
+//                             subtitle: Text(deliveryBoy['email']),
+//                             trailing: Row(
+//                               mainAxisSize: MainAxisSize.min,
+//                               children: [
+//                                 Text("Accept", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+//                                 IconButton(
+//                                   icon: Icon(Icons.check, color: Colors.green),
+//                                   onPressed: () => ApprovalDelivery(deliveryBoy.id, "admin123"),
+//                                 ),
+//                                 Text("Reject", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+//                                 IconButton(
+//                                   icon: Icon(Icons.close, color: Colors.red),
+//                                   onPressed: () => rejectdelivery(deliveryBoy.id),
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         );
+//                       },
+//                     );
+//                   },
+//                 ),
+//               ),
+//               SizedBox(height: 50),
+             
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+// import 'package:agthia/Restaurant_pages/Restaurant_changepassword.dart';
+// import 'package:agthia/backend_pages/backend_new/loginpage.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/material.dart';
+
+// class ApprovalDelivery extends StatefulWidget {
+//   ApprovalDelivery({super.key});
+
+//   @override
+//   State<ApprovalDelivery> createState() => _ApprovalDeliveryState();
+// }
+
+// class _ApprovalDeliveryState extends State<ApprovalDelivery> {
+//   final CollectionReference delivery_boys =
+//       FirebaseFirestore.instance.collection('delivery_boys');
+
+//   // Future<void> approveDelivery(String id, String adminId) async {
+//   //   try {
+//   //     await delivery_boys.doc(id).update({
+//   //       'status': 'active',
+//   //       'approvedBy': adminId,
+//   //       'updatedAt': FieldValue.serverTimestamp(),
+//   //     });
+//   //     print("Delivery Boy Approved: $id by $adminId");
+
+//   //     setState(() {}); // ✅ Refresh UI
+//   //   } catch (e) {
+//   //     print("Error approving delivery boy: $e");
+//   //   }
+//   // }
+//   Future<void> approveDelivery(String id, String adminId) async {
+//   try {
+//     DocumentReference docRef = delivery_boys.doc(id);
+
+//     await docRef.update({
+//       'status': 'active',
+//       'approvedBy': adminId,
+//       'availability': 'available', // ✅ Ensure this updates
+//       'updatedAt': FieldValue.serverTimestamp(),
+//     });
+
+//     // Fetch updated document to verify changes
+//     DocumentSnapshot updatedDoc = await docRef.get();
+//     print("Updated Document Data: ${updatedDoc.data()}"); // Debugging
+
+//     setState(() {}); // ✅ Refresh UI
+//   } catch (e) {
+//     print("Error approving delivery boy: $e");
+//   }
+// }
+
+//   Future<void> rejectDelivery(String id) async {
+//     try {
+//       await delivery_boys.doc(id).delete();
+//       print("Delivery Boy Rejected: $id");
+
+//       setState(() {}); // ✅ Refresh UI
+//     } catch (e) {
+//       print("Error rejecting delivery boy: $e");
+//     }
+//   }
+
+//   Future<void> fetchPendingDeliveryBoys() async {
+//     QuerySnapshot snapshot = await FirebaseFirestore.instance
+//         .collection('delivery_boys')
+//         .where('status', isEqualTo: 'pending')
+//         .get();
+
+//     if (snapshot.docs.isEmpty) {
+//       print("No pending delivery boys found.");
+//     } else {
+//       for (var doc in snapshot.docs) {
+//         print("Pending Delivery Boy: ${doc.id} - ${doc['name']}");
+//       }
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Center(
+//           child: Transform.translate(
+//             offset: Offset(-10.0, 0.0),
+//             child: Image(
+//               image: AssetImage("asset/logo_agthia.jpg"),
+//               height: 50,
+//               fit: BoxFit.contain,
+//             ),
+//           ),
+//         ),
+//         iconTheme: IconThemeData(color: Colors.white),
+//         backgroundColor: Color(0xFF282d37),
+//         actions: [
+//           PopupMenuButton<String>(
+//             icon: Row(
+//               children: [
+//                 CircleAvatar(
+//                   backgroundColor: Color.fromARGB(255, 188, 187, 187),
+//                   child: Icon(Icons.person, color: Colors.white),
+//                 ),
+//                 SizedBox(width: 5),
+//                 Text(
+//                   "ADMIN",
+//                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+//                 ),
+//                 SizedBox(width: 5),
+//                 Icon(Icons.arrow_drop_down, color: Colors.white),
+//               ],
+//             ),
+//             onSelected: (value) {
+//               if (value == 'change_password') {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                         builder: (context) => RestaurantChangepassword()));
+//               } else if (value == 'logout') {
+//                 Navigator.push(
+//                     context, MaterialPageRoute(builder: (context) => LoginPage()));
+//               }
+//             },
+//             itemBuilder: (context) => [
+//               PopupMenuItem<String>(
+//                 enabled: false,
+//                 child: Text(
+//                   "ADMIN",
+//                   style: TextStyle(fontWeight: FontWeight.bold),
+//                 ),
+//               ),
+//               PopupMenuDivider(),
+//               PopupMenuItem<String>(
+//                 value: 'change_password',
+//                 child: Row(
+//                   children: [
+//                     Icon(Icons.lock, color: Colors.black),
+//                     SizedBox(width: 10),
+//                     Text("Change Password"),
+//                   ],
+//                 ),
+//               ),
+//               PopupMenuItem<String>(
+//                 value: 'logout',
+//                 child: Row(
+//                   children: [
+//                     Icon(Icons.logout, color: Colors.black),
+//                     SizedBox(width: 10),
+//                     Text("Logout"),
+//                   ],
+//                 ),
+//               ),
+//             ],
+//           ),
+//           SizedBox(width: 10),
+//         ],
+//       ),
+//       body: Container(
+//         width: double.infinity,
+//         height: double.infinity,
+//         decoration: BoxDecoration(
+//           image: DecorationImage(
+//             image: AssetImage("asset/background_image1.jpg"),
+//             fit: BoxFit.cover,
+//           ),
+//         ),
+//         child: SingleChildScrollView(
+//           child: Column(
+//             children: [
+//               SizedBox(height: 20),
+//               Text(
+//                 'Registered Delivery Personnels',
+//                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
+//               ),
+//               SizedBox(height: 20),
+
+//               /// PENDING DELIVERY BOYS
+//               Text(
+//                 "Pending Approvals",
+//                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+//               ),
+//               SizedBox(
+//                 height: 250,
+//                 child: StreamBuilder<QuerySnapshot>(
+//                   stream: delivery_boys.where('status', isEqualTo: 'pending').snapshots(),
+//                   builder: (context, snapshot) {
+//                     if (snapshot.connectionState == ConnectionState.waiting) {
+//                       return Center(child: CircularProgressIndicator());
+//                     }
+
+//                     if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+//                       print("No documents found in Firestore.");  // Debugging print
+//                       return Center(
+//                         child: Text("No pending delivery personnel",
+//                             style: TextStyle(color: Colors.white)),
+//                       );
+//                     }
+
+//                     print(snapshot.data!.docs);  // Debugging print
+
+//                     var deliveryBoys = snapshot.data!.docs;
+
+//                     return ListView.builder(
+//                       shrinkWrap: true,
+//                       itemCount: deliveryBoys.length,
+//                       itemBuilder: (context, index) {
+//                         var deliveryBoy = deliveryBoys[index];
+
+//                         return Card(
+//                           margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+//                           elevation: 3,
+//                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+//                           child: ListTile(
+//                             title: Text(deliveryBoy['name'], style: TextStyle(fontWeight: FontWeight.bold)),
+//                             subtitle: Text(deliveryBoy['email']),
+//                             trailing: Row(
+//                               mainAxisSize: MainAxisSize.min,
+//                               children: [
+//                                 IconButton(
+//                                   icon: Icon(Icons.check, color: Colors.green),
+//                                   onPressed: () => approveDelivery(deliveryBoy.id, "admin123"),
+//                                 ),
+//                                 IconButton(
+//                                   icon: Icon(Icons.close, color: Colors.red),
+//                                   onPressed: () => rejectDelivery(deliveryBoy.id),
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         );
+//                       },
+//                     );
+//                   },
+//                 ),
+//               ),
+
+//               SizedBox(height: 20),
+
+//               /// APPROVED DELIVERY BOYS
+//               Text(
+//                 "Approved Delivery Boys",
+//                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+//               ),
+//               SizedBox(
+//                 height: 250,
+//                 child: StreamBuilder<QuerySnapshot>(
+//                   stream: delivery_boys.where('status', isEqualTo: 'active').snapshots(),
+//                   builder: (context, snapshot) {
+//                     if (snapshot.connectionState == ConnectionState.waiting) {
+//                       return Center(child: CircularProgressIndicator());
+//                     }
+
+//                     if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+//                       return Center(
+//                         child: Text("No approved delivery personnel",
+//                             style: TextStyle(color: Colors.white)),
+//                       );
+//                     }
+
+//                     var approvedDeliveryBoys = snapshot.data!.docs;
+
+//                     return ListView.builder(
+//                       shrinkWrap: true,
+//                       itemCount: approvedDeliveryBoys.length,
+//                       itemBuilder: (context, index) {
+//                         var deliveryBoy = approvedDeliveryBoys[index];
+
+//                         return Card(
+//                           margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+//                           elevation: 3,
+//                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+//                           child: ListTile(
+//                             title: Text(deliveryBoy['name'], style: TextStyle(fontWeight: FontWeight.bold)),
+//                             subtitle: Column(
+//                               crossAxisAlignment: CrossAxisAlignment.start,
+//                               children: [
+//                                 Text(deliveryBoy['email']),
+//                                 // Safe check for approvedBy field
+//                                 Text(
+//                                   "Approved By: ${(deliveryBoy.data() as Map<String, dynamic>)['approvedBy'] ?? 'Not Available'}",
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         );
+//                       },
+//                     );
+//                   },
+//                 ),
+//               ),
+
+//               SizedBox(height: 50),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
 import 'package:agthia/Restaurant_pages/Restaurant_changepassword.dart';
 import 'package:agthia/backend_pages/backend_new/loginpage.dart';
+import 'package:agthia/backend_pages/backendlogin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -979,17 +1467,66 @@ class ApprovalDelivery extends StatefulWidget {
 class _ApprovalDeliveryState extends State<ApprovalDelivery> {
   final CollectionReference delivery_boys =
       FirebaseFirestore.instance.collection('delivery_boys');
+      Future<void> approveDelivery(String id, String adminId) async {
+  try {
+    DocumentReference docRef = delivery_boys.doc(id);
 
-  Future<void> ApprovalDelivery(String id, String adminId) async {
-    await delivery_boys.doc(id).update({
-      'status': 'active', // ✅ Marks as approved
+    await docRef.update({
+      'status': 'active',
       'approvedBy': adminId,
+      'availability': 'available', // ✅ Ensure this updates
       'updatedAt': FieldValue.serverTimestamp(),
     });
+
+    // Fetch updated document to verify changes
+    DocumentSnapshot updatedDoc = await docRef.get();
+    print("Updated Document Data: ${updatedDoc.data()}"); // Debugging
+
+    setState(() {}); // ✅ Refresh UI
+  } catch (e) {
+    print("Error approving delivery boy: $e");
+}
+}
+
+  // Future<void> approveDelivery(String id, String adminId) async {
+  //   try {
+  //     await delivery_boys.doc(id).update({
+  //       'status': 'active',
+  //       'approvedBy': adminId,
+  //       'updatedAt': FieldValue.serverTimestamp(),
+  //     });
+  //     print("Delivery Boy Approved: $id by $adminId");
+
+  //     setState(() {}); // ✅ Refresh UI
+  //   } catch (e) {
+  //     print("Error approving delivery boy: $e");
+  //   }
+  // }
+
+  Future<void> rejectDelivery(String id) async {
+    try {
+      await delivery_boys.doc(id).delete();
+      print("Delivery Boy Rejected: $id");
+
+      setState(() {}); // ✅ Refresh UI
+    } catch (e) {
+      print("Error rejecting delivery boy: $e");
+    }
   }
 
-  Future<void> rejectdelivery(String id) async {
-    await delivery_boys.doc(id).delete(); // ✅ Removes from Firestore
+  Future<void> fetchPendingDeliveryBoys() async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('delivery_boys')
+        .where('status', isEqualTo: 'pending')
+        .get();
+
+    if (snapshot.docs.isEmpty) {
+      print("No pending delivery boys found.");
+    } else {
+      for (var doc in snapshot.docs) {
+        print("Pending Delivery Boy: ${doc.id} - ${doc['name']}");
+      }
+    }
   }
 
   @override
@@ -1027,9 +1564,13 @@ class _ApprovalDeliveryState extends State<ApprovalDelivery> {
             ),
             onSelected: (value) {
               if (value == 'change_password') {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => RestaurantChangepassword()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RestaurantChangepassword()));
               } else if (value == 'logout') {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => LoginPage()));
               }
             },
             itemBuilder: (context) => [
@@ -1083,26 +1624,31 @@ class _ApprovalDeliveryState extends State<ApprovalDelivery> {
                 'Registered Delivery Personnels',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
+
+              /// PENDING DELIVERY BOYS
+              Text(
+                "Pending Approvals",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+              ),
               SizedBox(
-                height: 400, // Fixed height for ListView.builder
+                height: 250,
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('delivery_boys')
-                      .where('status', isEqualTo: 'pending') // ✅ Only fetch pending delivery boys
-                      .snapshots(),
+                  stream: delivery_boys.where('status', isEqualTo: 'pending').snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());
                     }
 
-                    if (snapshot.hasError) {
-                      return Center(child: Text("Error: ${snapshot.error}"));
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      print("No documents found in Firestore.");  // Debugging print
+                      return Center(
+                        child: Text("No pending delivery personnel",
+                            style: TextStyle(color: Colors.white)),
+                      );
                     }
 
-                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                      return Center(child: Text("No pending delivery personnel", style: TextStyle(color: Colors.white)));
-                    }
+                    print(snapshot.data!.docs);  // Debugging print
 
                     var deliveryBoys = snapshot.data!.docs;
 
@@ -1122,15 +1668,13 @@ class _ApprovalDeliveryState extends State<ApprovalDelivery> {
                             trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text("Accept", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                                 IconButton(
                                   icon: Icon(Icons.check, color: Colors.green),
-                                  onPressed: () => ApprovalDelivery(deliveryBoy.id, "admin123"),
+                                  onPressed: () => approveDelivery(deliveryBoy.id, "admin123"),
                                 ),
-                                Text("Reject", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                                 IconButton(
                                   icon: Icon(Icons.close, color: Colors.red),
-                                  onPressed: () => rejectdelivery(deliveryBoy.id),
+                                  onPressed: () => rejectDelivery(deliveryBoy.id),
                                 ),
                               ],
                             ),
@@ -1141,8 +1685,63 @@ class _ApprovalDeliveryState extends State<ApprovalDelivery> {
                   },
                 ),
               ),
+
+              SizedBox(height: 20),
+
+              /// APPROVED DELIVERY BOYS
+              Text(
+                "Approved Delivery Boys",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              SizedBox(
+                height: 250,
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: delivery_boys.where('status', isEqualTo: 'active').snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      return Center(
+                        child: Text("No approved delivery personnel",
+                            style: TextStyle(color: Colors.white)),
+                      );
+                    }
+
+                    var approvedDeliveryBoys = snapshot.data!.docs;
+
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: approvedDeliveryBoys.length,
+                      itemBuilder: (context, index) {
+                        var deliveryBoy = approvedDeliveryBoys[index];
+
+                        return Card(
+                          margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                          elevation: 3,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          child: ListTile(
+                            title: Text(deliveryBoy['name'], style: TextStyle(fontWeight: FontWeight.bold)),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(deliveryBoy['email']),
+                                // Safe check for approvedBy field
+                                Text(
+                                  "Approved By: ${(deliveryBoy.data() as Map<String, dynamic>)['approvedBy'] ?? 'Not Available'}",
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+
               SizedBox(height: 50),
-             
             ],
           ),
         ),
@@ -1150,5 +1749,3 @@ class _ApprovalDeliveryState extends State<ApprovalDelivery> {
     );
   }
 }
-
-

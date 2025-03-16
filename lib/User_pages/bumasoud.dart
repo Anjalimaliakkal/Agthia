@@ -1,3 +1,4 @@
+import 'package:agthia/User_pages/confirmation_page.dart';
 import 'package:agthia/User_pages/About.dart';
 import 'package:agthia/User_pages/brandspage.dart';
 import 'package:agthia/User_pages/bumasoud_reservation.dart';
@@ -11,6 +12,7 @@ import 'package:agthia/User_pages/ourpeople.dart';
 import 'package:agthia/User_pages/user_changepassword.dart';
 import 'package:agthia/User_pages/words_from_chairman.dart';
 import 'package:agthia/backend_pages/backend_new/loginpage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Bumasoud extends StatelessWidget {
@@ -211,6 +213,36 @@ class Bumasoud extends StatelessWidget {
                 },
               ),
               ListTile(
+                title: Text("My orders",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white)),
+     onTap: () async {
+  // Fetch the latest order from Firestore (Modify if needed)
+  var orderSnapshot = await FirebaseFirestore.instance
+      .collection('orders')
+      .orderBy('timestamp', descending: true) // Sort by latest
+      .limit(1)
+      .get();
+
+  if (orderSnapshot.docs.isNotEmpty) {
+    String orderId = orderSnapshot.docs.first.id; // Get the actual order ID
+
+    print("📢 Navigating to Confirmation Page with orderId: $orderId");
+
+   Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => ConfirmationPage(orderId: orderId)), // Use dynamic ID
+);
+  } else {
+    print("❌ No orders found in Firestore!");
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('No orders found. Please place an order first!')),
+    );
+  }
+},
+
+              ),
+              ListTile(
                 title: Text("Media",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
@@ -370,10 +402,10 @@ class Bumasoud extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => FoodItemsPage(restaurantId: 'O45CERXVHcj7mpFxTjMA',)));
+                              builder: (context) => FoodItemsPage(restaurantId: 'bIF6QKc9ewht6ndmUBOk',)));
                     },
                     child: Text(
-                      "Online Order",
+                      "Order",
                       style: TextStyle(color: Colors.green),
                     )),
               ),
@@ -456,50 +488,45 @@ class Bumasoud extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 230,
-                        child: Image(
-                            image: AssetImage('asset/bumasoud2.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                  Container(
+                    color: Colors.red,
+                    height: 250,
+                    width: 230,
+                    child: Image(
+                        image: AssetImage('asset/bumasoud2.jpg'),
+                        fit: BoxFit.cover),
                   ),
-                  SizedBox(width: 30),
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 230,
-                        child: Image(
-                            image: AssetImage('asset/bumasoud3.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                  SizedBox(height: 10),
+                ],
+              ),
+              SizedBox(width: 30),
+              Column(
+                children: [
+                  Container(
+                    color: Colors.red,
+                    height: 250,
+                    width: 230,
+                    child: Image(
+                        image: AssetImage('asset/bumasoud3.jpg'),
+                        fit: BoxFit.cover),
                   ),
-                  SizedBox(width: 30),
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 230,
-                        child: Image(
-                            image: AssetImage('asset/bumasoud4.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                  SizedBox(height: 10),
+                ],
+              ),
+              SizedBox(width: 30),
+              Column(
+                children: [
+                  Container(
+                    color: Colors.red,
+                    height: 250,
+                    width: 230,
+                    child: Image(
+                        image: AssetImage('asset/bumasoud4.jpg'),
+                        fit: BoxFit.cover),
                   ),
+                  SizedBox(height: 10),
                 ],
               ),
               SizedBox(height: 30),

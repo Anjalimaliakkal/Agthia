@@ -1296,23 +1296,23 @@ Future<void> subscribeUser() async {
                         child: Text("Resume:", style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
                       SizedBox(height: 10),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ElevatedButton(
-                            onPressed: pickFile,
-                            child: Text("Choose File"),
-                          ),
-                          if (selectedFile != null)
-                            Padding(
-                              padding: EdgeInsets.only(top: 5),
-                              child: Text(
-                                "Selected File: ${selectedFile!.path.split('/').last}",
-                                style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                        ],
-                      ),
+                      // Row(
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: [
+                      //     ElevatedButton(
+                      //       onPressed: pickFile,
+                      //       child: Text("Choose File"),
+                      //     ),
+                      //     if (selectedFile != null)
+                      //       Padding(
+                      //         padding: EdgeInsets.only(top: 5),
+                      //         child: Text(
+                      //           "Selected File: ${selectedFile!.path.split('/').last}",
+                      //           style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                      //         ),
+                      //       ),
+                      //   ],
+                      // ),
                       SizedBox(height: 30),
                       Center(
                         child: Row(

@@ -550,52 +550,6 @@ class Viewrestaurants extends StatelessWidget {
           ],
         ),
       ),
-      // body: StreamBuilder<QuerySnapshot>(
-      //   stream: FirebaseFirestore.instance
-      //       .collection('restaurants')
-      //       .orderBy('createdAt', descending: true) // Order by date
-      //       .snapshots(),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.connectionState == ConnectionState.waiting) {
-      //       return Center(child: CircularProgressIndicator());
-      //     }
-
-      //     if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-      //       return Center(child: Text("No Restaurants found."));
-      //     }
-
-      //     var restaurants = snapshot.data!.docs;
-      //     return ListView.builder(
-      //       itemCount: restaurants.length,
-      //       itemBuilder: (context, index) {
-      //         var restaurant = restaurants[index];
-      //         String name = restaurant['name'] ?? 'No Name';
-      //         String brandType = restaurant['brandType'] ?? 'No brandType';
-      //         String registerNo = restaurant['registerNo'] ?? 'No registerNo';
-      //         //String seatingCapacity = restaurant['seatingCapacity'] ?? 'No seatingCapacity';
-      //         String seatingCapacity = restaurant['seatingCapacity'].toString();
-      //         String reservationUrl = restaurant['reservationUrl'] ?? 'No reservationUrl';
-      //         String instagramUrl = restaurant['instagramUrl'] ?? 'No instagramUrl';
-      //         String facebookUrl = restaurant['facebookUrl'] ?? 'No facebookUrl';
-      //        // String twitterUrl = restaurant['twitterUrl'] ?? 'No twitterUrl';
-      //         String description1 = restaurant['description1'] ?? 'No description1';
-      //         String description2 = restaurant['description2'] ?? 'No description2';
-      //         String status = restaurant['status'] ?? 'No status';
-      //         Timestamp? timestamp =
-      //             restaurant['createdAt'] as Timestamp?;
-      //         // String date = timestamp != null
-      //         //     ? timestamp.toDate().toString()
-      //         //     : 'No Date Available';
-
-      //         return ListTile(
-      //           title: Text(name),
-      //           subtitle: Text(brandType),
-                
-      //         );
-      //       },
-      //     );
-      //   },
-      // ),
       body: StreamBuilder<QuerySnapshot>(
   stream: FirebaseFirestore.instance
       .collection('restaurants')
@@ -625,15 +579,15 @@ class Viewrestaurants extends StatelessWidget {
         String twitterUrl = restaurant['twitterUrl'] ?? 'No twitterUrl';
         String description1 = restaurant['description1'] ?? 'No description1';
         String description2 = restaurant['description2'] ?? 'No description2';
-        String menuItems = (restaurant['menuItems'] as List?)?.join(", ") ?? 'No menu items';
-        String locations = (restaurant['locations'] as List?)?.join(", ") ?? 'No locations';
+       // String menuItems = (restaurant['menuItems'] as List?)?.join(", ") ?? 'No menu items';
+       // String locations = (restaurant['locations'] as List?)?.join(", ") ?? 'No locations';
         
-
         // String menuItems = restaurant['menuItems'] ?? 'No menuitems';
         // String locations = restaurant['locations'] ?? 'No locations';
         String status = restaurant['status'] ?? 'No status';
         Timestamp? timestamp = restaurant['createdAt'] as Timestamp?;
         String date = timestamp != null ? timestamp.toDate().toString() : 'No Date Available';
+
 
         return Card(
           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -663,9 +617,9 @@ class Viewrestaurants extends StatelessWidget {
                 SizedBox(height: 10,),
                 Text("Additional Info: $description2"),
                 SizedBox(height: 10,),
-                Text("Menu Items: $menuItems"),
+               // Text("Menu Items: $menuItems"),
                 SizedBox(height: 10,),
-                Text("Location: $locations"),
+               // Text("Location: $locations"),
                 SizedBox(height: 10,),
                 Text("Status: $status"),
                 SizedBox(height: 10,),

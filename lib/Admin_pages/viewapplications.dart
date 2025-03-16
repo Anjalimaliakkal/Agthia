@@ -560,7 +560,7 @@ class ViewApplications extends StatelessWidget {
               String email = jobApplication['email'] ?? 'No email';
               String jobId = jobApplication['jobId'] ?? 'No jobId';
               String jobTitle = jobApplication['jobTitle'] ?? 'No job Title';
-              String resumeFileName = jobApplication['resumeFileName'] ?? ''; // Get resume URL
+              //String resumeFileName = jobApplication['resumeFileName'] ?? ''; // Get resume URL
 
               Timestamp? timestamp = jobApplication['submittedAt'] as Timestamp?;
               String date = timestamp != null ? timestamp.toDate().toString() : 'No Date Available';
@@ -582,12 +582,12 @@ class ViewApplications extends StatelessWidget {
                       Text("Submitted At: $date"),
                       
                       // View Resume Button
-                      resumeFileName.isNotEmpty
-                          ? TextButton(
-                              onPressed: () => _openResume(resumeFileName),
-                              child: Text("View Resume", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
-                            )
-                          : Text("No Resume Available", style: TextStyle(color: Colors.red)),
+                      // resumeFileName.isNotEmpty
+                      //     ? TextButton(
+                      //         onPressed: () => _openResume(resumeFileName),
+                      //         child: Text("View Resume", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                      //       )
+                      //     : Text("No Resume Available", style: TextStyle(color: Colors.red)),
                     ],
                   ),
                 ),

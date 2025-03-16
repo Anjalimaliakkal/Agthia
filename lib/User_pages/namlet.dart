@@ -1,3 +1,4 @@
+import 'package:agthia/User_pages/confirmation_page.dart';
 import 'package:agthia/User_pages/About.dart';
 import 'package:agthia/User_pages/brandspage.dart';
 import 'package:agthia/User_pages/carreerpage.dart';
@@ -11,6 +12,7 @@ import 'package:agthia/User_pages/ourpeople.dart';
 import 'package:agthia/User_pages/user_changepassword.dart';
 import 'package:agthia/User_pages/words_from_chairman.dart';
 import 'package:agthia/backend_pages/backend_new/loginpage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Namlet extends StatelessWidget {
@@ -211,6 +213,36 @@ class Namlet extends StatelessWidget {
                 },
               ),
               ListTile(
+                title: Text("My orders",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white)),
+     onTap: () async {
+  // Fetch the latest order from Firestore (Modify if needed)
+  var orderSnapshot = await FirebaseFirestore.instance
+      .collection('orders')
+      .orderBy('timestamp', descending: true) // Sort by latest
+      .limit(1)
+      .get();
+
+  if (orderSnapshot.docs.isNotEmpty) {
+    String orderId = orderSnapshot.docs.first.id; // Get the actual order ID
+
+    print("📢 Navigating to Confirmation Page with orderId: $orderId");
+
+   Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => ConfirmationPage(orderId: orderId)), // Use dynamic ID
+);
+  } else {
+    print("❌ No orders found in Firestore!");
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('No orders found. Please place an order first!')),
+    );
+  }
+},
+
+              ),
+              ListTile(
                 title: Text("Media",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
@@ -385,10 +417,10 @@ class Namlet extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => FoodItemsPage(restaurantId: '2IZp2N00orbsWOKNXTzq',)));
+                              builder: (context) => FoodItemsPage(restaurantId: 'poNj0fi4WilPUZfDRAGW',)));
                     },
                     child: Text(
-                      "Online Order",
+                      "Order",
                       style: TextStyle(color: Colors.green),
                     )),
               ),
@@ -455,50 +487,45 @@ class Namlet extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 230,
-                        child: Image(
-                            image: AssetImage('asset/namlet2.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                  Container(
+                    color: Colors.red,
+                    height: 250,
+                    width: 230,
+                    child: Image(
+                        image: AssetImage('asset/namlet2.jpg'),
+                        fit: BoxFit.cover),
                   ),
-                  SizedBox(width: 30),
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 230,
-                        child: Image(
-                            image: AssetImage('asset/namlet3.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                  SizedBox(height: 10),
+                ],
+              ),
+              SizedBox(width: 30),
+              Column(
+                children: [
+                  Container(
+                    color: Colors.red,
+                    height: 250,
+                    width: 230,
+                    child: Image(
+                        image: AssetImage('asset/namlet3.jpg'),
+                        fit: BoxFit.cover),
                   ),
-                  SizedBox(width: 30),
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 230,
-                        child: Image(
-                            image: AssetImage('asset/namlet4.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                  SizedBox(height: 10),
+                ],
+              ),
+              SizedBox(width: 30),
+              Column(
+                children: [
+                  Container(
+                    color: Colors.red,
+                    height: 250,
+                    width: 230,
+                    child: Image(
+                        image: AssetImage('asset/namlet4.jpg'),
+                        fit: BoxFit.cover),
                   ),
+                  SizedBox(height: 10),
                 ],
               ),
               SizedBox(height: 30),

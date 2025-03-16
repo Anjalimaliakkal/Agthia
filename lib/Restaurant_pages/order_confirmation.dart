@@ -170,6 +170,91 @@
 // }
 
 
+// import 'package:flutter/material.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+
+// class RestaurantOrderDetailsPage extends StatelessWidget {
+//   final String orderId;
+
+//   RestaurantOrderDetailsPage({required this.orderId});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text("Order Details")),
+//       body: FutureBuilder<DocumentSnapshot>(
+//         future: FirebaseFirestore.instance.collection('orders').doc(orderId).get(),
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.waiting) {
+//             return Center(child: CircularProgressIndicator());
+//           }
+
+//           if (!snapshot.hasData || !snapshot.data!.exists) {
+//             return Center(child: Text("Order not found"));
+//           }
+
+//           var orderData = snapshot.data!.data() as Map<String, dynamic>;
+
+//           return Padding(
+//             padding: const EdgeInsets.all(16.0),
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Text("Order ID: ${orderId}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+//                 SizedBox(height: 10),
+//                 Text("Customer: ${orderData['name']}"),
+//                 Text("Phone: ${orderData['phone']}"),
+//                 Text("Address: ${orderData['address']}"),
+//                 SizedBox(height: 10),
+//                 Text("Total Amount: \$${orderData['totalAmount']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+//                 SizedBox(height: 10),
+//                 Text("Items:", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+
+//                 // Display Order Items
+//                 Expanded(
+//                   child: ListView.builder(
+//                     itemCount: orderData['cartItems'].length,
+//                     itemBuilder: (context, index) {
+//                       var item = orderData['cartItems'][index];
+//                       return ListTile(
+//                         title: Text("${item['name']} (x${item['quantity']})"),
+//                         subtitle: Text("Price: \$${item['price']}"),
+//                       );
+//                     },
+//                   ),
+//                 ),
+
+//                 SizedBox(height: 20),
+//                 Center(
+//                   child: ElevatedButton(
+//                     onPressed: () async {
+//                       await FirebaseFirestore.instance.collection('orders').doc(orderId).update({
+//                         'status': 'Approved'
+//                       });
+
+//                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//                         content: Text("Order Approved"),
+//                       ));
+
+//                       Navigator.pop(context); // Go back after approving
+//                     },
+//                     child: Text("Approve Order"),
+//                     style: ElevatedButton.styleFrom(
+//                       backgroundColor: Colors.green,
+//                       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

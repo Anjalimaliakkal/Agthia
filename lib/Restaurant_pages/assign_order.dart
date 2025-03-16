@@ -187,7 +187,7 @@ class _AssignOrder extends State<AssignOrder> {
               },
             ),
             ListTile(
-              title: Text("View Delivery Personnel",
+              title: Text("Orders",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
@@ -205,7 +205,7 @@ class _AssignOrder extends State<AssignOrder> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DeliveryAllocation()));
+                        builder: (context) => DeliveryAllocation(orderId: '',)));
               },
             ),
           ],

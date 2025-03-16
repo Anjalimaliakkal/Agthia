@@ -502,17 +502,17 @@ class RestaurantViewdelivery extends StatelessWidget {
                         builder: (context) => AddRestaurant()));
               },
             ),
-            ListTile(
-              title: Text("View Orders",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => RestaurantVieworders()));
-              },
-            ),
+            // ListTile(
+            //   title: Text("View Orders",
+            //       style: TextStyle(
+            //           fontWeight: FontWeight.bold, color: Colors.white)),
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => RestaurantVieworders()));
+            //   },
+            // ),
             ListTile(
               title: Text("View Delivery Personnel",
                   style: TextStyle(
@@ -532,7 +532,7 @@ class RestaurantViewdelivery extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DeliveryAllocation()));
+                        builder: (context) => DeliveryAllocation(orderId: '',)));
               },
             ),
           ],
