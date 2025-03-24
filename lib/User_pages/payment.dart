@@ -632,11 +632,421 @@
 // }
 
 
-import 'package:agthia/User_pages/cart_provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:agthia/User_pages/cart_provider.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+// import 'package:agthia/User_pages/confirmation_page.dart';
+
+// class PaymentPage extends StatefulWidget {
+//   final String name;
+//   final String phone;
+//   final String address;
+//   final double totalAmount;
+//   final double shippingCharge;
+
+//   PaymentPage({
+//     required this.name,
+//     required this.phone,
+//     required this.address,
+//     required this.totalAmount,
+//     required this.shippingCharge,
+//   });
+
+//   @override
+//   _PaymentPageState createState() => _PaymentPageState();
+// }
+
+// class _PaymentPageState extends State<PaymentPage> {
+//   String selectedPaymentMethod = 'Credit Card';
+//   final TextEditingController _cardNumberController = TextEditingController();
+//   final TextEditingController _expiryDateController = TextEditingController();
+//   final TextEditingController _cvvController = TextEditingController();
+
+//   Future<void> processPayment() async {
+//     if (selectedPaymentMethod == 'Credit Card') {
+//       if (_cardNumberController.text.isEmpty ||
+//           _expiryDateController.text.isEmpty ||
+//           _cvvController.text.isEmpty) {
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           SnackBar(content: Text('Please enter all card details.')),
+//         );
+//         return;
+//       }
+
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Processing Payment...')),
+//       );
+
+//       await Future.delayed(Duration(seconds: 2));
+//     }
+
+//     try {
+//       User? user = FirebaseAuth.instance.currentUser;
+//       if (user == null) {
+//         throw Exception("User not logged in.");
+//       }
+
+//       String userId = user.uid;
+
+//       // ✅ Fetch cart items from CartProvider
+//       final cartProvider = Provider.of<CartProvider>(context, listen: false);
+//       final List<Map<String, dynamic>> cartItems =
+//           cartProvider.cartItems.map((item) => item.toJson()).toList();
+
+//       if (cartItems.isEmpty) {
+//         throw Exception("Cart is empty.");
+//       }
+
+//       print("🛒 Cart Items: $cartItems"); // ✅ Debugging
+
+//       var order = {
+//         'userId': userId,
+//         'name': widget.name,
+//         'phone': widget.phone,
+//         'address': widget.address,
+//         'cartItems': cartItems, // ✅ Saving cart items
+//         'totalAmount': widget.totalAmount,
+//         'shippingCharge': widget.shippingCharge,
+//         'paymentMethod': selectedPaymentMethod,
+//         'status': 'Pending',
+//         'timestamp': FieldValue.serverTimestamp(),
+//       };
+
+//       // ✅ Save Order to Firestore
+//       DocumentReference orderRef =
+//           await FirebaseFirestore.instance.collection('orders').add(order);
+//       String orderId = orderRef.id;
+
+//       print("✅ Order placed successfully. Order ID: $orderId");
+
+//       // ✅ Navigate to Confirmation Page
+//       Navigator.push(
+//         context,
+//         MaterialPageRoute(builder: (_) => ConfirmationPage(orderId: orderId)),
+//       );
+
+//       // ✅ Clear Cart after placing order
+//       cartProvider.clearCart();
+//     } catch (e) {
+//       print("❌ Error placing order: $e");
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Error placing order: $e')),
+//       );
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Payment')),
+//       backgroundColor: const Color.fromARGB(255, 203, 212, 219),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Text('Total Amount: \$${widget.totalAmount + widget.shippingCharge}',
+//                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+//             SizedBox(height: 20),
+//             Text('Payment Method:', style: TextStyle(fontSize: 16)),
+//             DropdownButton<String>(
+//               value: selectedPaymentMethod,
+//               items: [
+//                 DropdownMenuItem(value: 'Credit Card', child: Text('Credit Card')),
+//                 DropdownMenuItem(value: 'Cash on Delivery', child: Text('Cash on Delivery')),
+//               ],
+//               onChanged: (newValue) {
+//                 setState(() {
+//                   selectedPaymentMethod = newValue!;
+//                 });
+//               },
+//             ),
+//             if (selectedPaymentMethod == 'Credit Card') ...[
+//               SizedBox(height: 20),
+//               TextField(
+//                 controller: _cardNumberController,
+//                 keyboardType: TextInputType.number,
+//                 decoration: InputDecoration(labelText: 'Card Number'),
+//               ),
+//               TextField(
+//                 controller: _expiryDateController,
+//                 keyboardType: TextInputType.datetime,
+//                 decoration: InputDecoration(labelText: 'Expiry Date (MM/YY)'),
+//               ),
+//               TextField(
+//                 controller: _cvvController,
+//                 keyboardType: TextInputType.number,
+//                 decoration: InputDecoration(labelText: 'CVV'),
+//                 obscureText: true,
+//               ),
+//             ],
+//             SizedBox(height: 30),
+//             Center(
+//               child: ElevatedButton(
+//                 onPressed: processPayment,
+//                 style: ElevatedButton.styleFrom(
+//                   shape: BeveledRectangleBorder(),
+//                   backgroundColor: Colors.green,
+//                 ),
+//                 child: Text(
+//                   selectedPaymentMethod == 'Credit Card' ? 'Pay Now' : 'Confirm Order',
+//                   style: TextStyle(color: Colors.white),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+
+// import 'package:agthia/User_pages/cart_provider.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+// import 'package:agthia/User_pages/confirmation_page.dart';
+
+// class PaymentPage extends StatefulWidget {
+//   final String name;
+//   final String phone;
+//   final String address;
+//   final double totalAmount;
+//   final double shippingCharge;
+
+//   PaymentPage({
+//     required this.name,
+//     required this.phone,
+//     required this.address,
+//     required this.totalAmount,
+//     required this.shippingCharge,
+//   });
+
+//   @override
+//   _PaymentPageState createState() => _PaymentPageState();
+// }
+
+// class _PaymentPageState extends State<PaymentPage> {
+//   String selectedPaymentMethod = 'Credit Card';
+//   final TextEditingController _cardNumberController = TextEditingController();
+//   final TextEditingController _expiryDateController = TextEditingController();
+//   final TextEditingController _cvvController = TextEditingController();
+
+//   Future<void> processPayment() async {
+//     if (selectedPaymentMethod == 'Credit Card') {
+//       if (_cardNumberController.text.isEmpty ||
+//           _expiryDateController.text.isEmpty ||
+//           _cvvController.text.isEmpty) {
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           SnackBar(content: Text('Please enter all card details.')),
+//         );
+//         return;
+//       }
+
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Payment Successfull...')),
+//       );
+
+//       await Future.delayed(Duration(seconds: 2));
+//     }
+
+//     try {
+//       User? user = FirebaseAuth.instance.currentUser;
+//       if (user == null) {
+//         throw Exception("User not logged in.");
+//       }
+
+//       String userId = user.uid;
+
+//       // ✅ Fetch cart items from CartProvider
+//       final cartProvider = Provider.of<CartProvider>(context, listen: false);
+//       final List<Map<String, dynamic>> cartItems =
+//           cartProvider.cartItems.map((item) => item.toJson()).toList();
+
+//       if (cartItems.isEmpty) {
+//         throw Exception("Cart is empty.");
+//       }
+
+//       var order = {
+//         'userId': userId,
+//         'name': widget.name,
+//         'phone': widget.phone,
+//         'address': widget.address,
+//         'cartItems': cartItems, // ✅ Saving cart items
+//         'totalAmount': widget.totalAmount,
+//         'shippingCharge': widget.shippingCharge,
+//         'paymentMethod': selectedPaymentMethod,
+//         'status': 'Pending',
+//         'timestamp': FieldValue.serverTimestamp(),
+//       };
+
+//       // ✅ Save Order to Firestore
+//       DocumentReference orderRef =
+//           await FirebaseFirestore.instance.collection('orders').add(order);
+//       String orderId = orderRef.id;
+
+//       // ✅ Navigate to Confirmation Page
+//       Navigator.push(
+//         context,
+//         MaterialPageRoute(builder: (_) => ConfirmationPage(orderId: orderId)),
+//       );
+
+//       // ✅ Clear Cart after placing order
+//       cartProvider.clearCart();
+//     } catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Error placing order: $e')),
+//       );
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Payment'),
+//         centerTitle: true,
+//         backgroundColor: Colors.blueAccent,
+//         elevation: 5,
+//       ),
+//       backgroundColor: const Color.fromARGB(255, 208, 217, 224),
+//       body: SingleChildScrollView(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Center(
+//           child: SizedBox(
+//             width: 600,
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Center(
+//                   child: SizedBox(
+//                     width: 400,
+//                     child: Card(
+//                       elevation: 4,
+//                       shape: RoundedRectangleBorder(
+//                         borderRadius: BorderRadius.circular(15),
+//                       ),
+//                       child: Padding(
+//                         padding: EdgeInsets.all(16),
+//                         child: Column(
+//                           crossAxisAlignment: CrossAxisAlignment.start,
+//                           children: [
+//                             Text('Total Amount', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+//                             Text("\$${widget.totalAmount + widget.shippingCharge}",
+//                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green)),
+//                             SizedBox(height: 20),
+//                             Text('Payment Method', style: TextStyle(fontSize: 16)),
+//                             SizedBox(height: 10),
+//                             Container(
+//                               padding: EdgeInsets.symmetric(horizontal: 12),
+//                               decoration: BoxDecoration(
+//                                 color: Colors.white,
+//                                 borderRadius: BorderRadius.circular(10),
+//                                 border: Border.all(color: Colors.grey.shade300),
+//                               ),
+//                               child: DropdownButtonHideUnderline(
+//                                 child: DropdownButton<String>(
+//                                   value: selectedPaymentMethod,
+//                                   items: [
+//                                     DropdownMenuItem(value: 'Credit Card', child: Text('Credit Card')),
+//                                     //DropdownMenuItem(value: 'Cash on Delivery', child: Text('Cash on Delivery')),
+//                                   ],
+//                                   onChanged: (newValue) {
+//                                     setState(() {
+//                                       selectedPaymentMethod = newValue!;
+//                                     });
+//                                   },
+//                                 ),
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//                 if (selectedPaymentMethod == 'Credit Card') ...[
+//                   SizedBox(height: 20),
+//                   TextField(
+//                     controller: _cardNumberController,
+//                     keyboardType: TextInputType.number,
+//                     decoration: InputDecoration(
+//                       labelText: 'Card Number',
+//                       prefixIcon: Icon(Icons.credit_card),
+//                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+//                       filled: true,
+//                       fillColor: Colors.white,
+//                     ),
+//                   ),
+//                   SizedBox(height: 10),
+//                   Row(
+//                     children: [
+//                       Expanded(
+//                         child: TextField(
+//                           controller: _expiryDateController,
+//                           keyboardType: TextInputType.datetime,
+//                           decoration: InputDecoration(
+//                             labelText: 'Expiry Date (MM/YY)',
+//                             prefixIcon: Icon(Icons.calendar_today),
+//                             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+//                             filled: true,
+//                             fillColor: Colors.white,
+//                           ),
+//                         ),
+//                       ),
+//                       SizedBox(width: 10),
+//                       Expanded(
+//                         child: TextField(
+//                           controller: _cvvController,
+//                           keyboardType: TextInputType.number,
+//                           decoration: InputDecoration(
+//                             labelText: 'CVV',
+//                             prefixIcon: Icon(Icons.lock),
+//                             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+//                             filled: true,
+//                             fillColor: Colors.white,
+//                           ),
+//                           obscureText: true,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ],
+//                 SizedBox(height: 30),
+//                 Center(
+//                   child: ElevatedButton(
+//                     onPressed: processPayment,
+//                     style: ElevatedButton.styleFrom(
+//                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+//                       backgroundColor: Colors.green,
+//                       padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+//                     ),
+//                     child: Text(
+//                       selectedPaymentMethod == 'Credit Card' ? 'Pay Now' : 'Confirm Order',
+//                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:agthia/User_pages/cart_provider.dart';
 import 'package:agthia/User_pages/confirmation_page.dart';
 
 class PaymentPage extends StatefulWidget {
@@ -674,11 +1084,9 @@ class _PaymentPageState extends State<PaymentPage> {
         );
         return;
       }
-
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Processing Payment...')),
+        SnackBar(content: Text('Payment Successfull...')),
       );
-
       await Future.delayed(Duration(seconds: 2));
     }
 
@@ -689,8 +1097,6 @@ class _PaymentPageState extends State<PaymentPage> {
       }
 
       String userId = user.uid;
-
-      // ✅ Fetch cart items from CartProvider
       final cartProvider = Provider.of<CartProvider>(context, listen: false);
       final List<Map<String, dynamic>> cartItems =
           cartProvider.cartItems.map((item) => item.toJson()).toList();
@@ -699,14 +1105,12 @@ class _PaymentPageState extends State<PaymentPage> {
         throw Exception("Cart is empty.");
       }
 
-      print("🛒 Cart Items: $cartItems"); // ✅ Debugging
-
       var order = {
         'userId': userId,
         'name': widget.name,
         'phone': widget.phone,
         'address': widget.address,
-        'cartItems': cartItems, // ✅ Saving cart items
+        'cartItems': cartItems,
         'totalAmount': widget.totalAmount,
         'shippingCharge': widget.shippingCharge,
         'paymentMethod': selectedPaymentMethod,
@@ -714,91 +1118,239 @@ class _PaymentPageState extends State<PaymentPage> {
         'timestamp': FieldValue.serverTimestamp(),
       };
 
-      // ✅ Save Order to Firestore
       DocumentReference orderRef =
           await FirebaseFirestore.instance.collection('orders').add(order);
       String orderId = orderRef.id;
 
-      print("✅ Order placed successfully. Order ID: $orderId");
-
-      // ✅ Navigate to Confirmation Page
       Navigator.push(
         context,
         MaterialPageRoute(builder: (_) => ConfirmationPage(orderId: orderId)),
       );
 
-      // ✅ Clear Cart after placing order
       cartProvider.clearCart();
     } catch (e) {
-      print("❌ Error placing order: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error placing order: $e')),
       );
     }
   }
 
+  Widget _buildPaymentOption(String method, IconData icon) {
+    bool isSelected = selectedPaymentMethod == method;
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedPaymentMethod = method;
+        });
+      },
+      child: Card(
+        color: isSelected ? Colors.blue.shade100 : Colors.white,
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: isSelected ? BorderSide(color: Colors.blue, width: 2) : BorderSide.none,
+        ),
+        child: ListTile(
+          leading: Icon(icon, color: isSelected ? Colors.blue : Colors.grey),
+          title: Text(
+            method,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: isSelected ? Colors.blue.shade800 : Colors.black,
+            ),
+          ),
+          trailing: isSelected
+              ? Icon(Icons.check_circle, color: Colors.blue)
+              : Icon(Icons.circle_outlined, color: Colors.grey),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField(String label, TextEditingController controller,
+      {bool isObscure = false, TextInputType? keyboardType}) {
+    return TextField(
+      controller: controller,
+      keyboardType: keyboardType ?? TextInputType.text,
+      obscureText: isObscure,
+      decoration: InputDecoration(
+        labelText: label,
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Payment')),
-      backgroundColor: const Color.fromARGB(255, 203, 212, 219),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Total Amount: \$${widget.totalAmount + widget.shippingCharge}',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            SizedBox(height: 20),
-            Text('Payment Method:', style: TextStyle(fontSize: 16)),
-            DropdownButton<String>(
-              value: selectedPaymentMethod,
-              items: [
-                DropdownMenuItem(value: 'Credit Card', child: Text('Credit Card')),
-                DropdownMenuItem(value: 'Cash on Delivery', child: Text('Cash on Delivery')),
-              ],
-              onChanged: (newValue) {
-                setState(() {
-                  selectedPaymentMethod = newValue!;
-                });
-              },
-            ),
-            if (selectedPaymentMethod == 'Credit Card') ...[
-              SizedBox(height: 20),
-              TextField(
-                controller: _cardNumberController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Card Number'),
-              ),
-              TextField(
-                controller: _expiryDateController,
-                keyboardType: TextInputType.datetime,
-                decoration: InputDecoration(labelText: 'Expiry Date (MM/YY)'),
-              ),
-              TextField(
-                controller: _cvvController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'CVV'),
-                obscureText: true,
-              ),
-            ],
-            SizedBox(height: 30),
-            Center(
-              child: ElevatedButton(
-                onPressed: processPayment,
-                style: ElevatedButton.styleFrom(
-                  shape: BeveledRectangleBorder(),
-                  backgroundColor: Colors.green,
-                ),
-                child: Text(
-                  selectedPaymentMethod == 'Credit Card' ? 'Pay Now' : 'Confirm Order',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
-          ],
-        ),
+      backgroundColor: Colors.grey.shade200,
+      appBar: AppBar(
+        title: Text('Payment'),
+        backgroundColor: Colors.blue,
       ),
+      // body: Padding(
+      //   padding: EdgeInsets.all(16),
+      //   child: Column(
+      //     children: [
+      //       Card(
+      //         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      //         elevation: 5,
+      //         child: Padding(
+      //           padding: EdgeInsets.all(16),
+      //           child: Column(
+      //             crossAxisAlignment: CrossAxisAlignment.start,
+      //             children: [
+      //               Text('Order Summary',
+      //                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+      //               Divider(),
+      //               Row(
+      //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //                 children: [
+      //                   Text("Total Price", style: TextStyle(fontSize: 16)),
+      //                   Text("\$${widget.totalAmount}", style: TextStyle(fontWeight: FontWeight.bold)),
+      //                 ],
+      //               ),
+      //               Row(
+      //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //                 children: [
+      //                   Text("Shipping", style: TextStyle(fontSize: 16)),
+      //                   Text("\$${widget.shippingCharge}", style: TextStyle(fontWeight: FontWeight.bold)),
+      //                 ],
+      //               ),
+      //               Divider(),
+      //               Row(
+      //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //                 children: [
+      //                   Text("Grand Total",
+      //                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+      //                   Text("\$${widget.totalAmount + widget.shippingCharge}",
+      //                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green)),
+      //                 ],
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //       SizedBox(height: 20),
+      //       Text("Select Payment Method",
+      //           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+      //       SizedBox(height: 10),
+      //       _buildPaymentOption('Credit Card', Icons.credit_card),
+      //       _buildPaymentOption('Cash on Delivery', Icons.money),
+      //       if (selectedPaymentMethod == 'Credit Card') ...[
+      //         SizedBox(height: 20),
+      //         _buildTextField("Card Number", _cardNumberController, keyboardType: TextInputType.number),
+      //         SizedBox(height: 10),
+      //         Row(
+      //           children: [
+      //             Expanded(child: _buildTextField("Expiry Date", _expiryDateController, keyboardType: TextInputType.datetime)),
+      //             SizedBox(width: 10),
+      //             Expanded(child: _buildTextField("CVV", _cvvController, isObscure: true, keyboardType: TextInputType.number)),
+      //           ],
+      //         ),
+      //       ],
+      //       Spacer(),
+      //       ElevatedButton(
+      //         onPressed: processPayment,
+      //         style: ElevatedButton.styleFrom(
+      //           backgroundColor: Colors.green,
+      //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      //           padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+      //         ),
+      //         child: Text(
+      //           selectedPaymentMethod == 'Credit Card' ? 'Pay Now' : 'Confirm Order',
+      //           style: TextStyle(color: Colors.white, fontSize: 18),
+      //         ),
+      //       ),
+      //       SizedBox(height: 20),
+      //     ],
+      //   ),
+      // ),
+
+      body: Padding(
+  padding: EdgeInsets.all(16),
+  child: SingleChildScrollView(
+    child: Column(
+      mainAxisSize: MainAxisSize.min, // Prevents unnecessary stretching
+      children: [
+        Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          elevation: 5,
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Order Summary',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Total Price", style: TextStyle(fontSize: 16)),
+                    Text("\$${widget.totalAmount}", style: TextStyle(fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Shipping", style: TextStyle(fontSize: 16)),
+                    Text("\$${widget.shippingCharge}", style: TextStyle(fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Grand Total",
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text("\$${widget.totalAmount + widget.shippingCharge}",
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 20),
+        Text("Select Payment Method",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+        SizedBox(height: 10),
+        _buildPaymentOption('Credit Card', Icons.credit_card),
+        _buildPaymentOption('Cash on Delivery', Icons.money),
+        if (selectedPaymentMethod == 'Credit Card') ...[
+          SizedBox(height: 20),
+          _buildTextField("Card Number", _cardNumberController, keyboardType: TextInputType.number),
+          SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(child: _buildTextField("Expiry Date", _expiryDateController, keyboardType: TextInputType.datetime)),
+              SizedBox(width: 10),
+              Expanded(child: _buildTextField("CVV", _cvvController, isObscure: true, keyboardType: TextInputType.number)),
+            ],
+          ),
+        ],
+        SizedBox(height: 20), // Ensure space before the button
+        ElevatedButton(
+          onPressed: processPayment,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+          ),
+          child: Text(
+            selectedPaymentMethod == 'Credit Card' ? 'Pay Now' : 'Confirm Order',
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+        ),
+        SizedBox(height: 20),
+      ],
+    ),
+  ),
+),
+
     );
   }
 }

@@ -251,7 +251,7 @@ class Brandspage extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: 400,
+                height: 300,
                 child: Stack(
                   children: [
                     Positioned.fill(
@@ -261,8 +261,8 @@ class Brandspage extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: 150,
-                      top: 250,
+                      left: 10,
+                      top: 150,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -349,6 +349,7 @@ class Brandspage extends StatelessWidget {
                           child: Text(
                               "We are proud to serve as the leading force behind renowned international brands.")),
                       SizedBox(height: 50),
+                      SizedBox(width: 350,),
                       Center(
                         child: GestureDetector(
                           onTap: () {
@@ -377,65 +378,68 @@ class Brandspage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Dinand()));
-                          },
-                          child: MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: Container(
-                              height: 100,
-                              width: 250,
-                              decoration: BoxDecoration(
-                                  //color: Colors.blueGrey,
-                                  border:
-                                      Border.all(color: Colors.grey, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image(
-                                    image: AssetImage('asset/dinand.jpg'),
-                                    fit: BoxFit.fitHeight,
-                                  )),
-                            ),
-                          ),
+                                            //   ],
+                                            // ),
+                                            SizedBox(height: 20),
+                                            Center(
+                                              child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Dinand()));
+                      },
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: Container(
+                          height: 100,
+                          width: 250,
+                          decoration: BoxDecoration(
+                              //color: Colors.blueGrey,
+                              border:
+                                  Border.all(color: Colors.grey, width: 1),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image(
+                                image: AssetImage('asset/dinand.jpg'),
+                                fit: BoxFit.fitHeight,
+                              )),
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Ferdi()));
-                          },
-                          child: MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: Container(
-                              height: 100,
-                              width: 250,
-                              decoration: BoxDecoration(
-                                  //color: Colors.blueGrey,
-                                  border:
-                                      Border.all(color: Colors.grey, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image(
-                                    image: AssetImage('asset/ferdi.jpg'),
-                                    fit: BoxFit.fitHeight,
-                                  )),
-                            ),
-                          ),
+                                              ),
+                                            ),
+                                            SizedBox(height: 20),
+                                            Center(
+                                              child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Ferdi()));
+                      },
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: Container(
+                          height: 100,
+                          width: 250,
+                          decoration: BoxDecoration(
+                              //color: Colors.blueGrey,
+                              border:
+                                  Border.all(color: Colors.grey, width: 1),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image(
+                                image: AssetImage('asset/ferdi.jpg'),
+                                fit: BoxFit.fitHeight,
+                              )),
                         ),
                       ),
+                                              ),
+                                            ),
                       SizedBox(height: 20),
+                      SizedBox(width: 450,),
                       Center(
                         child: GestureDetector(
                           onTap: () {
@@ -464,36 +468,38 @@ class Brandspage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Philippe()));
-                          },
-                          child: MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: Container(
-                              height: 100,
-                              width: 250,
-                              decoration: BoxDecoration(
-                                  //color: Colors.blueGrey,
-                                  border:
-                                      Border.all(color: Colors.grey, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image(
-                                    image: AssetImage('asset/philippe.jpg'),
-                                    fit: BoxFit.fitHeight,
-                                  )),
-                            ),
-                          ),
+                                            //   ],
+                                            // ),
+                                            SizedBox(height: 20),
+                                            Center(
+                                              child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Philippe()));
+                      },
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: Container(
+                          height: 100,
+                          width: 250,
+                          decoration: BoxDecoration(
+                              //color: Colors.blueGrey,
+                              border:
+                                  Border.all(color: Colors.grey, width: 1),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image(
+                                image: AssetImage('asset/philippe.jpg'),
+                                fit: BoxFit.fitHeight,
+                              )),
                         ),
                       ),
-                      SizedBox(height: 100),
+                                              ),
+                                            ),
+                      SizedBox(height: 50),
                       Center(
                         child: Container(
                           padding: EdgeInsets.all(10),
@@ -513,6 +519,7 @@ class Brandspage extends StatelessWidget {
                           child: Text(
                               "We are thrilled to be the driving forces behind the longstanding local grants that have been a part of the community.")),
                       SizedBox(height: 50),
+                      SizedBox(width: 450,),
                       Center(
                         child: GestureDetector(
                           onTap: () {
@@ -541,36 +548,39 @@ class Brandspage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Burgerinn()));
-                          },
-                          child: MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: Container(
-                              height: 100,
-                              width: 250,
-                              decoration: BoxDecoration(
-                                  //color: Colors.blueGrey,
-                                  border:
-                                      Border.all(color: Colors.grey, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image(
-                                    image: AssetImage('asset/BurgerInn_logo.jpg'),
-                                    fit: BoxFit.fitHeight,
-                                  )),
-                            ),
-                          ),
+                                            //   ],
+                                            // ),
+                                            SizedBox(height: 20),
+                                            Center(
+                                              child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Burgerinn()));
+                      },
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: Container(
+                          height: 100,
+                          width: 250,
+                          decoration: BoxDecoration(
+                              //color: Colors.blueGrey,
+                              border:
+                                  Border.all(color: Colors.grey, width: 1),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image(
+                                image: AssetImage('asset/BurgerInn_logo.jpg'),
+                                fit: BoxFit.fitHeight,
+                              )),
                         ),
                       ),
+                                              ),
+                                            ),
                       SizedBox(height: 20),
+                      SizedBox(width: 450,),
                       Center(
                         child: GestureDetector(
                           onTap: () {
@@ -599,35 +609,37 @@ class Brandspage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Namlet()));
-                          },
-                          child: MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: Container(
-                              height: 100,
-                              width: 250,
-                              decoration: BoxDecoration(
-                                  //color: Colors.blueGrey,
-                                  border:
-                                      Border.all(color: Colors.grey, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image(
-                                    image: AssetImage('asset/brand_image1.jpg'),
-                                    fit: BoxFit.fitHeight,
-                                  )),
-                            ),
-                          ),
+                                            //   ],
+                                            // ),
+                                            SizedBox(height: 20),
+                                            Center(
+                                              child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Namlet()));
+                      },
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: Container(
+                          height: 100,
+                          width: 250,
+                          decoration: BoxDecoration(
+                              //color: Colors.blueGrey,
+                              border:
+                                  Border.all(color: Colors.grey, width: 1),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image(
+                                image: AssetImage('asset/brand_image1.jpg'),
+                                fit: BoxFit.fitHeight,
+                              )),
                         ),
                       ),
+                                              ),
+                                            ),
                     ],
                   ),
                 ),

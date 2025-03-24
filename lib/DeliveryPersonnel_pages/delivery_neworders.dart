@@ -512,6 +512,72 @@
 // }
 
 
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/material.dart';
+
+// class DeliveryBoyOrdersScreen extends StatelessWidget {
+//   final String deliveryBoyId;
+
+//   DeliveryBoyOrdersScreen({required this.deliveryBoyId});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('My Orders')),
+//       body: StreamBuilder<QuerySnapshot>(
+//         stream: FirebaseFirestore.instance
+//             .collection('orders')
+//             .where('assignedDeliveryBoyId', isEqualTo: deliveryBoyId)
+//             .snapshots(),
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.waiting) {
+//             return Center(child: CircularProgressIndicator());
+//           }
+
+//           if (snapshot.hasError) {
+//             return Center(child: Text("Error: ${snapshot.error}"));
+//           }
+
+//           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+//             return Center(child: Text('No orders assigned.'));
+//           }
+
+//           var orders = snapshot.data!.docs;
+
+//           return ListView.builder(
+//             itemCount: orders.length,
+//             itemBuilder: (context, index) {
+//               var order = orders[index];
+//               bool isCompleted = order['status'] == 'Completed';
+
+//               return Card(
+//                 child: ListTile(
+//                   title: Text(order['name']),
+//                   subtitle: Text("Total: ₹${order['totalAmount']}"),
+//                   trailing: ElevatedButton(
+//                     onPressed: isCompleted ? null : () {
+//                       markOrderAsCompleted(order.id);
+//                     },
+//                     child: Text(isCompleted ? 'Completed' : 'Mark as Delivered'),
+//                   ),
+//                 ),
+//               );
+//             },
+//           );
+//         },
+//       ),
+//     );
+//   }
+
+//   Future<void> markOrderAsCompleted(String orderId) async {
+//     await FirebaseFirestore.instance.collection('orders').doc(orderId).update({'status': 'Completed'});
+//     await FirebaseFirestore.instance.collection('delivery_boys').doc(deliveryBoyId).update({'availability': 'available'});
+//   }
+// }
+
+
+import 'package:agthia/DeliveryPersonnel_pages/delivery_changepassword.dart';
+import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -523,7 +589,90 @@ class DeliveryBoyOrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('My Orders')),
+      // appBar: AppBar(title: Text('My Orders')),
+            appBar: AppBar(
+        title: Center(
+          child: Transform.translate(
+            offset: Offset(-10.0, 0.0),
+            child: Image(
+              image: AssetImage("asset/logo_agthia.jpg"),
+              height: 50,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Color(0xFF282d37),
+        actions: [
+          PopupMenuButton<String>(
+            child: Row(
+              children: [
+                CircleAvatar(
+                    backgroundColor: const Color.fromARGB(255, 188, 187, 187),
+                    child: Icon(Icons.person,
+                        color: Colors.white)), // Profile Icon
+                SizedBox(width: 5),
+                Text(
+                  "DELIVERY PERSONNEL",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(width: 5),
+                Icon(Icons.arrow_drop_down)
+              ],
+            ),
+            onSelected: (value) {
+              if (value == 'change_password') {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DeliveryChangepassword()));
+                // Navigate to change password screen
+              } else if (value == 'logout') {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => LoginPage()));
+                // Perform logout action
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              // Title Item (Non-clickable)
+              PopupMenuItem<String>(
+                enabled: false,
+                child: Text(
+                  "Delivery Personnel",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              PopupMenuDivider(),
+
+              // Change Password
+              PopupMenuItem<String>(
+                value: 'change_password',
+                child: Row(
+                  children: [
+                    Icon(Icons.lock, color: Colors.black),
+                    SizedBox(width: 10),
+                    Text("Change Password"),
+                  ],
+                ),
+              ),
+
+              // Logout
+              PopupMenuItem<String>(
+                value: 'logout',
+                child: Row(
+                  children: [
+                    Icon(Icons.logout, color: Colors.black),
+                    SizedBox(width: 10),
+                    Text("Logout"),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(width: 10),
+        ],
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('orders')
@@ -539,26 +688,54 @@ class DeliveryBoyOrdersScreen extends StatelessWidget {
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(child: Text('No orders assigned.'));
+            return Center(child: Text('No orders assigned.', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)));
           }
 
           var orders = snapshot.data!.docs;
 
           return ListView.builder(
+            padding: EdgeInsets.all(12),
             itemCount: orders.length,
             itemBuilder: (context, index) {
               var order = orders[index];
               bool isCompleted = order['status'] == 'Completed';
 
               return Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 4,
+                margin: EdgeInsets.symmetric(vertical: 8),
                 child: ListTile(
-                  title: Text(order['name']),
-                  subtitle: Text("Total: ₹${order['totalAmount']}"),
+                  contentPadding: EdgeInsets.all(12),
+                  leading: CircleAvatar(
+                    backgroundColor: isCompleted ? Colors.green : Colors.orange,
+                    child: Icon(
+                      isCompleted ? Icons.check_circle : Icons.local_shipping,
+                      color: Colors.white,
+                    ),
+                  ),
+                  title: Text(
+                    order['name'],
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    "Total: ₹${order['totalAmount']}",
+                    style: TextStyle(fontSize: 16, color: Colors.black87),
+                  ),
                   trailing: ElevatedButton(
                     onPressed: isCompleted ? null : () {
-                      markOrderAsCompleted(order.id);
+                      markOrderAsCompleted(context, order.id);
                     },
-                    child: Text(isCompleted ? 'Completed' : 'Mark as Delivered'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: isCompleted ? Colors.grey : Colors.blue,
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    ),
+                    child: Text(
+                      isCompleted ? 'Completed' : 'Mark as Delivered',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               );
@@ -569,8 +746,13 @@ class DeliveryBoyOrdersScreen extends StatelessWidget {
     );
   }
 
-  Future<void> markOrderAsCompleted(String orderId) async {
+  Future<void> markOrderAsCompleted(BuildContext context, String orderId) async {
     await FirebaseFirestore.instance.collection('orders').doc(orderId).update({'status': 'Completed'});
     await FirebaseFirestore.instance.collection('delivery_boys').doc(deliveryBoyId).update({'availability': 'available'});
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Order marked as delivered'), backgroundColor: Colors.green),
+    );
   }
 }
+

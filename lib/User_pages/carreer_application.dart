@@ -906,6 +906,7 @@ class _CarreerApplicationState extends State<CarreerApplication> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController qualificationController = TextEditingController();
   File? selectedFile;
 
   // Future<void> pickFile() async {
@@ -973,6 +974,7 @@ Future<void> pickFile() async {
         "address": addressController.text,
         "submittedAt": FieldValue.serverTimestamp(),
         "resumeFileName": selectedFile != null ? selectedFile!.path.split('/').last : null,
+        "qualification": qualificationController.text,
       };
 
       try {
@@ -987,6 +989,7 @@ Future<void> pickFile() async {
         phoneController.clear();
         emailController.clear();
         addressController.clear();
+        qualificationController.clear();
         setState(() {
           selectedFile = null;
         });
@@ -1234,124 +1237,136 @@ Future<void> subscribeUser() async {
               ),
               width: 500,
               height: 600,
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //Center(child: Text("Apply for ${widget.jobTitle}",style: TextStyle(fontWeight: FontWeight.bold),)),
-                      Center(
-                        child: Text(
-                          "Job Application Form",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //Center(child: Text("Apply for ${widget.jobTitle}",style: TextStyle(fontWeight: FontWeight.bold),)),
+                        Center(
+                          child: Text(
+                            "Job Application Form",
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+                          ),
                         ),
-                      ),
-                      Center(child: Text("Apply for ${widget.jobTitle}",style: TextStyle(fontWeight: FontWeight.bold),)),
-                      SizedBox(height: 10),
-                      Divider(color: Colors.orange),
-                      SizedBox(height: 10),
-                      TextFormField(
-                        controller: fullNameController,
-                        decoration: InputDecoration(labelText: "Full Name"),
-                        validator: (value) {
-                          if (value!.isEmpty) return "Please enter your full name";
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 10),
-                      TextFormField(
-                        controller: phoneController,
-                        decoration: InputDecoration(labelText: "Phone"),
-                        keyboardType: TextInputType.phone,
-                        validator: (value) {
-                          if (value!.isEmpty) return "Please enter your phone number";
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 10),
-                      TextFormField(
-                        controller: emailController,
-                        decoration: InputDecoration(labelText: "Email"),
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value!.isEmpty) return "Please enter your email";
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 10),
-                      TextFormField(
-                        controller: addressController,
-                        decoration: InputDecoration(labelText: "Address"),
-                        maxLines: 3,
-                        validator: (value) {
-                          if (value!.isEmpty) return "Please enter your address";
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 10),
-                      SizedBox(
-                        width: 500,
-                        child: Text("Resume:", style: TextStyle(fontWeight: FontWeight.bold)),
-                      ),
-                      SizedBox(height: 10),
-                      // Row(
-                      //   crossAxisAlignment: CrossAxisAlignment.start,
-                      //   children: [
-                      //     ElevatedButton(
-                      //       onPressed: pickFile,
-                      //       child: Text("Choose File"),
-                      //     ),
-                      //     if (selectedFile != null)
-                      //       Padding(
-                      //         padding: EdgeInsets.only(top: 5),
-                      //         child: Text(
-                      //           "Selected File: ${selectedFile!.path.split('/').last}",
-                      //           style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
-                      //         ),
-                      //       ),
-                      //   ],
-                      // ),
-                      SizedBox(height: 30),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: submitApplication,
-                              child: Text(
-                                "Submit",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                  shape: BeveledRectangleBorder(),
-                                  backgroundColor: Colors.green),
-                            ),
-                            SizedBox(width: 30),
-                            ElevatedButton(
-                              onPressed: () {
-                                _formKey.currentState!.reset();
-                                fullNameController.clear();
-                                phoneController.clear();
-                                emailController.clear();
-                                addressController.clear();
-                                setState(() {
-                                  selectedFile = null;
-                                });
-                              },
-                              child: Text(
-                                "Cancel",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                  shape: BeveledRectangleBorder(),
-                                  backgroundColor: Colors.red),
-                            ),
-                          ],
+                        Center(child: Text("Apply for ${widget.jobTitle}",style: TextStyle(fontWeight: FontWeight.bold),)),
+                        SizedBox(height: 10),
+                        Divider(color: Colors.orange),
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: fullNameController,
+                          decoration: InputDecoration(labelText: "Full Name"),
+                          validator: (value) {
+                            if (value!.isEmpty) return "Please enter your full name";
+                            return null;
+                          },
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: phoneController,
+                          decoration: InputDecoration(labelText: "Phone"),
+                          keyboardType: TextInputType.phone,
+                          validator: (value) {
+                            if (value!.isEmpty) return "Please enter your phone number";
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: emailController,
+                          decoration: InputDecoration(labelText: "Email"),
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value!.isEmpty) return "Please enter your email";
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: addressController,
+                          decoration: InputDecoration(labelText: "Address"),
+                          //maxLines: 3,
+                          validator: (value) {
+                            if (value!.isEmpty) return "Please enter your address";
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        TextFormField(
+                          controller: qualificationController,
+                          decoration: InputDecoration(labelText: "Qualification"),
+                          //maxLines: 3,
+                          validator: (value) {
+                            if (value!.isEmpty) return "Please enter your Qualification";
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        // SizedBox(
+                        //   width: 500,
+                        //   child: Text("Resume:", style: TextStyle(fontWeight: FontWeight.bold)),
+                        // ),
+                        SizedBox(height: 10),
+                        // Row(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: [
+                        //     ElevatedButton(
+                        //       onPressed: pickFile,
+                        //       child: Text("Choose File"),
+                        //     ),
+                        //     if (selectedFile != null)
+                        //       Padding(
+                        //         padding: EdgeInsets.only(top: 5),
+                        //         child: Text(
+                        //           "Selected File: ${selectedFile!.path.split('/').last}",
+                        //           style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                        //         ),
+                        //       ),
+                        //   ],
+                        // ),
+                        SizedBox(height: 30),
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                onPressed: submitApplication,
+                                child: Text(
+                                  "Submit",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    shape: BeveledRectangleBorder(),
+                                    backgroundColor: Colors.green),
+                              ),
+                              SizedBox(width: 30),
+                              ElevatedButton(
+                                onPressed: () {
+                                  _formKey.currentState!.reset();
+                                  fullNameController.clear();
+                                  phoneController.clear();
+                                  emailController.clear();
+                                  addressController.clear();
+                                  setState(() {
+                                    selectedFile = null;
+                                  });
+                                },
+                                child: Text(
+                                  "Cancel",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    shape: BeveledRectangleBorder(),
+                                    backgroundColor: Colors.red),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -8,6 +8,7 @@ import 'package:agthia/User_pages/foodlists.dart';
 import 'package:agthia/User_pages/homescreen.dart';
 import 'package:agthia/User_pages/mediapage.dart';
 import 'package:agthia/User_pages/mission.dart';
+import 'package:agthia/User_pages/my_orders.dart';
 import 'package:agthia/User_pages/ourpeople.dart';
 import 'package:agthia/User_pages/user_changepassword.dart';
 import 'package:agthia/User_pages/words_from_chairman.dart';
@@ -212,35 +213,44 @@ class Bumasoud extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => Brandspage()));
                 },
               ),
-              ListTile(
-                title: Text("My orders",
+//               ListTile(
+//                 title: Text("My orders",
+//                     style: TextStyle(
+//                         fontWeight: FontWeight.bold, color: Colors.white)),
+//      onTap: () async {
+//   // Fetch the latest order from Firestore (Modify if needed)
+//   var orderSnapshot = await FirebaseFirestore.instance
+//       .collection('orders')
+//       .orderBy('timestamp', descending: true) // Sort by latest
+//       .limit(1)
+//       .get();
+
+//   if (orderSnapshot.docs.isNotEmpty) {
+//     String orderId = orderSnapshot.docs.first.id; // Get the actual order ID
+
+//     print("📢 Navigating to Confirmation Page with orderId: $orderId");
+
+//    Navigator.push(
+//   context,
+//   MaterialPageRoute(builder: (context) => ConfirmationPage(orderId: orderId)), // Use dynamic ID
+// );
+//   } else {
+//     print("❌ No orders found in Firestore!");
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       SnackBar(content: Text('No orders found. Please place an order first!')),
+//     );
+//   }
+// },
+
+             // ),
+             ListTile(
+                title: Text("My Orders",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
-     onTap: () async {
-  // Fetch the latest order from Firestore (Modify if needed)
-  var orderSnapshot = await FirebaseFirestore.instance
-      .collection('orders')
-      .orderBy('timestamp', descending: true) // Sort by latest
-      .limit(1)
-      .get();
-
-  if (orderSnapshot.docs.isNotEmpty) {
-    String orderId = orderSnapshot.docs.first.id; // Get the actual order ID
-
-    print("📢 Navigating to Confirmation Page with orderId: $orderId");
-
-   Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => ConfirmationPage(orderId: orderId)), // Use dynamic ID
-);
-  } else {
-    print("❌ No orders found in Firestore!");
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('No orders found. Please place an order first!')),
-    );
-  }
-},
-
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UserOrdersPage(userId: '',)));
+                },
               ),
               ListTile(
                 title: Text("Media",
@@ -272,12 +282,13 @@ class Bumasoud extends StatelessWidget {
             ],
           ),
         ),
+        backgroundColor: const Color.fromARGB(255, 207, 215, 221),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
               SizedBox(
-                height: 470,
+                height: 200,
                 child: Stack(
                   children: [
                     Positioned.fill(
@@ -365,9 +376,12 @@ class Bumasoud extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 30),
-                        Center(
-                            child: Text(
-                                "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                        Container(
+                          padding: EdgeInsets.all(5),
+                          child: Center(
+                              child: Text(
+                                  "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                        ),
                       ]))),
               SizedBox(
                 height: 30,
@@ -439,23 +453,23 @@ class Bumasoud extends StatelessWidget {
                           TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.camera_alt, size: 24),
-                    onPressed: () {},
-                  ),
-                  SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(Icons.facebook, size: 24),
-                    onPressed: () {},
-                  ),
-                  SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(Icons.share, size: 24),
-                    onPressed: () {},
-                  ),
+                  // SizedBox(
+                  //   width: 40,
+                  // ),
+                  // IconButton(
+                  //   icon: Icon(Icons.camera_alt, size: 24),
+                  //   onPressed: () {},
+                  // ),
+                  // SizedBox(width: 8),
+                  // IconButton(
+                  //   icon: Icon(Icons.facebook, size: 24),
+                  //   onPressed: () {},
+                  // ),
+                  // SizedBox(width: 8),
+                  // IconButton(
+                  //   icon: Icon(Icons.share, size: 24),
+                  //   onPressed: () {},
+                  // ),
                 ],
               ),
               Container(
@@ -470,7 +484,8 @@ class Bumasoud extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Container(
-                height: 100,
+                padding: EdgeInsets.all(5),
+                height: 300,
                 width: 1100,
                 child: Text(
                   "is a restaurant located in Kuwait serving freshly made bread rolls stuffed with juicy meat and tahina with a selection of Shawarma and Beverages that delivers across Abdullah Al-Mubarak - West Jeleeb, Abdullah Al-Salem, Abu Ftaira, Abu Halifa and Abu Hasaniya. Our bestselling dishes are Bo Mas3od Chicken Shawarma, Bo Mas3od Meal, Fries and Bo Mas3od Meat Shawarma, although they have a variety of dishes and meals to choose from have been reviewed 13668 times by talabat users, with a rating of 4.",
@@ -488,12 +503,13 @@ class Bumasoud extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
+              SizedBox(width: 340,),
               Column(
                 children: [
                   Container(
                     color: Colors.red,
                     height: 250,
-                    width: 230,
+                    width: 250,
                     child: Image(
                         image: AssetImage('asset/bumasoud2.jpg'),
                         fit: BoxFit.cover),
@@ -501,34 +517,36 @@ class Bumasoud extends StatelessWidget {
                   SizedBox(height: 10),
                 ],
               ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 230,
-                    child: Image(
-                        image: AssetImage('asset/bumasoud3.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
+                            //   ],
+                            // ),
+                            SizedBox(width: 30),
+                            Column(
+                              children: [
+              Container(
+                color: Colors.red,
+                height: 250,
+                width: 250,
+                child: Image(
+                    image: AssetImage('asset/bumasoud3.jpg'),
+                    fit: BoxFit.cover),
               ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 230,
-                    child: Image(
-                        image: AssetImage('asset/bumasoud4.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
+              SizedBox(height: 10),
+                              ],
+                            ),
+                            SizedBox(width: 30),
+                            Column(
+                              children: [
+              Container(
+                color: Colors.red,
+                height: 250,
+                width: 250,
+                child: Image(
+                    image: AssetImage('asset/bumasoud4.jpg'),
+                    fit: BoxFit.cover),
               ),
+              SizedBox(height: 10),
+                              ],
+                            ),
               SizedBox(height: 30),
               Container(
                 color: Colors.black,

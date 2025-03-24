@@ -1482,180 +1482,549 @@
 
 
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:flutter/material.dart';
+
+// class AddDelivery extends StatefulWidget {
+//   @override
+//   _AddDeliveryState createState() =>
+//       _AddDeliveryState();
+// }
+
+// class _AddDeliveryState
+//     extends State<AddDelivery> {
+//   final _formKey = GlobalKey<FormState>();
+//   final TextEditingController _emailController = TextEditingController();
+//   final TextEditingController _passwordController = TextEditingController();
+//   final TextEditingController _nameController = TextEditingController();
+//   final TextEditingController _phoneController = TextEditingController();
+
+
+
+
+// Future<void> registerDeliveryBoy(BuildContext context, TextEditingController nameController, TextEditingController emailController, TextEditingController phoneController, TextEditingController passwordController) async {
+//   try {
+//     UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+//       email: emailController.text.trim(),
+//       password: passwordController.text.trim(),
+//     );
+
+//     String deliveryBoyUid = userCredential.user!.uid;
+
+//     // Store delivery boy details in Firestore
+//     await FirebaseFirestore.instance.collection('users').doc(deliveryBoyUid).set({
+//       'role': 'Delivery Boy',
+//       'name': nameController.text.trim(),
+//       'email': emailController.text.trim(),
+//       'phone': phoneController.text.trim(),
+//       'status': 'pending', // Requires admin approval
+//       'createdAt': FieldValue.serverTimestamp(),
+//     });
+
+//     await FirebaseFirestore.instance.collection('delivery_boys').doc(deliveryBoyUid).set({
+//       'uid': deliveryBoyUid,
+//       'name': nameController.text.trim(),
+//       'email': emailController.text.trim(),
+//       'phone': phoneController.text.trim(),
+//       'status': 'pending', // Admin must approve
+//       'availability': 'available', // Default to available
+//       'createdAt': FieldValue.serverTimestamp(),
+//     });
+
+//     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//       content: Text('Delivery boy registered successfully! Pending admin approval.'),
+//     ));
+
+//     Navigator.pop(context);
+//   } catch (e) {
+//     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//       content: Text('Error registering delivery boy: $e'),
+//     ));
+//   }
+// }
+
+
+//   // // Function to register the delivery boy
+//   // Future<void> registerDeliveryBoy() async {
+//   //   try {
+//   //     // 1. Register the delivery boy with Firebase Auth
+//   //     UserCredential userCredential = await FirebaseAuth.instance
+//   //         .createUserWithEmailAndPassword(
+//   //             email: _emailController.text.trim(),
+//   //             password: _passwordController.text.trim());
+
+//   //     String deliveryBoyUid = userCredential.user!.uid;
+
+//   //     // 2. Store delivery boy details in the `users` collection
+//   //     await FirebaseFirestore.instance.collection('users').doc(deliveryBoyUid).set({
+//   //       'role': 'Delivery Boy', // Assign role as 'Delivery Boy'
+//   //       'name': _nameController.text.trim(),
+//   //       'email': _emailController.text.trim(),
+//   //       'phone': _phoneController.text.trim(),
+//   //       'status': 'active', // You can set this to active or pending
+//   //       'createdAt': FieldValue.serverTimestamp(),
+//   //     });
+
+//   //     // 3. Store the same `UID` in the `delivery_boys` collection
+//   //     await FirebaseFirestore.instance.collection('delivery_boys').doc(deliveryBoyUid).set({
+//   //       'uid': deliveryBoyUid,  // Using the same UID from Firebase Auth
+//   //       'name': _nameController.text.trim(),
+//   //       'email': _emailController.text.trim(),
+//   //       'phone': _phoneController.text.trim(),
+//   //       'status': 'active', // You can change to inactive or pending if required
+//   //       'availability': 'available', // Set the initial availability
+//   //       'createdAt': FieldValue.serverTimestamp(),
+//   //     });
+
+//   //     // Show success message
+//   //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//   //       content: Text('Delivery boy registered successfully!'),
+//   //     ));
+
+//   //     // You can redirect them to a login page or another screen
+//   //     Navigator.pop(context); // Go back to the previous screen
+//   //   } catch (e) {
+//   //     // Handle error
+//   //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//   //       content: Text('Error registering delivery boy: $e'),
+//   //     ));
+//   //   }
+//   // }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Register Delivery Boy')),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Form(
+//           key: _formKey,
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               TextFormField(
+//                 controller: _nameController,
+//                 decoration: InputDecoration(labelText: 'Name'),
+//                 validator: (value) {
+//                   if (value == null || value.isEmpty) {
+//                     return 'Please enter name';
+//                   }
+//                   return null;
+//                 },
+//               ),
+//               TextFormField(
+//                 controller: _phoneController,
+//                 decoration: InputDecoration(labelText: 'Phone Number'),
+//                 validator: (value) {
+//                   if (value == null || value.isEmpty) {
+//                     return 'Please enter phone number';
+//                   }
+//                   return null;
+//                 },
+//               ),
+//               TextFormField(
+//                 controller: _emailController,
+//                 decoration: InputDecoration(labelText: 'Email'),
+//                 validator: (value) {
+//                   if (value == null || value.isEmpty) {
+//                     return 'Please enter email';
+//                   }
+//                   return null;
+//                 },
+//               ),
+//               TextFormField(
+//                 controller: _passwordController,
+//                 obscureText: true,
+//                 decoration: InputDecoration(labelText: 'Password'),
+//                 validator: (value) {
+//                   if (value == null || value.isEmpty) {
+//                     return 'Please enter password';
+//                   }
+//                   return null;
+//                 },
+//               ),
+//               SizedBox(height: 20),
+//               ElevatedButton(
+//                 onPressed: () {
+//                   if (_formKey.currentState!.validate()) {
+//                    registerDeliveryBoy(context, _nameController, _emailController, _phoneController, _passwordController);
+//                   }
+//                 },
+//                 child: Text('Register'),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+
+// class AddDelivery extends StatefulWidget {
+//   @override
+//   _AddDeliveryState createState() => _AddDeliveryState();
+// }
+
+// class _AddDeliveryState extends State<AddDelivery> {
+//   final _formKey = GlobalKey<FormState>();
+//   final TextEditingController _emailController = TextEditingController();
+//   final TextEditingController _passwordController = TextEditingController();
+//   final TextEditingController _nameController = TextEditingController();
+//   final TextEditingController _phoneController = TextEditingController();
+
+//   bool _isLoading = false;
+
+//   Future<void> registerDeliveryBoy(BuildContext context, TextEditingController nameController, TextEditingController emailController, TextEditingController phoneController, TextEditingController passwordController) async {
+//     try {
+//       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+//         email: emailController.text.trim(),
+//         password: passwordController.text.trim(),
+//       );
+
+//       String deliveryBoyUid = userCredential.user!.uid;
+
+//       await FirebaseFirestore.instance.collection('users').doc(deliveryBoyUid).set({
+//         'role': 'Delivery Boy',
+//         'name': nameController.text.trim(),
+//         'email': emailController.text.trim(),
+//         'phone': phoneController.text.trim(),
+//         'status': 'pending',
+//         'createdAt': FieldValue.serverTimestamp(),
+//       });
+
+//       await FirebaseFirestore.instance.collection('delivery_boys').doc(deliveryBoyUid).set({
+//         'uid': deliveryBoyUid,
+//         'name': nameController.text.trim(),
+//         'email': emailController.text.trim(),
+//         'phone': phoneController.text.trim(),
+//         'status': 'pending',
+//         'availability': 'available',
+//         'createdAt': FieldValue.serverTimestamp(),
+//       });
+
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//         content: Text('Delivery boy registered successfully! Pending admin approval.'),
+//       ));
+
+//       Navigator.pop(context);
+//     } catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//         content: Text('Error registering delivery boy: $e'),
+//       ));
+//     }
+//   }
+
+//   void _register() {
+//     if (_formKey.currentState!.validate()) {
+//       setState(() {
+//         _isLoading = true;
+//       });
+//       registerDeliveryBoy(context, _nameController, _emailController, _phoneController, _passwordController);
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Register Delivery Boy')),
+//       body: SingleChildScrollView(
+//         padding: EdgeInsets.all(16.0),
+//         child: Form(
+//           key: _formKey,
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               _buildTextField(_nameController, 'Name', Icons.person, 'Please enter name'),
+//               _buildTextField(_phoneController, 'Phone Number', Icons.phone, 'Please enter phone number', isNumeric: true),
+//               _buildTextField(_emailController, 'Email', Icons.email, 'Please enter email', isEmail: true),
+//               _buildTextField(_passwordController, 'Password', Icons.lock, 'Please enter password', isPassword: true),
+//               SizedBox(height: 20),
+//               _isLoading
+//                   ? Center(child: CircularProgressIndicator())
+//                   : SizedBox(
+//                       width: double.infinity,
+//                       child: ElevatedButton(
+//                         onPressed: _register,
+//                         style: ElevatedButton.styleFrom(
+//                           padding: EdgeInsets.symmetric(vertical: 12),
+//                           textStyle: TextStyle(fontSize: 18),
+//                         ),
+//                         child: Text('Register'),
+//                       ),
+//                     ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget _buildTextField(TextEditingController controller, String label, IconData icon, String errorMessage, {bool isPassword = false, bool isEmail = false, bool isNumeric = false}) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(vertical: 10.0),
+//       child: TextFormField(
+//         controller: controller,
+//         obscureText: isPassword,
+//         keyboardType: isNumeric ? TextInputType.phone : (isEmail ? TextInputType.emailAddress : TextInputType.text),
+//         decoration: InputDecoration(
+//           labelText: label,
+//           prefixIcon: Icon(icon),
+//           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+//         ),
+//         validator: (value) {
+//           if (value == null || value.isEmpty) {
+//             return errorMessage;
+//           }
+//           if (isEmail && !RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\$').hasMatch(value)) {
+//             return 'Enter a valid email';
+//           }
+//           if (isNumeric && !RegExp(r'^[0-9]{10}\$').hasMatch(value)) {
+//             return 'Enter a valid 10-digit phone number';
+//           }
+//           return null;
+//         },
+//       ),
+//     );
+//   }
+// }
+
+
+import 'package:agthia/DeliveryPersonnel_pages/delivery_changepassword.dart';
+import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddDelivery extends StatefulWidget {
   @override
-  _AddDeliveryState createState() =>
-      _AddDeliveryState();
+  _AddDeliveryState createState() => _AddDeliveryState();
 }
 
-class _AddDeliveryState
-    extends State<AddDelivery> {
+class _AddDeliveryState extends State<AddDelivery> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  bool _isLoading = false;
 
+  Future<void> registerDeliveryBoy() async {
+    if (!_formKey.currentState!.validate()) return;
 
+    setState(() => _isLoading = true);
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
 
+      String deliveryBoyUid = userCredential.user!.uid;
 
-Future<void> registerDeliveryBoy(BuildContext context, TextEditingController nameController, TextEditingController emailController, TextEditingController phoneController, TextEditingController passwordController) async {
-  try {
-    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
-    );
+      await FirebaseFirestore.instance.collection('users').doc(deliveryBoyUid).set({
+        'role': 'Delivery Boy',
+        'name': _nameController.text.trim(),
+        'email': _emailController.text.trim(),
+        'phone': _phoneController.text.trim(),
+        'status': 'pending',
+        'createdAt': FieldValue.serverTimestamp(),
+      });
 
-    String deliveryBoyUid = userCredential.user!.uid;
+      await FirebaseFirestore.instance.collection('delivery_boys').doc(deliveryBoyUid).set({
+        'uid': deliveryBoyUid,
+        'name': _nameController.text.trim(),
+        'email': _emailController.text.trim(),
+        'phone': _phoneController.text.trim(),
+        'status': 'pending',
+        'availability': 'available',
+        'createdAt': FieldValue.serverTimestamp(),
+      });
 
-    // Store delivery boy details in Firestore
-    await FirebaseFirestore.instance.collection('users').doc(deliveryBoyUid).set({
-      'role': 'Delivery Boy',
-      'name': nameController.text.trim(),
-      'email': emailController.text.trim(),
-      'phone': phoneController.text.trim(),
-      'status': 'pending', // Requires admin approval
-      'createdAt': FieldValue.serverTimestamp(),
-    });
-
-    await FirebaseFirestore.instance.collection('delivery_boys').doc(deliveryBoyUid).set({
-      'uid': deliveryBoyUid,
-      'name': nameController.text.trim(),
-      'email': emailController.text.trim(),
-      'phone': phoneController.text.trim(),
-      'status': 'pending', // Admin must approve
-      'availability': 'available', // Default to available
-      'createdAt': FieldValue.serverTimestamp(),
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('Delivery boy registered successfully! Pending admin approval.'),
-    ));
-
-    Navigator.pop(context);
-  } catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('Error registering delivery boy: $e'),
-    ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Delivery boy registered successfully! Pending admin approval.')),
+      );
+      Navigator.pop(context);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error registering delivery boy: $e')),
+      );
+    }
+    setState(() => _isLoading = false);
   }
-}
-
-
-  // // Function to register the delivery boy
-  // Future<void> registerDeliveryBoy() async {
-  //   try {
-  //     // 1. Register the delivery boy with Firebase Auth
-  //     UserCredential userCredential = await FirebaseAuth.instance
-  //         .createUserWithEmailAndPassword(
-  //             email: _emailController.text.trim(),
-  //             password: _passwordController.text.trim());
-
-  //     String deliveryBoyUid = userCredential.user!.uid;
-
-  //     // 2. Store delivery boy details in the `users` collection
-  //     await FirebaseFirestore.instance.collection('users').doc(deliveryBoyUid).set({
-  //       'role': 'Delivery Boy', // Assign role as 'Delivery Boy'
-  //       'name': _nameController.text.trim(),
-  //       'email': _emailController.text.trim(),
-  //       'phone': _phoneController.text.trim(),
-  //       'status': 'active', // You can set this to active or pending
-  //       'createdAt': FieldValue.serverTimestamp(),
-  //     });
-
-  //     // 3. Store the same `UID` in the `delivery_boys` collection
-  //     await FirebaseFirestore.instance.collection('delivery_boys').doc(deliveryBoyUid).set({
-  //       'uid': deliveryBoyUid,  // Using the same UID from Firebase Auth
-  //       'name': _nameController.text.trim(),
-  //       'email': _emailController.text.trim(),
-  //       'phone': _phoneController.text.trim(),
-  //       'status': 'active', // You can change to inactive or pending if required
-  //       'availability': 'available', // Set the initial availability
-  //       'createdAt': FieldValue.serverTimestamp(),
-  //     });
-
-  //     // Show success message
-  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //       content: Text('Delivery boy registered successfully!'),
-  //     ));
-
-  //     // You can redirect them to a login page or another screen
-  //     Navigator.pop(context); // Go back to the previous screen
-  //   } catch (e) {
-  //     // Handle error
-  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //       content: Text('Error registering delivery boy: $e'),
-  //     ));
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Register Delivery Boy')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(labelText: 'Name'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter name';
-                  }
-                  return null;
-                },
+      // appBar: AppBar(title: Text('Register Delivery Boy')),
+      appBar: AppBar(
+        title: Center(
+          child: Transform.translate(
+            offset: Offset(-10.0, 0.0),
+            child: Image(
+              image: AssetImage("asset/logo_agthia.jpg"),
+              height: 50,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Color(0xFF282d37),
+        actions: [
+          PopupMenuButton<String>(
+            child: Row(
+              children: [
+                CircleAvatar(
+                    backgroundColor: const Color.fromARGB(255, 188, 187, 187),
+                    child: Icon(Icons.person,
+                        color: Colors.white)), // Profile Icon
+                SizedBox(width: 5),
+                Text(
+                  "DELIVERY PERSONNEL",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(width: 5),
+                Icon(Icons.arrow_drop_down)
+              ],
+            ),
+            onSelected: (value) {
+              if (value == 'change_password') {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DeliveryChangepassword()));
+                // Navigate to change password screen
+              } else if (value == 'logout') {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => LoginPage()));
+                // Perform logout action
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              // Title Item (Non-clickable)
+              PopupMenuItem<String>(
+                enabled: false,
+                child: Text(
+                  "Delivery Personnel",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
-              TextFormField(
-                controller: _phoneController,
-                decoration: InputDecoration(labelText: 'Phone Number'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter phone number';
-                  }
-                  return null;
-                },
+              PopupMenuDivider(),
+
+              // Change Password
+              PopupMenuItem<String>(
+                value: 'change_password',
+                child: Row(
+                  children: [
+                    Icon(Icons.lock, color: Colors.black),
+                    SizedBox(width: 10),
+                    Text("Change Password"),
+                  ],
+                ),
               ),
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter email';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: InputDecoration(labelText: 'Password'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter password';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                   registerDeliveryBoy(context, _nameController, _emailController, _phoneController, _passwordController);
-                  }
-                },
-                child: Text('Register'),
+
+              // Logout
+              PopupMenuItem<String>(
+                value: 'logout',
+                child: Row(
+                  children: [
+                    Icon(Icons.logout, color: Colors.black),
+                    SizedBox(width: 10),
+                    Text("Logout"),
+                  ],
+                ),
               ),
             ],
           ),
+          SizedBox(width: 10),
+        ],
+      ),
+      backgroundColor: const Color.fromARGB(255, 218, 223, 232),
+      
+      body: Center(
+        child: Container(
+          width: 600,
+          height: 500,
+          color: const Color.fromARGB(255, 194, 204, 220),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Registration",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.green),),
+                  Center(
+                    child: SizedBox(
+                      width: 500,
+                      child: _buildTextField(_nameController, 'Name', Icons.person, 'Please enter name')),
+                  ),
+                  Center(
+                    child: SizedBox(
+                      width: 500,
+                      child: _buildTextField(_phoneController, 'Phone Number', Icons.phone, 'Enter a valid 10-digit phone number', isNumeric: true)),
+                  ),
+                  Center(
+                    child: SizedBox(
+                      width: 500,
+                      child: _buildTextField(_emailController, 'Email', Icons.email, 'Enter a valid email', isEmail: true)),
+                  ),
+                  Center(
+                    child: SizedBox(
+                      width: 500,
+                      child: _buildTextField(_passwordController, 'Password', Icons.lock, 'Password must be at least 6 characters', isPassword: true)),
+                  ),
+                  SizedBox(height: 20),
+                  _isLoading
+                      ? Center(child: CircularProgressIndicator())
+                      : Center(
+                        child: SizedBox(
+                            width: 300,
+                            child: ElevatedButton(
+                              onPressed: registerDeliveryBoy,
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.green,
+                                padding: EdgeInsets.symmetric(vertical: 12),
+                                textStyle: TextStyle(fontSize: 18),
+                              ),
+                              child: Text('Register',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                            ),
+                          ),
+                      ),
+                ],
+              ),
+            ),
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildTextField(TextEditingController controller, String label, IconData icon, String errorMessage,
+      {bool isPassword = false, bool isEmail = false, bool isNumeric = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: TextFormField(
+        controller: controller,
+        obscureText: isPassword,
+        keyboardType: isNumeric ? TextInputType.phone : (isEmail ? TextInputType.emailAddress : TextInputType.text),
+        decoration: InputDecoration(
+          labelText: label,
+          prefixIcon: Icon(icon),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) return errorMessage;
+          if (isEmail && RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\$').hasMatch(value)) return 'Enter a valid email';
+          if (isNumeric && RegExp(r'^[0-9]{10}\$').hasMatch(value)) return 'Enter a valid 10-digit phone number';
+          if (isPassword && value.length < 6) return 'Password must be at least 6 characters';
+          return null;
+        },
       ),
     );
   }

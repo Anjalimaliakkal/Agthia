@@ -802,6 +802,7 @@ Future<void> subscribeUser() async {
               children: [
                 SizedBox(
                   height: 300,
+                  width: 500,
                   child: Stack(
                     children: [
                       Positioned.fill(
@@ -829,7 +830,7 @@ Future<void> subscribeUser() async {
                     ],
                   ),
                   width: 1000,
-                  height: 400,
+                  height: 900,
                   child: Padding(
                     padding: EdgeInsets.all(20),
                     child: Column(

@@ -832,6 +832,7 @@ class Philippe extends StatelessWidget {
             ],
           ),
         ),
+        backgroundColor: const Color.fromARGB(255, 207, 215, 221),
         body: FutureBuilder<QuerySnapshot>(
           future: restaurants.get(), // Fetch all restaurants first
           builder: (context, snapshot) {
@@ -856,7 +857,7 @@ class Philippe extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 470,
+                    height: 200,
                     child: Stack(
                       children: [
                         Positioned.fill(
@@ -866,7 +867,7 @@ class Philippe extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          left: 150,
+                          left: 50,
                           top: 250,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -944,9 +945,12 @@ class Philippe extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 30),
-                            Center(
-                                child: Text(
-                                    "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              child: Center(
+                                  child: Text(
+                                      "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                            ),
                           ]))),
                   SizedBox(
                     height: 30,
@@ -979,9 +983,9 @@ class Philippe extends StatelessWidget {
                     height: 40,
                   ),
                   // Your existing widgets
-                  SizedBox(
-                    height: 40,
-                  ),
+                  // SizedBox(
+                  //   height: 40,
+                  // ),
                   Center(
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -1018,23 +1022,23 @@ class Philippe extends StatelessWidget {
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.camera_alt, size: 24),
-                        onPressed: () {},
-                      ),
-                      SizedBox(width: 8),
-                      IconButton(
-                        icon: Icon(Icons.facebook, size: 24),
-                        onPressed: () {},
-                      ),
-                      SizedBox(width: 8),
-                      IconButton(
-                        icon: Icon(Icons.share, size: 24),
-                        onPressed: () {},
-                      ),
+                      // SizedBox(
+                      //   width: 40,
+                      // ),
+                      // IconButton(
+                      //   icon: Icon(Icons.camera_alt, size: 24),
+                      //   onPressed: () {},
+                      // ),
+                      // SizedBox(width: 8),
+                      // IconButton(
+                      //   icon: Icon(Icons.facebook, size: 24),
+                      //   onPressed: () {},
+                      // ),
+                      // SizedBox(width: 8),
+                      // IconButton(
+                      //   icon: Icon(Icons.share, size: 24),
+                      //   onPressed: () {},
+                      // ),
                     ],
                   ),
                   Container(
@@ -1049,7 +1053,8 @@ class Philippe extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Container(
-                    height: 100,
+                    padding: EdgeInsets.all(5),
+                    height: 260,
                     width: 1100,
                     child: Text(
                       "Chef Philippe Chow started his humble beginnings as a teenage chef in Hong Kong restaurants, Executive Chef Philippe Chow has wowed thousands of diners and cooked in many of the world’s most high-profile kitchens. In 2004, Chef Chow brought Philippe to the biggest culinary stage, New York City. It is here that he established himself as a true pioneer and dining visionary, offering an experience coveted by the most talented of restaurateurs.",
@@ -1057,14 +1062,14 @@ class Philippe extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 8),
-                  Container(
-                    height: 100,
-                    width: 1100,
-                    child: Text(
-                      "With meticulous attention to detail, a commitment to bringing the flavors of his upbringing to the U.S., and a carefully crafted environment in which the “who’s who” of New York feel at home, Chef Chow is making culinary history. Chef Chow has ushered in a new era for world-class chefs in New York City – one where substance drives notoriety.",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
+                  // Container(
+                  //   height: 200,
+                  //   width: 1100,
+                  //   child: Text(
+                  //     "With meticulous attention to detail, a commitment to bringing the flavors of his upbringing to the U.S., and a carefully crafted environment in which the “who’s who” of New York feel at home, Chef Chow is making culinary history. Chef Chow has ushered in a new era for world-class chefs in New York City – one where substance drives notoriety.",
+                  //     style: TextStyle(fontSize: 16),
+                  //   ),
+                  // ),
                   Container(
                       width: 1100,
                       child: Divider(
@@ -1074,6 +1079,7 @@ class Philippe extends StatelessWidget {
                   SizedBox(
                     height: 40,
                   ),
+                  SizedBox(width: 240,),
                   Column(
                     children: [
                       Container(
@@ -1087,34 +1093,36 @@ class Philippe extends StatelessWidget {
                       SizedBox(height: 10),
                     ],
                   ),
-                  SizedBox(width: 30),
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 300,
-                        child: Image(
-                            image: AssetImage('asset/philippe3.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                                    //   ],
+                                    // ),
+                                    SizedBox(width: 30),
+                                    Column(
+                                      children: [
+                  Container(
+                    color: Colors.red,
+                    height: 250,
+                    width: 300,
+                    child: Image(
+                        image: AssetImage('asset/philippe3.jpg'),
+                        fit: BoxFit.cover),
                   ),
-                  SizedBox(width: 30),
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 300,
-                        child: Image(
-                            image: AssetImage('asset/philippe4.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                  SizedBox(height: 10),
+                                      ],
+                                    ),
+                                    SizedBox(width: 30),
+                                    Column(
+                                      children: [
+                  Container(
+                    color: Colors.red,
+                    height: 250,
+                    width: 300,
+                    child: Image(
+                        image: AssetImage('asset/philippe4.jpg'),
+                        fit: BoxFit.cover),
                   ),
+                  SizedBox(height: 10),
+                                      ],
+                                    ),
                   Container(
                     color: Colors.black,
                     padding: EdgeInsets.only(),

@@ -272,12 +272,13 @@ class Fatayer extends StatelessWidget {
             ],
           ),
         ),
+        backgroundColor: const Color.fromARGB(255, 207, 215, 221),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
               SizedBox(
-                height: 470,
+                height: 200,
                 child: Stack(
                   children: [
                     Positioned.fill(
@@ -365,9 +366,12 @@ class Fatayer extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 30),
-                        Center(
-                            child: Text(
-                                "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                        Container(
+                          padding: EdgeInsets.all(5),
+                          child: Center(
+                              child: Text(
+                                  "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                        ),
                       ]))),
               SizedBox(
                 height: 30,
@@ -439,23 +443,23 @@ class Fatayer extends StatelessWidget {
                           TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.camera_alt, size: 24),
-                    onPressed: () {},
-                  ),
-                  SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(Icons.facebook, size: 24),
-                    onPressed: () {},
-                  ),
-                  SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(Icons.share, size: 24),
-                    onPressed: () {},
-                  ),
+                  // SizedBox(
+                  //   width: 40,
+                  // ),
+                  // IconButton(
+                  //   icon: Icon(Icons.camera_alt, size: 24),
+                  //   onPressed: () {},
+                  // ),
+                  // SizedBox(width: 8),
+                  // IconButton(
+                  //   icon: Icon(Icons.facebook, size: 24),
+                  //   onPressed: () {},
+                  // ),
+                  // SizedBox(width: 8),
+                  // IconButton(
+                  //   icon: Icon(Icons.share, size: 24),
+                  //   onPressed: () {},
+                  // ),
                 ],
               ),
               Container(
@@ -469,7 +473,8 @@ class Fatayer extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Container(
-                height: 100,
+                padding: EdgeInsets.all(5),
+                height: 200,
                 width: 1100,
                 child: Text(
                   "Fatayer Ala Al Tayer is a local brand located in Kuwait. Established in 1992 with more than 12 branches, serving a selection of Breakfast, Pastries, and Pizza. Their best-selling dishes are Akkawi Pie, Zaatar Pie, Meat Pie and Kraft Pie, although they have a variety of dishes and meals to choose from like Breakfast, Pastries, Pizza.",
@@ -487,6 +492,7 @@ class Fatayer extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
+              SizedBox(width: 340,),
               Column(
                 children: [
                   Container(
@@ -500,34 +506,36 @@ class Fatayer extends StatelessWidget {
                   SizedBox(height: 10),
                 ],
               ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 230,
-                    child: Image(
-                        image: AssetImage('asset/fatayer3.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
+                            //   ],
+                            // ),
+                            SizedBox(width: 30),
+                            Column(
+                              children: [
+              Container(
+                color: Colors.red,
+                height: 250,
+                width: 230,
+                child: Image(
+                    image: AssetImage('asset/fatayer3.jpg'),
+                    fit: BoxFit.cover),
               ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 230,
-                    child: Image(
-                        image: AssetImage('asset/fatayer4.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
+              SizedBox(height: 10),
+                              ],
+                            ),
+                            SizedBox(width: 30),
+                            Column(
+                              children: [
+              Container(
+                color: Colors.red,
+                height: 250,
+                width: 230,
+                child: Image(
+                    image: AssetImage('asset/fatayer4.jpg'),
+                    fit: BoxFit.cover),
               ),
+              SizedBox(height: 10),
+                              ],
+                            ),
               SizedBox(height: 30),
               Container(
                 color: Colors.black,

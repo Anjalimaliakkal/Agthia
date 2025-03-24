@@ -2,6 +2,7 @@ import 'package:agthia/Restaurant_pages/Add_Restaurant.dart';
 import 'package:agthia/Restaurant_pages/Restaurant_changepassword.dart';
 import 'package:agthia/Restaurant_pages/delivery_allocation.dart';
 import 'package:agthia/Restaurant_pages/restaurant_home.dart';
+import 'package:agthia/Restaurant_pages/view_approved_orders.dart';
 import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -171,17 +172,17 @@ class ViewdeliveryRestaurant extends StatelessWidget {
                         builder: (context) => ViewdeliveryRestaurant()));
               },
             ),
-            ListTile(
-              title: Text("Allocate Delivery Personnel",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DeliveryAllocation(orderId: '',)));
-              },
-            ),
+            // ListTile(
+            //   title: Text("Allocate Delivery Personnel",
+            //       style: TextStyle(
+            //           fontWeight: FontWeight.bold, color: Colors.white)),
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => DeliveryAllocation(orderId: '',)));
+            //   },
+            // ),
           ],
         ),
       ),

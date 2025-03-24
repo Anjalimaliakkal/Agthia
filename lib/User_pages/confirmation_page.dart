@@ -221,7 +221,7 @@ class ConfirmationPage extends StatelessWidget {
   var orderSnapshot = await FirebaseFirestore.instance
       .collection('orders')
       .orderBy('timestamp', descending: true) // Sort by latest
-      .limit(1)
+      .limit(2)
       .get();
 
   if (orderSnapshot.docs.isNotEmpty) {
@@ -272,6 +272,47 @@ class ConfirmationPage extends StatelessWidget {
             ],
           ),
         ),
+      // body: FutureBuilder<DocumentSnapshot>(
+      //   future: FirebaseFirestore.instance.collection('orders').doc(orderId).get(),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.connectionState == ConnectionState.waiting) {
+      //       return Center(child: CircularProgressIndicator());
+      //     }
+
+      //     if (snapshot.hasError) {
+      //       print("❌ Firestore Error: ${snapshot.error}");
+      //       return Center(child: Text('Error fetching order details.'));
+      //     }
+
+      //     if (!snapshot.hasData || !snapshot.data!.exists) {
+      //       print("❌ Order not found in Firestore with ID: $orderId");
+      //       return Center(child: Text('Order not found.'));
+      //     }
+
+      //     var orderData = snapshot.data!.data() as Map<String, dynamic>;
+      //     print("📜 Firestore Data for Order ID $orderId: $orderData");
+
+      //     return Padding(
+      //       padding: const EdgeInsets.all(16.0),
+      //       child: Column(
+      //         crossAxisAlignment: CrossAxisAlignment.start,
+      //         children: [
+      //           Center(child: Text("Order Confirmation",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold,fontSize: 28),)),
+      //           Text('Order ID: $orderId', style: TextStyle(fontWeight: FontWeight.bold)),
+      //           Text('Name: ${orderData['name'] ?? 'Unknown'}'),
+      //           Text('Phone: ${orderData['phone'] ?? 'Unknown'}'),
+      //           Text('Address: ${orderData['address'] ?? 'Unknown'}'),
+      //           Text('Orderd Items: ${orderData['cartItems'] ?? 'Unknown'}'),
+      //           SizedBox(height: 20),
+      //           Text(
+      //             orderData['status'] == 'Approved' ? 'Your order has been approved! 🎉' : 'Your order is pending.',
+      //             style: TextStyle(fontSize: 16, color: orderData['status'] == 'Approved' ? Colors.green : Colors.orange),
+      //           ),
+      //         ],
+      //       ),
+      //     );
+      //   },
+      // ),
       body: FutureBuilder<DocumentSnapshot>(
         future: FirebaseFirestore.instance.collection('orders').doc(orderId).get(),
         builder: (context, snapshot) {
@@ -292,22 +333,88 @@ class ConfirmationPage extends StatelessWidget {
           var orderData = snapshot.data!.data() as Map<String, dynamic>;
           print("📜 Firestore Data for Order ID $orderId: $orderData");
 
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(child: Text("Order Confirmation",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold,fontSize: 28),)),
-                Text('Order ID: $orderId', style: TextStyle(fontWeight: FontWeight.bold)),
-                Text('Name: ${orderData['name'] ?? 'Unknown'}'),
-                Text('Phone: ${orderData['phone'] ?? 'Unknown'}'),
-                Text('Address: ${orderData['address'] ?? 'Unknown'}'),
-                SizedBox(height: 20),
-                Text(
-                  orderData['status'] == 'Approved' ? 'Your order has been approved! 🎉' : 'Your order is pending.',
-                  style: TextStyle(fontSize: 16, color: orderData['status'] == 'Approved' ? Colors.green : Colors.orange),
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text(
+                          "Order Confirmation",
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 26,
+                          ),
+                        ),
+                      ),
+                      Divider(thickness: 1, height: 20),
+            
+                      ListTile(
+                        leading: Icon(Icons.receipt_long, color: Colors.green),
+                        title: RichText(
+                          text: TextSpan(
+                            text: "Order ID: ",
+                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                            children: [
+                              TextSpan(
+                                text: orderId,
+                                style: TextStyle(fontWeight: FontWeight.normal, color: Colors.grey[700]),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.person, color: Colors.blue),
+                        title: Text("Name: ${orderData['name'] ?? 'Unknown'}"),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.phone, color: Colors.teal),
+                        title: Text("Phone: ${orderData['phone'] ?? 'Unknown'}"),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.location_on, color: Colors.red),
+                        title: Text("Address: ${orderData['address'] ?? 'Unknown'}"),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.shopping_cart, color: Colors.orange),
+                        title: Text("Ordered Items: ${orderData['cartItems'] ?? 'Unknown'}"),
+                      ),
+                      SizedBox(height: 20),
+            
+                      Center(
+                        child: Text(
+                          orderData['status'] == 'Approved'
+                              ? '🎉 Your order has been approved!'
+                              : '⏳ Your order is pending.',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: orderData['status'] == 'Approved' ? Colors.green : Colors.orange,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+            
+                      if (orderData['status'] == 'Approved')
+                        Center(
+                          child: Icon(Icons.check_circle, color: Colors.green, size: 40),
+                        )
+                      else
+                        Center(
+                          child: Icon(Icons.hourglass_top, color: Colors.orange, size: 40),
+                        ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
           );
         },

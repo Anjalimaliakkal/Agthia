@@ -791,19 +791,8 @@ class DeliveryHome extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>AddDelivery()));
               },
             ),
-            ListTile(
+             ListTile(
               title: Text("New Orders",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DeliveryBoyOrdersScreen(deliveryBoyId: deliveryBoyId,)));
-              },
-            ),
-            ListTile(
-              title: Text("Order Details",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {
@@ -816,6 +805,31 @@ class DeliveryHome extends StatelessWidget {
 
               },
             ),
+            ListTile(
+              title: Text("Order Status",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DeliveryBoyOrdersScreen(deliveryBoyId: deliveryBoyId,)));
+              },
+            ),
+//             ListTile(
+//               title: Text("New Orders",
+//                   style: TextStyle(
+//                       fontWeight: FontWeight.bold, color: Colors.white)),
+//               onTap: () {
+//               Navigator.push(
+//   context,
+//   MaterialPageRoute(
+//     builder: (context) => DeliveryPreviousOrders(deliveryBoyId: deliveryBoyId,), // Your destination screen
+//   ),
+// );
+
+//               },
+//             ),
           ],
         ),
       ),
@@ -857,12 +871,14 @@ class DeliveryHome extends StatelessWidget {
                         shape: const BeveledRectangleBorder(),
                       ),
                       onPressed: () {},
-                      child: const Text(
-                        "Registered Restaurants",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green),
+                      child: Center(
+                        child: const Text(
+                          "Registered Delivery Personnel",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10),

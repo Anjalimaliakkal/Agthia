@@ -1294,12 +1294,13 @@ class Burgerinn extends StatelessWidget {
             ],
           ),
         ),
+        backgroundColor: const Color.fromARGB(255, 207, 215, 221),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
               SizedBox(
-                height: 470,
+                height: 200,
                 child: Stack(
                   children: [
                     Positioned.fill(
@@ -1387,9 +1388,12 @@ class Burgerinn extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 30),
-                        Center(
-                            child: Text(
-                                "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                        Container(
+                          padding: EdgeInsets.all(5),
+                          child: Center(
+                              child: Text(
+                                  "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                        ),
                       ]))),
               SizedBox(
                 height: 30,
@@ -1446,23 +1450,23 @@ class Burgerinn extends StatelessWidget {
                           TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.camera_alt, size: 24),
-                    onPressed: () {},
-                  ),
-                  SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(Icons.facebook, size: 24),
-                    onPressed: () {},
-                  ),
-                  SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(Icons.share, size: 24),
-                    onPressed: () {},
-                  ),
+                  // SizedBox(
+                  //   width: 40,
+                  // ),
+                  // IconButton(
+                  //   icon: Icon(Icons.camera_alt, size: 24),
+                  //   onPressed: () {},
+                  // ),
+                  // SizedBox(width: 8),
+                  // IconButton(
+                  //   icon: Icon(Icons.facebook, size: 24),
+                  //   onPressed: () {},
+                  // ),
+                  // SizedBox(width: 8),
+                  // IconButton(
+                  //   icon: Icon(Icons.share, size: 24),
+                  //   onPressed: () {},
+                  // ),
                 ],
               ),
               Container(
@@ -1476,7 +1480,8 @@ class Burgerinn extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Container(
-                height: 100,
+                padding: EdgeInsets.all(5),
+                height: 200,
                 width: 1100,
                 child: Text(
                   "Burger Inn is a restaurant located in Kuwait, serving a selection of Burgers, Beverages, Fast Food that delivers across Al-Qusour, Ardhiya, Bayan, Maidan Hawally and Sabahiya. Our bestselling dishes are Burger Inn Chicken Fillet, Fries, Messy Fries and Chicky Fries, with a variety of other dishes and meals to choose from like Burgers, Beverages, and Fast Food.",
@@ -1494,6 +1499,7 @@ class Burgerinn extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
+              SizedBox(width: 360,),
               Column(
                 children: [
                   Container(
@@ -1507,34 +1513,36 @@ class Burgerinn extends StatelessWidget {
                   SizedBox(height: 10),
                 ],
               ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 230,
-                    child: Image(
-                        image: AssetImage('asset/burgerinn3.png'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
+                            //   ],
+                            // ),
+                            SizedBox(width: 30),
+                            Column(
+                              children: [
+              Container(
+                color: Colors.red,
+                height: 250,
+                width: 230,
+                child: Image(
+                    image: AssetImage('asset/burgerinn3.png'),
+                    fit: BoxFit.cover),
               ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 230,
-                    child: Image(
-                        image: AssetImage('asset/burgerinn4.png'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
+              SizedBox(height: 10),
+                              ],
+                            ),
+                            SizedBox(width: 30),
+                            Column(
+                              children: [
+              Container(
+                color: Colors.red,
+                height: 250,
+                width: 230,
+                child: Image(
+                    image: AssetImage('asset/burgerinn4.png'),
+                    fit: BoxFit.cover),
               ),
+              SizedBox(height: 10),
+                              ],
+                            ),
               SizedBox(height: 30),
               Container(
                 color: Colors.black,

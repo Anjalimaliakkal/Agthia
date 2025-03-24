@@ -697,7 +697,7 @@ Future<void> subscribeUser() async {
               // width: MediaQuery.of(context).size.width,
               //color: Color(0xFFf3eddf),
               width: 1000,
-              height: 250,
+              height: 280,
               child: Padding(
                 padding: EdgeInsets.all(20),
                 child: Column(

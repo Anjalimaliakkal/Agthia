@@ -826,6 +826,7 @@ class Dinand extends StatelessWidget {
             ],
           ),
         ),
+        backgroundColor: const Color.fromARGB(255, 207, 215, 221),
         body: FutureBuilder<QuerySnapshot>(
           future: restaurants.get(), // Fetch all restaurants first
           builder: (context, snapshot) {
@@ -848,7 +849,7 @@ class Dinand extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                height: 470,
+                height: 200,
                 child: Stack(
                   children: [
                     Positioned.fill(
@@ -858,7 +859,7 @@ class Dinand extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: 150,
+                      left: 50,
                       top: 250,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -936,9 +937,12 @@ class Dinand extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 30),
-                        Center(
-                            child: Text(
-                                "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                        Container(
+                          padding: EdgeInsets.all(5),
+                          child: Center(
+                              child: Text(
+                                  "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                        ),
                       ]))),
               SizedBox(
                 height: 30,
@@ -966,9 +970,9 @@ class Dinand extends StatelessWidget {
                 height: 40,
               ),
                   // Your existing widgets
-                  SizedBox(
-                    height: 40,
-                  ),
+                  // SizedBox(
+                  //   height: 40,
+                  // ),
                   Center(
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -1004,23 +1008,23 @@ class Dinand extends StatelessWidget {
                           TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.camera_alt, size: 24),
-                    onPressed: () {},
-                  ),
-                  SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(Icons.facebook, size: 24),
-                    onPressed: () {},
-                  ),
-                  SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(Icons.share, size: 24),
-                    onPressed: () {},
-                  ),
+                  // SizedBox(
+                  //   width: 40,
+                  // ),
+                  // IconButton(
+                  //   icon: Icon(Icons.camera_alt, size: 24),
+                  //   onPressed: () {},
+                  // ),
+                  // SizedBox(width: 8),
+                  // IconButton(
+                  //   icon: Icon(Icons.facebook, size: 24),
+                  //   onPressed: () {},
+                  // ),
+                  // SizedBox(width: 8),
+                  // IconButton(
+                  //   icon: Icon(Icons.share, size: 24),
+                  //   onPressed: () {},
+                  // ),
                 ],
               ),
               Container(
@@ -1035,6 +1039,7 @@ class Dinand extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Container(
+                padding: EdgeInsets.all(5),
                 height: 100,
                 width: 1100,
                 child: Text(
@@ -1053,47 +1058,51 @@ class Dinand extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 400,
-                    child: Image(
-                        image: AssetImage('asset/dinand3.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
-              ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 400,
-                    child: Image(
-                        image: AssetImage('asset/dinand4.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
-              ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 400,
-                    child: Image(
-                        image: AssetImage('asset/dinand5.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
-              ),
+              SizedBox(width: 200,),
+                                Column(
+               children: [
+                 // SizedBox(width: 240,),
+                 Container(
+                   color: Colors.red,
+                   height: 250,
+                   width: 400,
+                   child: Image(
+                       image: AssetImage('asset/dinand3.jpg'),
+                       fit: BoxFit.cover),
+                 ),
+                 SizedBox(height: 10),
+               ],
+                                ),
+                            //   ],
+                            // ),
+                            SizedBox(width: 30),
+                            Column(
+                              children: [
+                                Container(
+               color: Colors.red,
+               height: 250,
+               width: 400,
+               child: Image(
+                   image: AssetImage('asset/dinand4.jpg'),
+                   fit: BoxFit.cover),
+                                ),
+                                SizedBox(height: 10),
+                              ],
+                            ),
+                            SizedBox(width: 30),
+                            Column(
+                              children: [
+                                Container(
+               color: Colors.red,
+               height: 250,
+               width: 400,
+               child: Image(
+                   image: AssetImage('asset/dinand5.jpg'),
+                   fit: BoxFit.cover),
+                                ),
+                                SizedBox(height: 10),
+                              ],
+                            ),
               SizedBox(height: 30),
               Container(
                 color: Colors.black,

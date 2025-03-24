@@ -1203,7 +1203,7 @@ Future<void> subscribeUser() async {
         child: Column(
           children: [
             SizedBox(
-              height: 670,
+              height: 400,
               child: Stack(
                 children: [
                   Positioned.fill(
@@ -1213,8 +1213,8 @@ Future<void> subscribeUser() async {
                     ),
                   ),
                   Positioned(
-                    left: 150,
-                    top: 250,
+                    left: 10,
+                    top: 150,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1252,20 +1252,20 @@ Future<void> subscribeUser() async {
                 ],
               ),
             ),
-            Container(
-              color: Color(0xFFf3eddf),
-              height: 500,
-              child: SizedBox(
-                height: 300,
-                width: double.infinity,
-                child: Image(
-                  image: AssetImage(
-                    "asset/About_us.jpg",
-                  ),
-                  //fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            // Container(
+            //   color: Color(0xFFf3eddf),
+            //   height: 500,
+            //   child: SizedBox(
+            //     height: 300,
+            //     width: double.infinity,
+            //     child: Image(
+            //       image: AssetImage(
+            //         "asset/About_us.jpg",
+            //       ),
+            //       //fit: BoxFit.cover,
+            //     ),
+            //   ),
+            // ),
             Container(
               width: MediaQuery.of(context).size.width,
               color: Color(0xFFf3eddf),
@@ -1346,7 +1346,9 @@ Future<void> subscribeUser() async {
                       ),
                     ),
                     SizedBox(height: 30),
-                    Center(child: Text("We are proud to serve as the leading force behind renowned international brands.")),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Center(child: Text("We are proud to serve as the leading force behind renowned international brands."))),
                     
 
                     SizedBox(height: 40,),
@@ -1550,7 +1552,9 @@ Future<void> subscribeUser() async {
                       ),
                     ),
                     SizedBox(height: 20),
-                    Center(child: Text("We are thrilled to be the driving forces behind the longstanding local grants that have been a part of the community.")),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Center(child: Text("We are thrilled to be the driving forces behind the longstanding local grants that have been a part of the community."))),
                     SizedBox(height: 40,),
                     Center(
                       child: Column(

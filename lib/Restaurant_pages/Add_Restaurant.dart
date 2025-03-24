@@ -1770,7 +1770,236 @@
 
 
 
+// import 'dart:typed_data';
+// import 'package:flutter/material.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
+
+// class AddRestaurant extends StatefulWidget {
+//   const AddRestaurant({super.key});
+
+//   @override
+//   State<AddRestaurant> createState() => _AddRestaurantState();
+// }
+
+// class _AddRestaurantState extends State<AddRestaurant> {
+//   final _formKey = GlobalKey<FormState>();
+
+//   final TextEditingController nameController = TextEditingController();
+//   final TextEditingController brandTypeController = TextEditingController();
+//   final TextEditingController reservationUrlController = TextEditingController();
+//   final TextEditingController instagramUrlController = TextEditingController();
+//   final TextEditingController facebookUrlController = TextEditingController();
+//   final TextEditingController twitterUrlController = TextEditingController();
+//   final TextEditingController description1Controller = TextEditingController();
+//   final TextEditingController description2Controller = TextEditingController();
+//   final TextEditingController registerNoController = TextEditingController();
+//   final TextEditingController seatingCapacityController = TextEditingController();
+
+//   List<TextEditingController> menuItemControllers = [];
+//   List<TextEditingController> priceControllers = [];
+//   List<Uint8List?> menuImages = [];
+
+//   Uint8List? logoBytes;
+//   Uint8List? imageBytes;
+
+//   final CollectionReference restaurants = FirebaseFirestore.instance.collection('restaurants');
+
+//   Future<String?> uploadImage(Uint8List imageData, String path) async {
+//     try {
+//       Reference storageRef = FirebaseStorage.instance.ref().child(path);
+//       UploadTask uploadTask = storageRef.putData(imageData);
+//       TaskSnapshot taskSnapshot = await uploadTask;
+//       return await taskSnapshot.ref.getDownloadURL();
+//     } catch (e) {
+//       print("Error uploading image: $e");
+//       return null;
+//     }
+//   }
+
+//   Future<void> addRestaurant() async {
+//     if (!_formKey.currentState!.validate()) {
+//       return;
+//     }
+
+//     try {
+//       String? uploadedLogoUrl = logoBytes != null
+//           ? await uploadImage(logoBytes!, 'restaurants/logos/${nameController.text}.png')
+//           : null;
+//       String? uploadedImageUrl = imageBytes != null
+//           ? await uploadImage(imageBytes!, 'restaurants/images/${nameController.text}.png')
+//           : null;
+
+//       DocumentReference restaurantRef = await restaurants.add({
+//         'name': nameController.text,
+//         'brandType': brandTypeController.text,
+//         'reservationUrl': reservationUrlController.text,
+//         'instagramUrl': instagramUrlController.text,
+//         'facebookUrl': facebookUrlController.text,
+//         'twitterUrl': twitterUrlController.text,
+//         'description1': description1Controller.text,
+//         'description2': description2Controller.text,
+//         'registerNo': registerNoController.text,
+//         'seatingCapacity': int.tryParse(seatingCapacityController.text) ?? 0,
+//         'status': 'pending',
+//         'createdAt': FieldValue.serverTimestamp(),
+//         'updatedAt': FieldValue.serverTimestamp(),
+//         'logoUrl': uploadedLogoUrl ?? '',
+//         'imageUrl': uploadedImageUrl ?? '',
+//       });
+
+//       await restaurantRef.update({'restaurantID': restaurantRef.id});
+
+//       CollectionReference menuRef = restaurantRef.collection('menu');
+//       for (int i = 0; i < menuItemControllers.length; i++) {
+//         if (menuItemControllers[i].text.trim().isNotEmpty) {
+//           String? menuImageUrl = menuImages[i] != null
+//               ? await uploadImage(menuImages[i]!, 'restaurants/${restaurantRef.id}/menu/${menuItemControllers[i].text}.png')
+//               : '';
+
+//           await menuRef.add({
+//             'name': menuItemControllers[i].text.trim(),
+//             'price': double.tryParse(priceControllers[i].text) ?? 0.0,
+//             'image': menuImageUrl ?? '',
+//             'createdAt': FieldValue.serverTimestamp(),
+//           });
+//         }
+//       }
+
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Restaurant and menu items added successfully! Awaiting approval.')),
+//       );
+
+//       setState(() {
+//         logoBytes = null;
+//         imageBytes = null;
+//         menuItemControllers.clear();
+//         priceControllers.clear();
+//         menuImages.clear();
+//       });
+
+//       nameController.clear();
+//       brandTypeController.clear();
+//       reservationUrlController.clear();
+//       instagramUrlController.clear();
+//       facebookUrlController.clear();
+//       twitterUrlController.clear();
+//       description1Controller.clear();
+//       description2Controller.clear();
+//       registerNoController.clear();
+//       seatingCapacityController.clear();
+//     } catch (e) {
+//       print("Error adding restaurant: $e");
+//     }
+//   }
+
+//   // Future<void> pickImage(bool isLogo, {int? index}) async {
+//   //   Uint8List? bytes = await ImagePickerWeb.getImageAsBytes();
+//   //   if (bytes != null) {
+//   //     setState(() {
+//   //       if (isLogo) {
+//   //         logoBytes = bytes;
+//   //       } else if (index != null) {
+//   //         menuImages[index] = bytes;
+//   //       } else {
+//   //         imageBytes = bytes;
+//   //       }
+//   //     });
+//   //   }
+//   // }
+
+//   void addMenuItem() {
+//     setState(() {
+//       menuItemControllers.add(TextEditingController());
+//       priceControllers.add(TextEditingController());
+//       menuImages.add(null);
+//     });
+//   }
+
+//   Widget buildTextField(String label, TextEditingController controller, {bool isMultiline = false, bool isNumber = false, bool isRequired = false}) {
+//     return TextFormField(
+//       controller: controller,
+//       maxLines: isMultiline ? 3 : 1,
+//       keyboardType: isNumber ? TextInputType.number : TextInputType.text,
+//       decoration: InputDecoration(
+//         labelText: label,
+//         border: OutlineInputBorder(),
+//       ),
+//       validator: isRequired
+//           ? (value) {
+//               if (value == null || value.trim().isEmpty) {
+//                 return '$label is required';
+//               }
+//               return null;
+//             }
+//           : null,
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Add Restaurant"),
+//       ),
+//       body: SingleChildScrollView(
+//         padding: const EdgeInsets.all(15),
+//         child: Form(
+//           key: _formKey,
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               buildTextField("Name", nameController, isRequired: true),
+//               buildTextField("Brand Type", brandTypeController, isRequired: true),
+//               buildTextField("Register No", registerNoController, isRequired: true),
+//               buildTextField("Seat Capacity", seatingCapacityController, isNumber: true, isRequired: true),
+//               buildTextField("Reservation URL", reservationUrlController),
+//               buildTextField("Instagram URL", instagramUrlController),
+//               buildTextField("Facebook URL", facebookUrlController),
+//               buildTextField("Twitter URL", twitterUrlController),
+//               buildTextField("Description 1", description1Controller, isMultiline: true),
+//               buildTextField("Description 2", description2Controller, isMultiline: true),
+
+//               SizedBox(height: 20),
+//               Text("Menu Items", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+
+//               ...List.generate(menuItemControllers.length, (index) {
+//                 return Column(
+//                   children: [
+//                     buildTextField("Item Name", menuItemControllers[index], isRequired: true),
+//                     buildTextField("Price", priceControllers[index], isNumber: true, isRequired: true),
+//                     menuImages[index] != null ? Icon(Icons.check, color: Colors.green) : SizedBox(),
+//                     SizedBox(height: 10),
+//                   ],
+//                 );
+//               }),
+
+//               ElevatedButton(
+                
+//                 onPressed: addMenuItem,
+//                 child: Text("Add Menu Item"),
+//               ),
+//               SizedBox(height: 20),
+
+//               Center(
+//                 child: ElevatedButton(
+//                   style: ElevatedButton.styleFrom(shape: BeveledRectangleBorder(),backgroundColor: Colors.green),
+//                   onPressed: addRestaurant,
+//                   child: Text('Submit for Approval',style: TextStyle(color: Colors.white),),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
 import 'dart:typed_data';
+import 'package:agthia/Restaurant_pages/Restaurant_changepassword.dart';
+import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -1821,7 +2050,6 @@ class _AddRestaurantState extends State<AddRestaurant> {
     if (!_formKey.currentState!.validate()) {
       return;
     }
-
     try {
       String? uploadedLogoUrl = logoBytes != null
           ? await uploadImage(logoBytes!, 'restaurants/logos/${nameController.text}.png')
@@ -1893,21 +2121,6 @@ class _AddRestaurantState extends State<AddRestaurant> {
     }
   }
 
-  // Future<void> pickImage(bool isLogo, {int? index}) async {
-  //   Uint8List? bytes = await ImagePickerWeb.getImageAsBytes();
-  //   if (bytes != null) {
-  //     setState(() {
-  //       if (isLogo) {
-  //         logoBytes = bytes;
-  //       } else if (index != null) {
-  //         menuImages[index] = bytes;
-  //       } else {
-  //         imageBytes = bytes;
-  //       }
-  //     });
-  //   }
-  // }
-
   void addMenuItem() {
     setState(() {
       menuItemControllers.add(TextEditingController());
@@ -1916,31 +2129,121 @@ class _AddRestaurantState extends State<AddRestaurant> {
     });
   }
 
-  Widget buildTextField(String label, TextEditingController controller, {bool isMultiline = false, bool isNumber = false, bool isRequired = false}) {
-    return TextFormField(
-      controller: controller,
-      maxLines: isMultiline ? 3 : 1,
-      keyboardType: isNumber ? TextInputType.number : TextInputType.text,
-      decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(),
-      ),
-      validator: isRequired
-          ? (value) {
-              if (value == null || value.trim().isEmpty) {
-                return '$label is required';
+  Widget buildTextField(String label, TextEditingController controller,
+      {bool isMultiline = false, bool isNumber = false, bool isRequired = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextFormField(
+        controller: controller,
+        maxLines: isMultiline ? 3 : 1,
+        keyboardType: isNumber ? TextInputType.number : TextInputType.text,
+        decoration: InputDecoration(
+          labelText: label,
+          border: OutlineInputBorder(),
+          filled: true,
+          fillColor: Colors.grey[200],
+        ),
+        validator: isRequired
+            ? (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return '$label is required';
+                }
+                return null;
               }
-              return null;
-            }
-          : null,
+            : null,
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   title: Text("Add Restaurant", style: TextStyle(fontWeight: FontWeight.bold)),
+      //   backgroundColor: Colors.deepOrange,
+      // ),
       appBar: AppBar(
-        title: Text("Add Restaurant"),
+        title: Center(
+          child: Transform.translate(
+            offset: Offset(-10.0, 0.0),
+            child: Image(
+              image: AssetImage("asset/logo_agthia.jpg"),
+              height: 50,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Color(0xFF282d37),
+        actions: [
+          PopupMenuButton<String>(
+            child: Row(
+              children: [
+                CircleAvatar(
+                    backgroundColor: const Color.fromARGB(255, 188, 187, 187),
+                    child: Icon(Icons.person,
+                        color: Colors.white)), // Profile Icon
+                SizedBox(width: 5),
+                Text(
+                  "RESTAURANT",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(width: 5),
+                Icon(Icons.arrow_drop_down)
+              ],
+            ),
+            onSelected: (value) {
+              if (value == 'change_password') {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RestaurantChangepassword()));
+                // Navigate to change password screen
+              } else if (value == 'logout') {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => LoginPage()));
+                // Perform logout action
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              // Title Item (Non-clickable)
+              PopupMenuItem<String>(
+                enabled: false,
+                child: Text(
+                  "Restaurant",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              PopupMenuDivider(),
+
+              // Change Password
+              PopupMenuItem<String>(
+                value: 'change_password',
+                child: Row(
+                  children: [
+                    Icon(Icons.lock, color: Colors.black),
+                    SizedBox(width: 10),
+                    Text("Change Password"),
+                  ],
+                ),
+              ),
+
+              // Logout
+              PopupMenuItem<String>(
+                value: 'logout',
+                child: Row(
+                  children: [
+                    Icon(Icons.logout, color: Colors.black),
+                    SizedBox(width: 10),
+                    Text("Logout"),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(width: 10),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(15),
@@ -1949,6 +2252,7 @@ class _AddRestaurantState extends State<AddRestaurant> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Center(child: Text("ADD RESTAURANT",style: TextStyle(color: Colors.green,fontSize: 25,fontWeight: FontWeight.bold),)),
               buildTextField("Name", nameController, isRequired: true),
               buildTextField("Brand Type", brandTypeController, isRequired: true),
               buildTextField("Register No", registerNoController, isRequired: true),
@@ -1957,12 +2261,12 @@ class _AddRestaurantState extends State<AddRestaurant> {
               buildTextField("Instagram URL", instagramUrlController),
               buildTextField("Facebook URL", facebookUrlController),
               buildTextField("Twitter URL", twitterUrlController),
-              buildTextField("Description 1", description1Controller, isMultiline: true),
+              buildTextField("Description 1", description1Controller, isMultiline: true,isRequired: true),
               buildTextField("Description 2", description2Controller, isMultiline: true),
-
+              
               SizedBox(height: 20),
               Text("Menu Items", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-
+              
               ...List.generate(menuItemControllers.length, (index) {
                 return Column(
                   children: [
@@ -1973,22 +2277,50 @@ class _AddRestaurantState extends State<AddRestaurant> {
                   ],
                 );
               }),
-
+              
               ElevatedButton(
-                
-                onPressed: addMenuItem,
+                onPressed: () {
+                  setState(() {
+                    menuItemControllers.add(TextEditingController());
+                    priceControllers.add(TextEditingController());
+                    menuImages.add(null);
+                  });
+                },
                 child: Text("Add Menu Item"),
               ),
+              
               SizedBox(height: 20),
-
               Center(
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(shape: BeveledRectangleBorder(),backgroundColor: Colors.green),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   onPressed: addRestaurant,
-                  child: Text('Submit for Approval',style: TextStyle(color: Colors.white),),
+                  child: Text('Submit for Approval', style: TextStyle(color: Colors.white)),
                 ),
               ),
+              // Center(
+              //   child: ElevatedButton(
+              //     style: ElevatedButton.styleFrom(
+              //       shape: BeveledRectangleBorder(),
+              //       backgroundColor: Colors.green,
+              //     ),
+              //     onPressed: () {},
+              //     child: Text('Submit for Approval', style: TextStyle(color: Colors.white)),
+              //   ),
+              // ),
             ],
+            //   buildTextField("Name", nameController, isRequired: true),
+            //   buildTextField("Brand Type", brandTypeController, isRequired: true),
+            //   buildTextField("Register No", registerNoController, isRequired: true),
+            //   buildTextField("Seat Capacity", seatingCapacityController, isNumber: true, isRequired: true),
+            //   SizedBox(height: 20),
+            //   Center(
+            //     child: ElevatedButton(
+            //       style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+            //       onPressed: addRestaurant,
+            //       child: Text('Submit for Approval', style: TextStyle(color: Colors.white)),
+            //     ),
+            //   ),
+            // ],
           ),
         ),
       ),

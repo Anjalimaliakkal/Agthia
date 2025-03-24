@@ -1,4 +1,5 @@
 import 'package:agthia/Admin_pages/addBrands.dart';
+import 'package:agthia/Admin_pages/adminChangepassword.dart';
 import 'package:agthia/Admin_pages/viewDelivery.dart';
 import 'package:agthia/Admin_pages/viewRestaurants.dart';
 import 'package:agthia/Admin_pages/viewbrands.dart';
@@ -145,15 +146,15 @@ class AdminHome extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => addNewsPage()));
               },
             ),
-            ListTile(
-              title: Text("Add Brands",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Addbrands()));
-              },
-            ),
+            // ListTile(
+            //   title: Text("Add Brands",
+            //       style: TextStyle(
+            //           fontWeight: FontWeight.bold, color: Colors.white)),
+            //   onTap: () {
+            //     Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => Addbrands()));
+            //   },
+            // ),
             ExpansionTile(
               //tilePadding: const EdgeInsets.only(left: 15, right: 15),
               title: Text(
@@ -215,15 +216,15 @@ class AdminHome extends StatelessWidget {
             ),
             
            
-              ListTile(
-              title: Text("View Brands",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Viewbrands()));
-              },
-            ),
+            //   ListTile(
+            //   title: Text("View Brands",
+            //       style: TextStyle(
+            //           fontWeight: FontWeight.bold, color: Colors.white)),
+            //   onTap: () {
+            //     Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => Viewbrands()));
+            //   },
+            // ),
             ListTile(
               title: Text("Subscriptions",
                   style: TextStyle(
@@ -245,6 +246,7 @@ class AdminHome extends StatelessWidget {
           ],
         ),
       ),
+      backgroundColor: const Color.fromARGB(255, 168, 186, 205),
       body:  Container(
         width: double.infinity,
         height: double.infinity,
@@ -289,7 +291,10 @@ class AdminHome extends StatelessWidget {
                   Row(
                     children: [
                       Icon(Icons.circle,size: 5,),
-                      TextButton(onPressed: (){}, child: Text("Change password",style: TextStyle(color: Colors.blue,fontSize: 14),)),
+                      TextButton(onPressed: (){
+
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Adminchangepassword()));
+                      }, child: Text("Change password",style: TextStyle(color: Colors.blue,fontSize: 14),)),
                     ],
                   ),
                   Row(
@@ -300,18 +305,178 @@ class AdminHome extends StatelessWidget {
                       }, child: Text("Logout",style: TextStyle(color: Colors.blue,fontSize: 14),)),
                     ],
                   ),
-                
-                ],
+                SizedBox(width: 140,),
+                Center(
+                              child: SizedBox(
+                width: 300,
+                child: Container(
+                  
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    
+                    color: const Color.fromARGB(255, 210, 212, 235),
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 6,
+                        spreadRadius: 2,
+                        offset: Offset(2, 4),
+                      ),
+                    ],
+                  ),
+                  width:
+                      MediaQuery.of(context).size.width * 0.8, // Responsive width
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "10",
+                        style:
+                            TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: const BeveledRectangleBorder(),
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                          "Registered Restaurants",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      const CircleAvatar(
+                        backgroundColor: Color.fromARGB(255, 218, 216, 216),
+                        child: Icon(Icons.check),
+                      ),
+                    ],
+                  ),
+                ),
+                              ),
+                            ),
+                                //   ],
+                                // ),
+                                SizedBox(height: 20,),
+                        
+                  Center(
+                                child: SizedBox(
+                                  width: 300,
+                                  child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color:  const Color.fromARGB(255, 210, 212, 235),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 6,
+                      spreadRadius: 2,
+                      offset: Offset(2, 4),
+                    ),
+                  ],
+                ),
+                width:
+                    MediaQuery.of(context).size.width * 0.8, // Responsive width
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "300",
+                      style:
+                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: const BeveledRectangleBorder(),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        "Registered Users",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const CircleAvatar(
+                      backgroundColor: Color.fromARGB(255, 218, 216, 216),
+                      child: Icon(Icons.check),
+                    ),
+                  ],
+                ),
+                                  ),
+                                ),
+                        ),
+                        SizedBox(height: 20,),
+                        
+                        Center(
+                                child: SizedBox(
+                                  width: 300,
+                                  child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color:  const Color.fromARGB(255, 210, 212, 235),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 6,
+                      spreadRadius: 2,
+                      offset: Offset(2, 4),
+                    ),
+                  ],
+                ),
+                width:
+                    MediaQuery.of(context).size.width * 0.8, // Responsive width
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "60",
+                      style:
+                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: const BeveledRectangleBorder(),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        "Registered Delivery Boys",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const CircleAvatar(
+                      backgroundColor: Color.fromARGB(255, 218, 216, 216),
+                      child: Icon(Icons.check),
+                    ),
+                  ],
+                ),
+                                  ),
+                                ),
+                        ),
+                ]
+                ),
               ),
-              
             ),
+                
+              ),
+                
+                 ),
+            );
             
-          ),
           
-          
-        ),
-      ),
-       
-    );
   }
 }

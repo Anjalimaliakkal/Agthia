@@ -825,6 +825,7 @@ class Novikov extends StatelessWidget {
             ],
           ),
         ),
+        backgroundColor: const Color.fromARGB(255, 207, 215, 221),
         body: FutureBuilder<QuerySnapshot>(
           future: restaurants.get(), // Fetch all restaurants first
           builder: (context, snapshot) {
@@ -849,7 +850,7 @@ class Novikov extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 470,
+                    height: 200,
                     child: Stack(
                       children: [
                         Positioned.fill(
@@ -937,9 +938,12 @@ class Novikov extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 30),
-                            Center(
-                                child: Text(
-                                    "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              child: Center(
+                                  child: Text(
+                                      "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                            ),
                           ]))),
                   SizedBox(
                     height: 30,
@@ -1009,23 +1013,23 @@ class Novikov extends StatelessWidget {
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.camera_alt, size: 24),
-                        onPressed: () {},
-                      ),
-                      SizedBox(width: 8),
-                      IconButton(
-                        icon: Icon(Icons.facebook, size: 24),
-                        onPressed: () {},
-                      ),
-                      SizedBox(width: 8),
-                      IconButton(
-                        icon: Icon(Icons.share, size: 24),
-                        onPressed: () {},
-                      ),
+                      // SizedBox(
+                      //   width: 40,
+                      // ),
+                      // IconButton(
+                      //   icon: Icon(Icons.camera_alt, size: 24),
+                      //   onPressed: () {},
+                      // ),
+                      // SizedBox(width: 8),
+                      // IconButton(
+                      //   icon: Icon(Icons.facebook, size: 24),
+                      //   onPressed: () {},
+                      // ),
+                      // SizedBox(width: 8),
+                      // IconButton(
+                      //   icon: Icon(Icons.share, size: 24),
+                      //   onPressed: () {},
+                      // ),
                     ],
                   ),
                   Container(
@@ -1040,7 +1044,8 @@ class Novikov extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Container(
-                    height: 100,
+                    padding: EdgeInsets.all(5),
+                    height: 180,
                     width: 1100,
                     child: Text(
                       "Novikov Restaurant and lounge opened the doors of its flagship restaurant in London’s Mayfair in 2011 and is marking its tenth year with a constellation of new outposts, in Moscow, Miami, Sardinia, Doha, Bodrum, Boulevard Mall Jeddah, and soon in Kuwait the premium luxury destination of choice in the city",
@@ -1058,8 +1063,10 @@ class Novikov extends StatelessWidget {
                   SizedBox(
                     height: 40,
                   ),
+                  SizedBox(width: 240,),
                   Column(
                     children: [
+                      
                       Container(
                         color: Colors.red,
                         height: 250,
@@ -1071,34 +1078,36 @@ class Novikov extends StatelessWidget {
                       SizedBox(height: 10),
                     ],
                   ),
-                  SizedBox(width: 30),
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 300,
-                        child: Image(
-                            image: AssetImage('asset/novikov3.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                                    //   ],
+                                    // ),
+                                    SizedBox(width: 30),
+                                    Column(
+                                      children: [
+                  Container(
+                    color: Colors.red,
+                    height: 250,
+                    width: 300,
+                    child: Image(
+                        image: AssetImage('asset/novikov3.jpg'),
+                        fit: BoxFit.cover),
                   ),
-                  SizedBox(width: 30),
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 300,
-                        child: Image(
-                            image: AssetImage('asset/novikov4.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                  SizedBox(height: 10),
+                                      ],
+                                    ),
+                                    SizedBox(width: 30),
+                                    Column(
+                                      children: [
+                  Container(
+                    color: Colors.red,
+                    height: 250,
+                    width: 300,
+                    child: Image(
+                        image: AssetImage('asset/novikov4.jpg'),
+                        fit: BoxFit.cover),
                   ),
+                  SizedBox(height: 10),
+                                      ],
+                                    ),
                   Container(
                     color: Colors.black,
                     padding: EdgeInsets.only(),

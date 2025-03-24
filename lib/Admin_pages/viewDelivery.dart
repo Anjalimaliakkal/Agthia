@@ -224,15 +224,15 @@ class Viewdelivery extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => addNewsPage()));
               },
             ),
-            ListTile(
-              title: Text("Add Brands",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Addbrands()));
-              },
-            ),
+            // ListTile(
+            //   title: Text("Add Brands",
+            //       style: TextStyle(
+            //           fontWeight: FontWeight.bold, color: Colors.white)),
+            //   onTap: () {
+            //     Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => Addbrands()));
+            //   },
+            // ),
             ExpansionTile(
               //tilePadding: const EdgeInsets.only(left: 15, right: 15),
               title: Text(
@@ -292,17 +292,17 @@ class Viewdelivery extends StatelessWidget {
               },
             ),
           
-            ListTile(
-              title: Text("View Brands",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Viewbrands()));
-              },
-            ),
+            // ListTile(
+            //   title: Text("View Brands",
+            //       style: TextStyle(
+            //           fontWeight: FontWeight.bold, color: Colors.white)),
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => Viewbrands()));
+            //   },
+            // ),
             ListTile(
               title: Text("Subscriptions",
                   style: TextStyle(

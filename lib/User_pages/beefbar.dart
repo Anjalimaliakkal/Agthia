@@ -824,6 +824,7 @@ class beefbar extends StatelessWidget {
           ),
           // Your drawer implementation
         ),
+        backgroundColor: const Color.fromARGB(255, 207, 215, 221),
         body: FutureBuilder<QuerySnapshot>(
           future: restaurants.get(), // Fetch all restaurants first
           builder: (context, snapshot) {
@@ -846,7 +847,7 @@ class beefbar extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                height: 470,
+                height: 200,
                 child: Stack(
                   children: [
                     Positioned.fill(
@@ -856,7 +857,7 @@ class beefbar extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: 150,
+                      left: 50,
                       top: 250,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -934,32 +935,39 @@ class beefbar extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 30),
-                        Center(
-                            child: Text(
-                                "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                        Container(
+                          padding: EdgeInsets.all(5),
+                          child: Center(
+                              child: Text(
+                                  "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                        ),
                       ]))),
               SizedBox(
                 height: 30,
               ),
+              SizedBox(width: 450,),
               Center(child: Image(image: AssetImage("asset/image2.jpg"),height: 300,width: 300,)),
-
-              SizedBox(height: 50),
-              Center(
-                child: Container(
-                  height: 100,
-                  width: 250,
-                  decoration: BoxDecoration(
-                      //color: Colors.blueGrey,
-                      border: Border.all(color: Colors.grey, width: 1),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image(
-                        image: AssetImage('asset/beefbar.jpg'),
-                        fit: BoxFit.fitHeight,
-                      )),
-                ),
-              ),
+                            //   ],
+                            // ),
+              
+                            SizedBox(height: 20),
+                            Center(
+                              
+                              child: Container(
+              height: 100,
+              width: 250,
+              decoration: BoxDecoration(
+                  //color: Colors.blueGrey,
+                  border: Border.all(color: Colors.grey, width: 1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image(
+                    image: AssetImage('asset/beefbar.jpg'),
+                    fit: BoxFit.fitHeight,
+                  )),
+                              ),
+                            ),
               SizedBox(
                 height: 40,
               ),
@@ -973,7 +981,7 @@ class beefbar extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => ReservationScreen(
-                                restaurantId: restaurantId, // Pass the correct ID
+                                restaurantId: 'KyIjotogCOgDXpqzZMsi', // Pass the correct ID
                               ),
                             ),
                           );
@@ -1014,22 +1022,22 @@ class beefbar extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 40,
+                    height: 20,
                   ),
-                  IconButton(
-                    icon: Icon(Icons.camera_alt, size: 24),
-                    onPressed: () {},
-                  ),
-                  SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(Icons.facebook, size: 24),
-                    onPressed: () {},
-                  ),
-                  SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(Icons.share, size: 24),
-                    onPressed: () {},
-                  ),
+                  // IconButton(
+                  //   icon: Icon(Icons.camera_alt, size: 24),
+                  //   onPressed: () {},
+                  // ),
+                  // SizedBox(width: 8),
+                  // IconButton(
+                  //   icon: Icon(Icons.facebook, size: 24),
+                  //   onPressed: () {},
+                  // ),
+                  // SizedBox(width: 8),
+                  // IconButton(
+                  //   icon: Icon(Icons.share, size: 24),
+                  //   onPressed: () {},
+                  // ),
                 ],
               ),
               Container(
@@ -1043,12 +1051,15 @@ class beefbar extends StatelessWidget {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
-              Container(
-                height: 100,
-                width: 1100,
-                child: Text(
-                  "Born in Monte-Carlo, full of contrasts, our brand breaks with rigid, traditional codes. Through its glamorous architectural lines & bold menu, we re-think food and incorporate a modern luxury feel while offering a complete and more accessible experience. From the kitchen, our executive chef Thierry Paludetto works closely with Riccardo Giraudi to create incredible, tasty yet simple dishes.",
-                  style: TextStyle(fontSize: 16),
+              Center(
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  height: 220,
+                  width: 1000,
+                  child: Text(
+                    "Born in Monte-Carlo, full of contrasts, our brand breaks with rigid, traditional codes. Through its glamorous architectural lines & bold menu, we re-think food and incorporate a modern luxury feel while offering a complete and more accessible experience. From the kitchen, our executive chef Thierry Paludetto works closely with Riccardo Giraudi to create incredible, tasty yet simple dishes.",
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
               ),
               Container(
@@ -1060,6 +1071,7 @@ class beefbar extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
+              SizedBox(width: 240,),
               Column(
                 children: [
                   Container(
@@ -1073,34 +1085,36 @@ class beefbar extends StatelessWidget {
                   SizedBox(height: 10),
                 ],
               ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 300,
-                    child: Image(
-                        image: AssetImage('asset/beefbar2.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
+                            //   ],
+                            // ),
+                            SizedBox(width: 30),
+                            Column(
+                              children: [
+              Container(
+                color: Colors.red,
+                height: 250,
+                width: 300,
+                child: Image(
+                    image: AssetImage('asset/beefbar2.jpg'),
+                    fit: BoxFit.cover),
               ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 300,
-                    child: Image(
-                        image: AssetImage('asset/beefbar3.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
+              SizedBox(height: 10),
+                              ],
+                            ),
+                            SizedBox(width: 30),
+                            Column(
+                              children: [
+              Container(
+                color: Colors.red,
+                height: 250,
+                width: 300,
+                child: Image(
+                    image: AssetImage('asset/beefbar3.jpg'),
+                    fit: BoxFit.cover),
               ),
+              SizedBox(height: 10),
+                              ],
+                            ),
               SizedBox(height: 30),
               Container(
                 color: Colors.black,

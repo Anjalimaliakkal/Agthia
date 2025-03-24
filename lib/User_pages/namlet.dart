@@ -272,12 +272,13 @@ class Namlet extends StatelessWidget {
             ],
           ),
         ),
+        backgroundColor: const Color.fromARGB(255, 207, 215, 221),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
               SizedBox(
-                height: 470,
+                height: 200,
                 child: Stack(
                   children: [
                     Positioned.fill(
@@ -365,9 +366,12 @@ class Namlet extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 30),
-                        Center(
-                            child: Text(
-                                "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                        Container(
+                          padding: EdgeInsets.all(5),
+                          child: Center(
+                              child: Text(
+                                  "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                        ),
                       ]))),
               SizedBox(
                 height: 30,
@@ -439,23 +443,23 @@ class Namlet extends StatelessWidget {
                           TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.camera_alt, size: 24),
-                    onPressed: () {},
-                  ),
-                  SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(Icons.facebook, size: 24),
-                    onPressed: () {},
-                  ),
-                  SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(Icons.share, size: 24),
-                    onPressed: () {},
-                  ),
+                  // SizedBox(
+                  //   width: 40,
+                  // ),
+                  // IconButton(
+                  //   icon: Icon(Icons.camera_alt, size: 24),
+                  //   onPressed: () {},
+                  // ),
+                  // SizedBox(width: 8),
+                  // IconButton(
+                  //   icon: Icon(Icons.facebook, size: 24),
+                  //   onPressed: () {},
+                  // ),
+                  // SizedBox(width: 8),
+                  // IconButton(
+                  //   icon: Icon(Icons.share, size: 24),
+                  //   onPressed: () {},
+                  // ),
                 ],
               ),
               Container(
@@ -469,7 +473,8 @@ class Namlet extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Container(
-                height: 100,
+                padding: EdgeInsets.all(5),
+                height: 180,
                 width: 1100,
                 child: Text(
                   "Namlet Juice started its business in 2017. Namlet offers a variety of the highest-quality juices and hot drinks on the market. It is well known for its distinct branding identity portrayed in its eccentric interior design. The chain prides itself on using the newest and most up-to-date electronic appliances.",
@@ -487,6 +492,7 @@ class Namlet extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
+              SizedBox(width: 340,),
               Column(
                 children: [
                   Container(
@@ -500,34 +506,36 @@ class Namlet extends StatelessWidget {
                   SizedBox(height: 10),
                 ],
               ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 230,
-                    child: Image(
-                        image: AssetImage('asset/namlet3.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
+                            //   ],
+                            // ),
+                            SizedBox(width: 30),
+                            Column(
+                              children: [
+              Container(
+                color: Colors.red,
+                height: 250,
+                width: 230,
+                child: Image(
+                    image: AssetImage('asset/namlet3.jpg'),
+                    fit: BoxFit.cover),
               ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 250,
-                    width: 230,
-                    child: Image(
-                        image: AssetImage('asset/namlet4.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  SizedBox(height: 10),
-                ],
+              SizedBox(height: 10),
+                              ],
+                            ),
+                            SizedBox(width: 30),
+                            Column(
+                              children: [
+              Container(
+                color: Colors.red,
+                height: 250,
+                width: 230,
+                child: Image(
+                    image: AssetImage('asset/namlet4.jpg'),
+                    fit: BoxFit.cover),
               ),
+              SizedBox(height: 10),
+                              ],
+                            ),
               SizedBox(height: 30),
               Container(
                 color: Colors.black,

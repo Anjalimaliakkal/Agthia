@@ -344,7 +344,6 @@
 //   }
 // }
 
-
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:flutter/material.dart';
 
@@ -399,7 +398,123 @@
 //   }
 // }
 
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/material.dart';
 
+// class DeliveryPreviousOrders extends StatefulWidget {
+//   final String deliveryBoyId;
+
+//   const DeliveryPreviousOrders({super.key, required this.deliveryBoyId});
+
+//   @override
+//   State<DeliveryPreviousOrders> createState() => _DeliveryPreviousOrdersState();
+// }
+
+// class _DeliveryPreviousOrdersState extends State<DeliveryPreviousOrders> {
+//   late Future<List<Map<String, dynamic>>> orders;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     orders = fetchOrders();  // Fetch the orders for the specific delivery boy ID
+//   }
+// Future<List<Map<String, dynamic>>> fetchOrders() async {
+//   try {
+//     print("Fetching orders for deliveryBoyId: ${widget.deliveryBoyId}");
+
+//     // Query Firestore using the correct field name: assignedDeliveryBoyId
+//     QuerySnapshot orderSnapshot = await FirebaseFirestore.instance
+//         .collection('orders')
+//         .where('assignedDeliveryBoyId', isEqualTo: widget.deliveryBoyId)
+//         .get();
+
+//     print("Fetched ${orderSnapshot.docs.length} orders");
+
+//     if (orderSnapshot.docs.isEmpty) {
+//       print("No previous orders found for deliveryBoyId: ${widget.deliveryBoyId}");
+//       return [];
+//     }
+
+//     List<Map<String, dynamic>> orderList = orderSnapshot.docs.map((doc) {
+//       print("Document ID: ${doc.id}");
+//       print("Order data: ${doc.data()}");
+
+//       // Safely access fields and provide defaults where necessary
+//       var data = doc.data() as Map<String, dynamic>;
+
+//       return {
+//         'orderId': doc.id,  // Firestore document ID as orderId
+//         'address': data['address'] ?? "No Address",  // Default if missing
+//         'itemcount': (data['cartItems'] as List).length,  // Handle missing or empty cartItems
+//         'itemname': data['cartItems'].isNotEmpty ? data['cartItems'][0]['name'] : "No items", // Handle empty cartItems
+//         'shippingCharge': data.containsKey('shippingCharge') ? data['shippingCharge'] : 0.0,  // Check if the field exists
+//         'totalPrice': data['totalAmount'] ?? 0.0,  // Default if missing
+//         'paymentMethod': data['paymentMethod'] ?? "Not Specified",  // Default if missing
+//         'status': data['status'] ?? "Unknown",  // Default if missing
+//       };
+//     }).toList();
+
+//     return orderList;
+//   } catch (e) {
+//     print("Error fetching orders: $e");
+//     return [];
+//   }
+// }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Previous Orders'),
+//       ),
+//       body: FutureBuilder<List<Map<String, dynamic>>>(
+//         future: orders,
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.waiting) {
+//             return Center(child: CircularProgressIndicator());
+//           }
+
+//           if (snapshot.hasError) {
+//             return Center(child: Text("Error fetching orders"));
+//           }
+
+//           if (!snapshot.hasData || snapshot.data!.isEmpty) {
+//             return Center(child: Text('No previous orders found'));
+//           }
+
+//           // Display the orders
+//           return ListView.builder(
+//             itemCount: snapshot.data!.length,
+//             itemBuilder: (context, index) {
+//               var order = snapshot.data![index];
+//               return Card(
+//                 margin: EdgeInsets.all(10),
+//                 child: ListTile(
+//                   title: Text('Order ID: ${order['orderId']}'),
+//                   subtitle: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Text('Address: ${order['address']}'),
+//                       Text('Item Count: ${order['itemcount']}'),
+//                       Text('Item Name: ${order['itemname']}'),
+//                       Text('Shipping: \$${order['shippingCharge']}'),
+//                       Text('Total Price: \$${order['totalPrice']}'),
+//                       Text('Payment Method: ${order['paymentMethod']}'),
+//                       Text('Status: ${order['status']}'),
+//                     ],
+//                   ),
+//                 ),
+//               );
+//             },
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
+import 'package:agthia/DeliveryPersonnel_pages/delivery_changepassword.dart';
+import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -418,58 +533,125 @@ class _DeliveryPreviousOrdersState extends State<DeliveryPreviousOrders> {
   @override
   void initState() {
     super.initState();
-    orders = fetchOrders();  // Fetch the orders for the specific delivery boy ID
+    orders = fetchOrders(); // Fetch orders for this delivery boy
   }
-Future<List<Map<String, dynamic>>> fetchOrders() async {
-  try {
-    print("Fetching orders for deliveryBoyId: ${widget.deliveryBoyId}");
 
-    // Query Firestore using the correct field name: assignedDeliveryBoyId
-    QuerySnapshot orderSnapshot = await FirebaseFirestore.instance
-        .collection('orders')
-        .where('assignedDeliveryBoyId', isEqualTo: widget.deliveryBoyId)
-        .get();
+  Future<List<Map<String, dynamic>>> fetchOrders() async {
+    try {
+      QuerySnapshot orderSnapshot = await FirebaseFirestore.instance
+          .collection('orders')
+          .where('assignedDeliveryBoyId', isEqualTo: widget.deliveryBoyId)
+          .get();
 
-    print("Fetched ${orderSnapshot.docs.length} orders");
-
-    if (orderSnapshot.docs.isEmpty) {
-      print("No previous orders found for deliveryBoyId: ${widget.deliveryBoyId}");
+      return orderSnapshot.docs.map((doc) {
+        var data = doc.data() as Map<String, dynamic>;
+        return {
+          'orderId': doc.id,
+          'name': data['name'] ?? "No name",
+          'address': data['address'] ?? "No Address",
+          'itemcount': (data['cartItems'] as List).length,
+          'itemname': data['cartItems'].isNotEmpty
+              ? data['cartItems'][0]['name']
+              : "No items",
+          'shippingCharge':
+              data.containsKey('shippingCharge') ? data['shippingCharge'] : 0.0,
+          'totalPrice': data['totalAmount'] ?? 0.0,
+          'paymentMethod': data['paymentMethod'] ?? "Not Specified",
+          'status': data['status'] ?? "Unknown",
+        };
+      }).toList();
+    } catch (e) {
+      print("Error fetching orders: $e");
       return [];
     }
-
-    List<Map<String, dynamic>> orderList = orderSnapshot.docs.map((doc) {
-      print("Document ID: ${doc.id}");
-      print("Order data: ${doc.data()}");
-
-      // Safely access fields and provide defaults where necessary
-      var data = doc.data() as Map<String, dynamic>;
-      
-      return {
-        'orderId': doc.id,  // Firestore document ID as orderId
-        'address': data['address'] ?? "No Address",  // Default if missing
-        'itemcount': (data['cartItems'] as List).length,  // Handle missing or empty cartItems
-        'itemname': data['cartItems'].isNotEmpty ? data['cartItems'][0]['name'] : "No items", // Handle empty cartItems
-        'shippingCharge': data.containsKey('shippingCharge') ? data['shippingCharge'] : 0.0,  // Check if the field exists
-        'totalPrice': data['totalAmount'] ?? 0.0,  // Default if missing
-        'paymentMethod': data['paymentMethod'] ?? "Not Specified",  // Default if missing
-        'status': data['status'] ?? "Unknown",  // Default if missing
-      };
-    }).toList();
-
-    return orderList;
-  } catch (e) {
-    print("Error fetching orders: $e");
-    return [];
   }
-}
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(title: Text('Previous Orders')),
       appBar: AppBar(
-        title: Text('Previous Orders'),
+        title: Center(
+          child: Transform.translate(
+            offset: Offset(-10.0, 0.0),
+            child: Image(
+              image: AssetImage("asset/logo_agthia.jpg"),
+              height: 50,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Color(0xFF282d37),
+        actions: [
+          PopupMenuButton<String>(
+            child: Row(
+              children: [
+                CircleAvatar(
+                    backgroundColor: const Color.fromARGB(255, 188, 187, 187),
+                    child: Icon(Icons.person,
+                        color: Colors.white)), // Profile Icon
+                SizedBox(width: 5),
+                Text(
+                  "DELIVERY PERSONNEL",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(width: 5),
+                Icon(Icons.arrow_drop_down)
+              ],
+            ),
+            onSelected: (value) {
+              if (value == 'change_password') {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DeliveryChangepassword()));
+                // Navigate to change password screen
+              } else if (value == 'logout') {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => LoginPage()));
+                // Perform logout action
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              // Title Item (Non-clickable)
+              PopupMenuItem<String>(
+                enabled: false,
+                child: Text(
+                  "Delivery Personnel",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              PopupMenuDivider(),
+
+              // Change Password
+              PopupMenuItem<String>(
+                value: 'change_password',
+                child: Row(
+                  children: [
+                    Icon(Icons.lock, color: Colors.black),
+                    SizedBox(width: 10),
+                    Text("Change Password"),
+                  ],
+                ),
+              ),
+
+              // Logout
+              PopupMenuItem<String>(
+                value: 'logout',
+                child: Row(
+                  children: [
+                    Icon(Icons.logout, color: Colors.black),
+                    SizedBox(width: 10),
+                    Text("Logout"),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(width: 10),
+        ],
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: orders,
@@ -483,28 +665,44 @@ Future<List<Map<String, dynamic>>> fetchOrders() async {
           }
 
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No previous orders found'));
+            return Center(
+              child: Text('No previous orders found',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+            );
           }
 
-          // Display the orders
           return ListView.builder(
+            padding: EdgeInsets.all(12),
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               var order = snapshot.data![index];
+
               return Card(
-                margin: EdgeInsets.all(10),
-                child: ListTile(
-                  title: Text('Order ID: ${order['orderId']}'),
-                  subtitle: Column(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
+                elevation: 4,
+                margin: EdgeInsets.symmetric(vertical: 8),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Address: ${order['address']}'),
-                      Text('Item Count: ${order['itemcount']}'),
-                      Text('Item Name: ${order['itemname']}'),
-                      Text('Shipping: \$${order['shippingCharge']}'),
-                      Text('Total Price: \$${order['totalPrice']}'),
-                      Text('Payment Method: ${order['paymentMethod']}'),
-                      Text('Status: ${order['status']}'),
+                      _buildRow(Icons.receipt, "Order ID: ${order['orderId']}",
+                          fontWeight: FontWeight.bold),
+                      Divider(),
+                      _buildRow(Icons.person, "Name: ${order['name']}"),
+                      _buildRow(
+                          Icons.location_on, "Address: ${order['address']}"),
+                      _buildRow(Icons.shopping_cart,
+                          "Items: ${order['itemcount']} - ${order['itemname']}"),
+                      _buildRow(Icons.local_shipping,
+                          "Shipping: ₹${order['shippingCharge']}"),
+                      _buildRow(Icons.attach_money,
+                          "Total Price: ₹${order['totalPrice']}",
+                          fontWeight: FontWeight.bold),
+                      _buildRow(Icons.payment,
+                          "Payment Method: ${order['paymentMethod']}"),
+                      _buildStatusRow(order['status']),
                     ],
                   ),
                 ),
@@ -512,6 +710,52 @@ Future<List<Map<String, dynamic>>> fetchOrders() async {
             },
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildRow(IconData icon, String text,
+      {FontWeight fontWeight = FontWeight.normal}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          Icon(icon, size: 22, color: Colors.grey[700]),
+          SizedBox(width: 10),
+          Expanded(
+            child: Text(text,
+                style: TextStyle(fontSize: 16, fontWeight: fontWeight)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatusRow(String status) {
+    Color statusColor;
+    switch (status.toLowerCase()) {
+      case "completed":
+        statusColor = Colors.green;
+        break;
+      case "pending":
+        statusColor = Colors.orange;
+        break;
+      default:
+        statusColor = Colors.blue;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        children: [
+          Icon(Icons.check_circle, size: 22, color: statusColor),
+          SizedBox(width: 10),
+          Text(
+            "Status: $status",
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: statusColor),
+          ),
+        ],
       ),
     );
   }

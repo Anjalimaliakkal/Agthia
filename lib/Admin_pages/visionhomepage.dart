@@ -1,7 +1,6 @@
+import 'package:agthia/Admin_pages/adminChangepassword.dart';
 import 'package:agthia/Admin_pages/viewDelivery.dart';
 import 'package:agthia/Admin_pages/viewRestaurants.dart';
-import 'package:agthia/Admin_pages/viewbrands.dart';
-import 'package:agthia/Restaurant_pages/Add_Restaurant.dart';
 import 'package:agthia/Admin_pages/aboutUsHomePage.dart';
 import 'package:agthia/Admin_pages/addJobVaccancy.dart';
 import 'package:agthia/Admin_pages/addNewsPage.dart';
@@ -12,7 +11,6 @@ import 'package:agthia/Admin_pages/approval_delivery.dart';
 import 'package:agthia/Admin_pages/approval_restaurant.dart';
 import 'package:agthia/Admin_pages/ourpeopleHomePage.dart';
 import 'package:agthia/Admin_pages/subscripionViewPage.dart';
-import 'package:agthia/User_pages/user_changepassword.dart';
 import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:flutter/material.dart';
 
@@ -146,15 +144,15 @@ class Visionhomepage extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => addNewsPage()));
               },
             ),
-            ListTile(
-              title: Text("Add Brands",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AddRestaurant()));
-              },
-            ),
+            // ListTile(
+            //   title: Text("Add Brands",
+            //       style: TextStyle(
+            //           fontWeight: FontWeight.bold, color: Colors.white)),
+            //   onTap: () {
+            //     Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => AddRestaurant()));
+            //   },
+            // ),
             ExpansionTile(
               //tilePadding: const EdgeInsets.only(left: 15, right: 15),
               title: Text(
@@ -212,17 +210,17 @@ class Visionhomepage extends StatelessWidget {
                         builder: (context) => Viewdelivery()));
               },
             ),
-            ListTile(
-              title: Text("View Brands",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Viewbrands()));
-              },
-            ),
+            // ListTile(
+            //   title: Text("View Brands",
+            //       style: TextStyle(
+            //           fontWeight: FontWeight.bold, color: Colors.white)),
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => Viewbrands()));
+            //   },
+            // ),
             ListTile(
               title: Text("Subscriptions",
                   style: TextStyle(
@@ -291,7 +289,7 @@ class Visionhomepage extends StatelessWidget {
                       ),
                       TextButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>UserChangepassword()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Adminchangepassword()));
                           },
                           child: Text(
                             "Change password",

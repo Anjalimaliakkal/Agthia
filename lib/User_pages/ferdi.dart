@@ -832,6 +832,7 @@ class Ferdi extends StatelessWidget {
             ],
           ),
         ),
+        backgroundColor: const Color.fromARGB(255, 207, 215, 221),
         body: FutureBuilder<QuerySnapshot>(
           future: restaurants.get(), // Fetch all restaurants first
           builder: (context, snapshot) {
@@ -855,7 +856,7 @@ class Ferdi extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 child: Column(children: [
                   SizedBox(
-                    height: 470,
+                    height: 200,
                     child: Stack(
                       children: [
                         Positioned.fill(
@@ -943,9 +944,12 @@ class Ferdi extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 30),
-                            Center(
-                                child: Text(
-                                    "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              child: Center(
+                                  child: Text(
+                                      "Every dish is a chapter. And every concept unfolds a new culinary adventure. Every dish is a chapter.")),
+                            ),
                           ]))),
                   SizedBox(
                     height: 30,
@@ -978,9 +982,9 @@ class Ferdi extends StatelessWidget {
                     height: 40,
                   ),
                   // Your existing widgets
-                  SizedBox(
-                    height: 40,
-                  ),
+                  // SizedBox(
+                  //   height: 40,
+                  // ),
                   Center(
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -1002,7 +1006,7 @@ class Ferdi extends StatelessWidget {
                           style: TextStyle(color: Colors.green),
                         )),
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -1013,23 +1017,23 @@ class Ferdi extends StatelessWidget {
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.camera_alt, size: 24),
-                        onPressed: () {},
-                      ),
-                      SizedBox(width: 8),
-                      IconButton(
-                        icon: Icon(Icons.facebook, size: 24),
-                        onPressed: () {},
-                      ),
-                      SizedBox(width: 8),
-                      IconButton(
-                        icon: Icon(Icons.share, size: 24),
-                        onPressed: () {},
-                      ),
+                      // SizedBox(
+                      //   width: 40,
+                      // ),
+                      // IconButton(
+                      //   icon: Icon(Icons.camera_alt, size: 24),
+                      //   onPressed: () {},
+                      // ),
+                      // SizedBox(width: 8),
+                      // IconButton(
+                      //   icon: Icon(Icons.facebook, size: 24),
+                      //   onPressed: () {},
+                      // ),
+                      // SizedBox(width: 8),
+                      // IconButton(
+                      //   icon: Icon(Icons.share, size: 24),
+                      //   onPressed: () {},
+                      // ),
                     ],
                   ),
                   Container(
@@ -1044,7 +1048,8 @@ class Ferdi extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Container(
-                    height: 100,
+                    padding: EdgeInsets.all(5),
+                    height: 230,
                     width: 1100,
                     child: Text(
                       "From its earliest days Ferdi’s attraction lay in a uniquely honest and unpretentious charm. In a small Parisian Street, dwarfed by the majesty of the nearby Louvre and the Champs-Elysées, Ferdi opened for business in 2004. In the district of St Honoré, an enclave of haute-couture, Ferdi sits on an innocuous street, from the outside looking no different to the many nearby bars and bistros.",
@@ -1052,14 +1057,14 @@ class Ferdi extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 8),
-                  Container(
-                    height: 100,
-                    width: 1100,
-                    child: Text(
-                      "Ferdi has become a captivating oasis of warmth nestled in the elegant heart of Paris. And now in the heart of London. Since January 2017 the delights of Ferdi have been brought to a new audience with the opening of Ferdi, Mayfair. We will see you in Kuwait soon in 2024!",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
+                  // Container(
+                  //   height: 100,
+                  //   width: 1100,
+                  //   child: Text(
+                  //     "Ferdi has become a captivating oasis of warmth nestled in the elegant heart of Paris. And now in the heart of London. Since January 2017 the delights of Ferdi have been brought to a new audience with the opening of Ferdi, Mayfair. We will see you in Kuwait soon in 2024!",
+                  //     style: TextStyle(fontSize: 16),
+                  //   ),
+                  // ),
                   Container(
                       width: 1100,
                       child: Divider(
@@ -1069,47 +1074,50 @@ class Ferdi extends StatelessWidget {
                   SizedBox(
                     height: 40,
                   ),
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 300,
-                        child: Image(
-                            image: AssetImage('asset/ferdi2.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
-                  ),
-                  SizedBox(width: 30),
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 300,
-                        child: Image(
-                            image: AssetImage('asset/ferdi3.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
-                  ),
-                  SizedBox(width: 30),
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        height: 250,
-                        width: 300,
-                        child: Image(
-                            image: AssetImage('asset/ferdi4.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      SizedBox(height: 10),
-                    ],
-                  ),
+                  SizedBox(width: 240,),
+                                        Column(
+                   children: [
+                     Container(
+                       color: Colors.red,
+                       height: 250,
+                       width: 300,
+                       child: Image(
+                           image: AssetImage('asset/ferdi2.jpg'),
+                           fit: BoxFit.cover),
+                     ),
+                     SizedBox(height: 10),
+                   ],
+                                        ),
+                                    //   ],
+                                    // ),
+                                    SizedBox(width: 30),
+                                    Column(
+                                      children: [
+                                        Container(
+                   color: Colors.red,
+                   height: 250,
+                   width: 300,
+                   child: Image(
+                       image: AssetImage('asset/ferdi3.jpg'),
+                       fit: BoxFit.cover),
+                                        ),
+                                        SizedBox(height: 10),
+                                      ],
+                                    ),
+                                    SizedBox(width: 30),
+                                    Column(
+                                      children: [
+                                        Container(
+                   color: Colors.red,
+                   height: 250,
+                   width: 300,
+                   child: Image(
+                       image: AssetImage('asset/ferdi4.jpg'),
+                       fit: BoxFit.cover),
+                                        ),
+                                        SizedBox(height: 10),
+                                      ],
+                                    ),
                   SizedBox(height: 30),
                   Container(
                     color: Colors.black,

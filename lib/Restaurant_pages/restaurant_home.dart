@@ -1438,6 +1438,7 @@ import 'package:agthia/Restaurant_pages/Restaurant_viewdelivery.dart';
 import 'package:agthia/Restaurant_pages/Restaurant_vieworders.dart';
 import 'package:agthia/Restaurant_pages/delivery_allocation.dart';
 import 'package:agthia/Restaurant_pages/orderlist.dart';
+import 'package:agthia/Restaurant_pages/view_approved_orders.dart';
 import 'package:agthia/Restaurant_pages/view_reservations.dart';
 import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:agthia/login.dart';
@@ -1622,8 +1623,20 @@ class RestaurantHome extends StatelessWidget {
             //             builder: (context) => RestaurantVieworders()));
             //   },
             // ),
+            ListTile(
+              title: Text("Approved Orders",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ViewApprovedOrders()));
+              },
+            ),
+
              ListTile(
-              title: Text("View Order",
+              title: Text("View all Orders",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white)),
               onTap: () {

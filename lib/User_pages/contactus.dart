@@ -385,40 +385,40 @@ Future<void> subscribeUser() async {
               ),
             ),
             SizedBox(height: 20,),
-            Center(child: Text("Have a Question ?",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)),
-            SizedBox(height: 20,),
-            Column(
-              children: [
-                 SizedBox(
-                  width: 400,
-                  child: TextField(decoration: InputDecoration(hintText: "Name",border: OutlineInputBorder()),)),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: 400,
-                      child: TextField(decoration: InputDecoration(hintText: "Email",border: OutlineInputBorder()))),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: 400,
-                      child: TextField(decoration: InputDecoration(hintText: "Subject",border: OutlineInputBorder()))),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: 400,
-                      child: TextField(decoration: InputDecoration(hintText: "Phone",border: OutlineInputBorder()))),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: 400,
-                      child: TextField(
-                        decoration: InputDecoration(hintText: "Message",border: OutlineInputBorder()),
-                        maxLines: 5,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text("Send"),
-                    ),
-              ],
-            ),
+            // Center(child: Text("Have a Question ?",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)),
+            // SizedBox(height: 20,),
+            // Column(
+            //   children: [
+            //      SizedBox(
+            //       width: 400,
+            //       child: TextField(decoration: InputDecoration(hintText: "Name",border: OutlineInputBorder()),)),
+            //         SizedBox(height: 10),
+            //         SizedBox(
+            //           width: 400,
+            //           child: TextField(decoration: InputDecoration(hintText: "Email",border: OutlineInputBorder()))),
+            //         SizedBox(height: 10),
+            //         SizedBox(
+            //           width: 400,
+            //           child: TextField(decoration: InputDecoration(hintText: "Subject",border: OutlineInputBorder()))),
+            //         SizedBox(height: 10),
+            //         SizedBox(
+            //           width: 400,
+            //           child: TextField(decoration: InputDecoration(hintText: "Phone",border: OutlineInputBorder()))),
+            //         SizedBox(height: 10),
+            //         SizedBox(
+            //           width: 400,
+            //           child: TextField(
+            //             decoration: InputDecoration(hintText: "Message",border: OutlineInputBorder()),
+            //             maxLines: 5,
+            //           ),
+            //         ),
+            //         SizedBox(height: 10),
+            //         ElevatedButton(
+            //           onPressed: () {},
+            //           child: Text("Send"),
+            //         ),
+            //   ],
+            // ),
 
             SizedBox(height: 20),
             Container(
