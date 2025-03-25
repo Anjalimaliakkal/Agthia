@@ -7,6 +7,7 @@ import 'package:agthia/User_pages/foodlists.dart';
 import 'package:agthia/User_pages/homescreen.dart';
 import 'package:agthia/User_pages/mediapage.dart';
 import 'package:agthia/User_pages/mission.dart';
+import 'package:agthia/User_pages/my_orders.dart';
 import 'package:agthia/User_pages/namlet_reservation.dart';
 import 'package:agthia/User_pages/ourpeople.dart';
 import 'package:agthia/User_pages/user_changepassword.dart';
@@ -212,35 +213,44 @@ class Namlet extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => Brandspage()));
                 },
               ),
-              ListTile(
-                title: Text("My orders",
+//               ListTile(
+//                 title: Text("My orders",
+//                     style: TextStyle(
+//                         fontWeight: FontWeight.bold, color: Colors.white)),
+//      onTap: () async {
+//   // Fetch the latest order from Firestore (Modify if needed)
+//   var orderSnapshot = await FirebaseFirestore.instance
+//       .collection('orders')
+//       .orderBy('timestamp', descending: true) // Sort by latest
+//       .limit(1)
+//       .get();
+
+//   if (orderSnapshot.docs.isNotEmpty) {
+//     String orderId = orderSnapshot.docs.first.id; // Get the actual order ID
+
+//     print("📢 Navigating to Confirmation Page with orderId: $orderId");
+
+//    Navigator.push(
+//   context,
+//   MaterialPageRoute(builder: (context) => ConfirmationPage(orderId: orderId)), // Use dynamic ID
+// );
+//   } else {
+//     print("❌ No orders found in Firestore!");
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       SnackBar(content: Text('No orders found. Please place an order first!')),
+//     );
+//   }
+// },
+
+//               ),
+ ListTile(
+                title: Text("My Orders",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
-     onTap: () async {
-  // Fetch the latest order from Firestore (Modify if needed)
-  var orderSnapshot = await FirebaseFirestore.instance
-      .collection('orders')
-      .orderBy('timestamp', descending: true) // Sort by latest
-      .limit(1)
-      .get();
-
-  if (orderSnapshot.docs.isNotEmpty) {
-    String orderId = orderSnapshot.docs.first.id; // Get the actual order ID
-
-    print("📢 Navigating to Confirmation Page with orderId: $orderId");
-
-   Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => ConfirmationPage(orderId: orderId)), // Use dynamic ID
-);
-  } else {
-    print("❌ No orders found in Firestore!");
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('No orders found. Please place an order first!')),
-    );
-  }
-},
-
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UserOrdersPage()));
+                },
               ),
               ListTile(
                 title: Text("Media",

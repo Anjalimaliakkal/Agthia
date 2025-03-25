@@ -1101,8 +1101,11 @@ import 'package:agthia/User_pages/foodlists.dart';
 import 'package:agthia/User_pages/homescreen.dart';
 import 'package:agthia/User_pages/mediapage.dart';
 import 'package:agthia/User_pages/mission.dart';
+import 'package:agthia/User_pages/my_orders.dart';
 import 'package:agthia/User_pages/ourpeople.dart';
+import 'package:agthia/User_pages/user_changepassword.dart';
 import 'package:agthia/User_pages/words_from_chairman.dart';
+import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -1125,6 +1128,75 @@ class Burgerinn extends StatelessWidget {
           ),
           iconTheme: IconThemeData(color: Colors.white),
           backgroundColor: Color(0xFF282d37),
+          actions: [
+          PopupMenuButton<String>(
+            child: Row(
+              children: [
+                CircleAvatar(
+                    backgroundColor: const Color.fromARGB(255, 188, 187, 187),
+                    child: Icon(Icons.person,
+                        color: Colors.white)), // Profile Icon
+                SizedBox(width: 5),
+                Text(
+                  "User",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(width: 5),
+                Icon(Icons.arrow_drop_down)
+              ],
+            ),
+            onSelected: (value) {
+              if (value == 'change_password') {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UserChangepassword()));
+                // Navigate to change password screen
+              } else if (value == 'logout') {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));
+                // Perform logout action
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              // Title Item (Non-clickable)
+              PopupMenuItem<String>(
+                enabled: false,
+                child: Text(
+                  "User",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              PopupMenuDivider(),
+
+              // Change Password
+              PopupMenuItem<String>(
+                value: 'change_password',
+                child: Row(
+                  children: [
+                    Icon(Icons.lock, color: Colors.black),
+                    SizedBox(width: 10),
+                    Text("Change Password"),
+                  ],
+                ),
+              ),
+
+              // Logout
+              PopupMenuItem<String>(
+                value: 'logout',
+                child: Row(
+                  children: [
+                    Icon(Icons.logout, color: Colors.black),
+                    SizedBox(width: 10),
+                    Text("Logout"),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(width: 10),
+        ],
         ),
         drawer: Drawer(
           width: 200,
@@ -1234,35 +1306,44 @@ class Burgerinn extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => Brandspage()));
                 },
               ),
-              ListTile(
-                title: Text("My orders",
+//               ListTile(
+//                 title: Text("My orders",
+//                     style: TextStyle(
+//                         fontWeight: FontWeight.bold, color: Colors.white)),
+//      onTap: () async {
+//   // Fetch the latest order from Firestore (Modify if needed)
+//   var orderSnapshot = await FirebaseFirestore.instance
+//       .collection('orders')
+//       .orderBy('timestamp', descending: true) // Sort by latest
+//       .limit(1)
+//       .get();
+
+//   if (orderSnapshot.docs.isNotEmpty) {
+//     String orderId = orderSnapshot.docs.first.id; // Get the actual order ID
+
+//     print("📢 Navigating to Confirmation Page with orderId: $orderId");
+
+//    Navigator.push(
+//   context,
+//   MaterialPageRoute(builder: (context) => ConfirmationPage(orderId: orderId)), // Use dynamic ID
+// );
+//   } else {
+//     print("❌ No orders found in Firestore!");
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       SnackBar(content: Text('No orders found. Please place an order first!')),
+//     );
+//   }
+// },
+
+//               ),
+ ListTile(
+                title: Text("My Orders",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
-     onTap: () async {
-  // Fetch the latest order from Firestore (Modify if needed)
-  var orderSnapshot = await FirebaseFirestore.instance
-      .collection('orders')
-      .orderBy('timestamp', descending: true) // Sort by latest
-      .limit(1)
-      .get();
-
-  if (orderSnapshot.docs.isNotEmpty) {
-    String orderId = orderSnapshot.docs.first.id; // Get the actual order ID
-
-    print("📢 Navigating to Confirmation Page with orderId: $orderId");
-
-   Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => ConfirmationPage(orderId: orderId)), // Use dynamic ID
-);
-  } else {
-    print("❌ No orders found in Firestore!");
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('No orders found. Please place an order first!')),
-    );
-  }
-},
-
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UserOrdersPage()));
+                },
               ),
               ListTile(
                 title: Text("Media",

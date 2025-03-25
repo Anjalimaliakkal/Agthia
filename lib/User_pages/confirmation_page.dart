@@ -5,6 +5,7 @@ import 'package:agthia/User_pages/contactus.dart';
 import 'package:agthia/User_pages/homescreen.dart';
 import 'package:agthia/User_pages/mediapage.dart';
 import 'package:agthia/User_pages/mission.dart';
+import 'package:agthia/User_pages/my_orders.dart';
 import 'package:agthia/User_pages/ourpeople.dart';
 import 'package:agthia/User_pages/user_changepassword.dart';
 import 'package:agthia/User_pages/words_from_chairman.dart';
@@ -22,19 +23,20 @@ class ConfirmationPage extends StatelessWidget {
     print("🔍 Fetching order details for Order ID: $orderId");
 
     return Scaffold(
-      appBar: AppBar( title: Center(
-            child: Transform.translate(
-              offset: Offset(-10.0, 0.0),
-              child: Image(
-                image: AssetImage("asset/logo_agthia.jpg"),
-                height: 50,
-                fit: BoxFit.contain,
-              ),
+      appBar: AppBar(
+        title: Center(
+          child: Transform.translate(
+            offset: Offset(-10.0, 0.0),
+            child: Image(
+              image: AssetImage("asset/logo_agthia.jpg"),
+              height: 50,
+              fit: BoxFit.contain,
             ),
           ),
-          iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: Color(0xFF282d37),
-          actions: [
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Color(0xFF282d37),
+        actions: [
           PopupMenuButton<String>(
             child: Row(
               children: [
@@ -60,8 +62,8 @@ class ConfirmationPage extends StatelessWidget {
                         builder: (context) => UserChangepassword()));
                 // Navigate to change password screen
               } else if (value == 'logout') {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => LoginPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));
                 // Perform logout action
               }
             },
@@ -103,175 +105,184 @@ class ConfirmationPage extends StatelessWidget {
           ),
           SizedBox(width: 10),
         ],
-          ),
-            drawer: Drawer(
-          width: 200,
-          backgroundColor: Color(0xFF282d37),
-          child: ListView(
-            padding: EdgeInsets.all(12),
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(color: Color(0xFF282d37)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Colors.white,
-                      child: Icon(Icons.person),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    Text(
-                      "User",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    )
-                  ],
-                ),
-              ),
-              ListTile(
-                title: Text("Home",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white)),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Homescreen()));
-                },
-              ),
-              ExpansionTile(
-                //tilePadding: const EdgeInsets.only(left: 15, right: 15),
-                title: Text(
-                  "About us",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
-                ),
+      ),
+      drawer: Drawer(
+        width: 200,
+        backgroundColor: Color(0xFF282d37),
+        child: ListView(
+          padding: EdgeInsets.all(12),
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Color(0xFF282d37)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ListTile(
-                    title: Text(
-                      "About",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => About()));
-                    },
-                    contentPadding: EdgeInsets.only(left: 60),
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.person),
                   ),
-                  ListTile(
-                    title: Text(
-                      "Our People",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Ourpeople()));
-                    },
-                    contentPadding: EdgeInsets.only(left: 60),
+                  SizedBox(
+                    height: 7,
                   ),
-                  ListTile(
-                    title: Text(
-                      "Mission/Vision",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Mission()));
-                    },
-                    contentPadding: EdgeInsets.only(left: 60),
-                  ),
-                  ListTile(
-                    title: Text(
-                      "Word from Chairman",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WordsFromChairman()));
-                    },
-                    contentPadding: EdgeInsets.only(left: 60),
-                  ),
+                  Text(
+                    "User",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  )
                 ],
               ),
-              ListTile(
-                title: Text("Brands",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white)),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Brandspage()));
-                },
+            ),
+            ListTile(
+              title: Text("Home",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Homescreen()));
+              },
+            ),
+            ExpansionTile(
+              //tilePadding: const EdgeInsets.only(left: 15, right: 15),
+              title: Text(
+                "About us",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
-              ListTile(
-                title: Text("My orders",
+              children: [
+                ListTile(
+                  title: Text(
+                    "About",
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white)),
-     onTap: () async {
-  // Fetch the latest order from Firestore (Modify if needed)
-  var orderSnapshot = await FirebaseFirestore.instance
-      .collection('orders')
-      .orderBy('timestamp', descending: true) // Sort by latest
-      .limit(2)
-      .get();
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => About()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                ListTile(
+                  title: Text(
+                    "Our People",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Ourpeople()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                ListTile(
+                  title: Text(
+                    "Mission/Vision",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Mission()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+                ListTile(
+                  title: Text(
+                    "Word from Chairman",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WordsFromChairman()));
+                  },
+                  contentPadding: EdgeInsets.only(left: 60),
+                ),
+              ],
+            ),
+            ListTile(
+              title: Text("Brands",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Brandspage()));
+              },
+            ),
+//               ListTile(
+//                 title: Text("My orders",
+//                     style: TextStyle(
+//                         fontWeight: FontWeight.bold, color: Colors.white)),
+//      onTap: () async {
+//   // Fetch the latest order from Firestore (Modify if needed)
+//   var orderSnapshot = await FirebaseFirestore.instance
+//       .collection('orders')
+//       .orderBy('timestamp', descending: true) // Sort by latest
+//       .limit(2)
+//       .get();
 
-  if (orderSnapshot.docs.isNotEmpty) {
-    String orderId = orderSnapshot.docs.first.id; // Get the actual order ID
+//   if (orderSnapshot.docs.isNotEmpty) {
+//     String orderId = orderSnapshot.docs.first.id; // Get the actual order ID
 
-    print("📢 Navigating to Confirmation Page with orderId: $orderId");
+//     print("📢 Navigating to Confirmation Page with orderId: $orderId");
 
-   Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => ConfirmationPage(orderId: orderId)), // Use dynamic ID
-);
-  } else {
-    print("❌ No orders found in Firestore!");
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('No orders found. Please place an order first!')),
-    );
-  }
-},
+//    Navigator.push(
+//   context,
+//   MaterialPageRoute(builder: (context) => ConfirmationPage(orderId: orderId)), // Use dynamic ID
+// );
+//   } else {
+//     print("❌ No orders found in Firestore!");
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       SnackBar(content: Text('No orders found. Please place an order first!')),
+//     );
+//   }
+// },
 
-              ),
-              ListTile(
-                title: Text("Media",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white)),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Mediapage()));
-                },
-              ),
-              ListTile(
-                title: Text("Carrier",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white)),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Carreerpage()));
-                },
-              ),
-              ListTile(
-                title: Text("Contact us",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white)),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Contactus()));
-                },
-              ),
-            ],
-          ),
+//               ),
+            ListTile(
+              title: Text("My Orders",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UserOrdersPage()));
+              },
+            ),
+            ListTile(
+              title: Text("Media",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Mediapage()));
+              },
+            ),
+            ListTile(
+              title: Text("Carrier",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Carreerpage()));
+              },
+            ),
+            ListTile(
+              title: Text("Contact us",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Contactus()));
+              },
+            ),
+          ],
         ),
+      ),
       // body: FutureBuilder<DocumentSnapshot>(
       //   future: FirebaseFirestore.instance.collection('orders').doc(orderId).get(),
       //   builder: (context, snapshot) {
@@ -314,7 +325,8 @@ class ConfirmationPage extends StatelessWidget {
       //   },
       // ),
       body: FutureBuilder<DocumentSnapshot>(
-        future: FirebaseFirestore.instance.collection('orders').doc(orderId).get(),
+        future:
+            FirebaseFirestore.instance.collection('orders').doc(orderId).get(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -338,7 +350,8 @@ class ConfirmationPage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Card(
                 elevation: 5,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -355,17 +368,20 @@ class ConfirmationPage extends StatelessWidget {
                         ),
                       ),
                       Divider(thickness: 1, height: 20),
-            
                       ListTile(
                         leading: Icon(Icons.receipt_long, color: Colors.green),
                         title: RichText(
                           text: TextSpan(
                             text: "Order ID: ",
-                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
                             children: [
                               TextSpan(
                                 text: orderId,
-                                style: TextStyle(fontWeight: FontWeight.normal, color: Colors.grey[700]),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.grey[700]),
                               ),
                             ],
                           ),
@@ -377,18 +393,21 @@ class ConfirmationPage extends StatelessWidget {
                       ),
                       ListTile(
                         leading: Icon(Icons.phone, color: Colors.teal),
-                        title: Text("Phone: ${orderData['phone'] ?? 'Unknown'}"),
+                        title:
+                            Text("Phone: ${orderData['phone'] ?? 'Unknown'}"),
                       ),
                       ListTile(
                         leading: Icon(Icons.location_on, color: Colors.red),
-                        title: Text("Address: ${orderData['address'] ?? 'Unknown'}"),
+                        title: Text(
+                            "Address: ${orderData['address'] ?? 'Unknown'}"),
                       ),
                       ListTile(
-                        leading: Icon(Icons.shopping_cart, color: Colors.orange),
-                        title: Text("Ordered Items: ${orderData['cartItems'] ?? 'Unknown'}"),
+                        leading:
+                            Icon(Icons.shopping_cart, color: Colors.orange),
+                        title: Text(
+                            "Ordered Items: ${orderData['cartItems'] ?? 'Unknown'}"),
                       ),
                       SizedBox(height: 20),
-            
                       Center(
                         child: Text(
                           orderData['status'] == 'Approved'
@@ -397,19 +416,22 @@ class ConfirmationPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: orderData['status'] == 'Approved' ? Colors.green : Colors.orange,
+                            color: orderData['status'] == 'Approved'
+                                ? Colors.green
+                                : Colors.orange,
                           ),
                         ),
                       ),
                       SizedBox(height: 10),
-            
                       if (orderData['status'] == 'Approved')
                         Center(
-                          child: Icon(Icons.check_circle, color: Colors.green, size: 40),
+                          child: Icon(Icons.check_circle,
+                              color: Colors.green, size: 40),
                         )
                       else
                         Center(
-                          child: Icon(Icons.hourglass_top, color: Colors.orange, size: 40),
+                          child: Icon(Icons.hourglass_top,
+                              color: Colors.orange, size: 40),
                         ),
                     ],
                   ),
