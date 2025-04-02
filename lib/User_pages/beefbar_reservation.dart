@@ -1317,42 +1317,106 @@ class _ReservationScreenState extends State<ReservationScreen> {
   }
 
   // Reserve seats
-  void _reserveSeats() async {
-    int requestedSeats = int.tryParse(_seatsController.text) ?? 0;
+  // void _reserveSeats() async {
+  //   int requestedSeats = int.tryParse(_seatsController.text) ?? 0;
 
-    if (requestedSeats <= 0 || requestedSeats > availableSeats) {
-      _showError("Invalid number of seats.");
-      return;
-    }
+  //   if (requestedSeats <= 0 || requestedSeats > availableSeats) {
+  //     _showError("Invalid number of seats.");
+  //     return;
+  //   }
 
-    bool timeConflict = await _checkTimeConflict();
-    if (timeConflict) {
-      _showError("Time slot already taken.");
-      return;
-    }
+  //   bool timeConflict = await _checkTimeConflict();
+  //   if (timeConflict) {
+  //     _showError("Time slot already taken.");
+  //     return;
+  //   }
 
-    try {
-      await FirebaseFirestore.instance.collection('reservations').add({
-        'restaurantId': widget.restaurantId,
-        'userId': userId,
-        'name': nameController.text,
-        'seats': requestedSeats,
-        'selectedTime': selectedStartTime,
-        'selectedDate': Timestamp.fromDate(selectedDate),
-        'menuItem': selectedMenuItems,
-        'location': selectedLocation,
-        'timestamp': FieldValue.serverTimestamp(),
-      });
+  //   try {
+  //     await FirebaseFirestore.instance.collection('reservations').add({
+  //       'restaurantId': widget.restaurantId,
+  //       'userId': userId,
+  //       'name': nameController.text,
+  //       'seats': requestedSeats,
+  //       'selectedTime': selectedStartTime,
+  //       'selectedDate': Timestamp.fromDate(selectedDate),
+  //       'menuItem': selectedMenuItems,
+  //       'location': selectedLocation,
+  //       'timestamp': FieldValue.serverTimestamp(),
+  //     });
 
-      await _updateAvailableSeats(requestedSeats);
+  //     await _updateAvailableSeats(requestedSeats);
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Reservation successful!")),
-      );
-    } catch (e) {
-      _showError("Failed to make a reservation. Please try again.");
-    }
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text("Reservation successful!")),
+  //     );
+  //   } catch (e) {
+  //     _showError("Failed to make a reservation. Please try again.");
+  //   }
+  // }
+
+  void _submitReservation() async {
+  if (nameController.text.isEmpty ||
+      emailController.text.isEmpty ||
+      phoneController.text.isEmpty ||
+      selectedGuest <= 0 ||
+      selectedStartTime.isEmpty ||
+      selectedLocation == null ||
+      selectedMenuItems.isEmpty) {
+    _showError("Please fill in all required fields.");
+    return;
   }
+
+  // Validate email
+  if (!_isValidEmail(emailController.text)) {
+    _showError("Please enter a valid email address.");
+    return;
+  }
+
+  // Validate phone number
+  if (!_isValidPhoneNumber(phoneController.text)) {
+    _showError("Please enter a valid phone number.");
+    return;
+  }
+
+  final reservationData = {
+    'restaurantId': widget.restaurantId,
+    'userId': userId,
+    "name": nameController.text,
+    "email": emailController.text,
+    "phone": phoneController.text,
+    "notes": notesController.text,
+    "seats": selectedGuest,
+    "selectedDate": Timestamp.fromDate(selectedDate),
+    "selectedTime": selectedStartTime,
+    "endTime": selectedEndTime,
+    'menuItem': selectedMenuItems,
+    'location': selectedLocation,
+    'timestamp': FieldValue.serverTimestamp(),
+  };
+
+  try {
+    await FirebaseFirestore.instance.collection('reservations').add(reservationData);
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("Seats Reserved")));
+  } catch (e) {
+    _showError("Failed to submit reservation. Please try again.");
+  }
+}
+bool _isValidEmail(String email) {
+  final emailRegExp = RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+  return emailRegExp.hasMatch(email);
+}
+
+bool _isValidPhoneNumber(String phone) {
+  final phoneRegExp = RegExp(r'^[0-9]{10}$'); // Accepts exactly 10 digits
+  return phoneRegExp.hasMatch(phone);
+}
+
+void _showError(String message) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+}
+
 
   // Update available seats
   Future<void> _updateAvailableSeats(int reservedSeats) async {
@@ -1389,44 +1453,44 @@ class _ReservationScreenState extends State<ReservationScreen> {
   }
 
   // Show error message
-  void _showError(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message, style: TextStyle(color: Colors.red))),
-    );
-  }
+  // void _showError(String message) {
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(content: Text(message, style: TextStyle(color: Colors.red))),
+  //   );
+  // }
 
-  void _submitReservation() async {
-    final reservationData = {
-      'restaurantId': widget.restaurantId,
-      'userId': userId,
-      "name": nameController.text,
-      "email": emailController.text,
-      "phone": phoneController.text,
-      "notes": notesController.text,
-      "seats": selectedGuest,
-      //"selectedDate": DateFormat('yyyy-MM-dd').format(selectedDate),
-      'selectedDate': Timestamp.fromDate(selectedDate),
-      "selectedTime": selectedStartTime,
-      "endTime": selectedEndTime,
-      'menuItem': selectedMenuItems,
-      'location': selectedLocation,
-      'timestamp': FieldValue.serverTimestamp(),
-      //"status": "pending"
-    };
+  // void _submitReservation() async {
+  //   final reservationData = {
+  //     'restaurantId': widget.restaurantId,
+  //     'userId': userId,
+  //     "name": nameController.text,
+  //     "email": emailController.text,
+  //     "phone": phoneController.text,
+  //     "notes": notesController.text,
+  //     "seats": selectedGuest,
+  //     //"selectedDate": DateFormat('yyyy-MM-dd').format(selectedDate),
+  //     'selectedDate': Timestamp.fromDate(selectedDate),
+  //     "selectedTime": selectedStartTime,
+  //     "endTime": selectedEndTime,
+  //     'menuItem': selectedMenuItems,
+  //     'location': selectedLocation,
+  //     'timestamp': FieldValue.serverTimestamp(),
+  //     //"status": "pending"
+  //   };
 
-    try {
-      await FirebaseFirestore.instance
-          .collection('reservations')
-          .add(reservationData);
-      Navigator.pop(context);
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Seats Reserved")));
-    } catch (e) {
-      print("Error submitting reservation: $e");
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Failed to submit reservation. Please try again.")));
-    }
-  }
+  //   try {
+  //     await FirebaseFirestore.instance
+  //         .collection('reservations')
+  //         .add(reservationData);
+  //     Navigator.pop(context);
+  //     ScaffoldMessenger.of(context)
+  //         .showSnackBar(SnackBar(content: Text("Seats Reserved")));
+  //   } catch (e) {
+  //     print("Error submitting reservation: $e");
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //         content: Text("Failed to submit reservation. Please try again.")));
+  //   }
+  // }
 
   void _showWaitlistDialog(String selectedTime) {
     showDialog(
@@ -1799,26 +1863,41 @@ class _ReservationScreenState extends State<ReservationScreen> {
               SizedBox(height: 20),
 
               // Join Waitlist Button
-              Center(
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                    side: BorderSide(color: Colors.brown),
-                  ),
-                  onPressed: () {
-                    if (timeSlots.isNotEmpty) {
-                      _showWaitlistDialog(
-                          timeSlots[0]); // Pass first available time slot
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("No available time slots")),
-                      );
-                    }
-                  },
-                  child: Text("Reserve Now",
-                      style: TextStyle(fontSize: 16, color: Colors.brown)),
-                ),
-              ),
+              // Center(
+              //   child: OutlinedButton(
+              //     style: OutlinedButton.styleFrom(
+              //       padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+              //       side: BorderSide(color: Colors.brown),
+              //     ),
+              //     onPressed: () {
+              //       if (timeSlots.isNotEmpty) {
+              //         _showWaitlistDialog(
+              //             timeSlots[0]); // Pass first available time slot
+              //       } else {
+              //         ScaffoldMessenger.of(context).showSnackBar(
+              //           SnackBar(content: Text("No available time slots")),
+              //         );
+              //       }
+              //     },
+              //     child: Text("Reserve Now",
+              //         style: TextStyle(fontSize: 16, color: Colors.brown)),
+              //   ),
+              // ),
+              OutlinedButton(
+  onPressed: (nameController.text.isEmpty ||
+              emailController.text.isEmpty ||
+              phoneController.text.isEmpty ||
+              selectedGuest <= 0 ||
+              selectedStartTime.isEmpty ||
+              selectedLocation == null ||
+              selectedMenuItems.isEmpty ||
+              !_isValidEmail(emailController.text) ||
+              !_isValidPhoneNumber(phoneController.text))
+      ? null
+      : _submitReservation,
+  child: Text("Reserve"),
+)
+
             ],
           ),
         ),

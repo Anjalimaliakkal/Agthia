@@ -1796,6 +1796,241 @@
 // }
 
 
+// import 'package:agthia/DeliveryPersonnel_pages/delivery_changepassword.dart';
+// import 'package:agthia/backend_pages/backend_new/loginpage.dart';
+// import 'package:flutter/material.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+
+// class AddDelivery extends StatefulWidget {
+//   @override
+//   _AddDeliveryState createState() => _AddDeliveryState();
+// }
+
+// class _AddDeliveryState extends State<AddDelivery> {
+//   final _formKey = GlobalKey<FormState>();
+//   final TextEditingController _emailController = TextEditingController();
+//   final TextEditingController _passwordController = TextEditingController();
+//   final TextEditingController _nameController = TextEditingController();
+//   final TextEditingController _phoneController = TextEditingController();
+//   bool _isLoading = false;
+
+//   Future<void> registerDeliveryBoy() async {
+//     if (!_formKey.currentState!.validate()) return;
+
+//     setState(() => _isLoading = true);
+//     try {
+//       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+//         email: _emailController.text.trim(),
+//         password: _passwordController.text.trim(),
+//       );
+
+//       String deliveryBoyUid = userCredential.user!.uid;
+
+//       await FirebaseFirestore.instance.collection('users').doc(deliveryBoyUid).set({
+//         'role': 'Delivery Boy',
+//         'name': _nameController.text.trim(),
+//         'email': _emailController.text.trim(),
+//         'phone': _phoneController.text.trim(),
+//         'status': 'pending',
+//         'createdAt': FieldValue.serverTimestamp(),
+//       });
+
+//       await FirebaseFirestore.instance.collection('delivery_boys').doc(deliveryBoyUid).set({
+//         'uid': deliveryBoyUid,
+//         'name': _nameController.text.trim(),
+//         'email': _emailController.text.trim(),
+//         'phone': _phoneController.text.trim(),
+//         'status': 'pending',
+//         'availability': 'available',
+//         'createdAt': FieldValue.serverTimestamp(),
+//       });
+
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Delivery boy registered successfully! Pending admin approval.')),
+//       );
+//       Navigator.pop(context);
+//     } catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Error registering delivery boy: $e')),
+//       );
+//     }
+//     setState(() => _isLoading = false);
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       // appBar: AppBar(title: Text('Register Delivery Boy')),
+//       appBar: AppBar(
+//         title: Center(
+//           child: Transform.translate(
+//             offset: Offset(-10.0, 0.0),
+//             child: Image(
+//               image: AssetImage("asset/logo_agthia.jpg"),
+//               height: 50,
+//               fit: BoxFit.contain,
+//             ),
+//           ),
+//         ),
+//         iconTheme: IconThemeData(color: Colors.white),
+//         backgroundColor: Color(0xFF282d37),
+//         actions: [
+//           PopupMenuButton<String>(
+//             child: Row(
+//               children: [
+//                 CircleAvatar(
+//                     backgroundColor: const Color.fromARGB(255, 188, 187, 187),
+//                     child: Icon(Icons.person,
+//                         color: Colors.white)), // Profile Icon
+//                 SizedBox(width: 5),
+//                 Text(
+//                   "DELIVERY PERSONNEL",
+//                   style: TextStyle(
+//                       color: Colors.white, fontWeight: FontWeight.bold),
+//                 ),
+//                 SizedBox(width: 5),
+//                 Icon(Icons.arrow_drop_down)
+//               ],
+//             ),
+//             onSelected: (value) {
+//               if (value == 'change_password') {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                         builder: (context) => DeliveryChangepassword()));
+//                 // Navigate to change password screen
+//               } else if (value == 'logout') {
+//                 Navigator.push(
+//                     context, MaterialPageRoute(builder: (context) => LoginPage()));
+//                 // Perform logout action
+//               }
+//             },
+//             itemBuilder: (BuildContext context) => [
+//               // Title Item (Non-clickable)
+//               PopupMenuItem<String>(
+//                 enabled: false,
+//                 child: Text(
+//                   "Delivery Personnel",
+//                   style: TextStyle(fontWeight: FontWeight.bold),
+//                 ),
+//               ),
+//               PopupMenuDivider(),
+
+//               // Change Password
+//               PopupMenuItem<String>(
+//                 value: 'change_password',
+//                 child: Row(
+//                   children: [
+//                     Icon(Icons.lock, color: Colors.black),
+//                     SizedBox(width: 10),
+//                     Text("Change Password"),
+//                   ],
+//                 ),
+//               ),
+
+//               // Logout
+//               PopupMenuItem<String>(
+//                 value: 'logout',
+//                 child: Row(
+//                   children: [
+//                     Icon(Icons.logout, color: Colors.black),
+//                     SizedBox(width: 10),
+//                     Text("Logout"),
+//                   ],
+//                 ),
+//               ),
+//             ],
+//           ),
+//           SizedBox(width: 10),
+//         ],
+//       ),
+//       backgroundColor: const Color.fromARGB(255, 218, 223, 232),
+      
+//       body: Center(
+//         child: Container(
+//           width: 600,
+//           height: 500,
+//           color: const Color.fromARGB(255, 194, 204, 220),
+//           child: SingleChildScrollView(
+//             padding: EdgeInsets.all(16.0),
+//             child: Form(
+//               key: _formKey,
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Text("Registration",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.green),),
+//                   Center(
+//                     child: SizedBox(
+//                       width: 500,
+//                       child: _buildTextField(_nameController, 'Name', Icons.person, 'Please enter name')),
+//                   ),
+//                   Center(
+//                     child: SizedBox(
+//                       width: 500,
+//                       child: _buildTextField(_phoneController, 'Phone Number', Icons.phone, 'Enter a valid 10-digit phone number', isNumeric: true)),
+//                   ),
+//                   Center(
+//                     child: SizedBox(
+//                       width: 500,
+//                       child: _buildTextField(_emailController, 'Email', Icons.email, 'Enter a valid email', isEmail: true)),
+//                   ),
+//                   Center(
+//                     child: SizedBox(
+//                       width: 500,
+//                       child: _buildTextField(_passwordController, 'Password', Icons.lock, 'Password must be at least 6 characters', isPassword: true)),
+//                   ),
+//                   SizedBox(height: 20),
+//                   _isLoading
+//                       ? Center(child: CircularProgressIndicator())
+//                       : Center(
+//                         child: SizedBox(
+//                             width: 300,
+//                             child: ElevatedButton(
+//                               onPressed: registerDeliveryBoy,
+//                               style: ElevatedButton.styleFrom(backgroundColor: Colors.green,
+//                                 padding: EdgeInsets.symmetric(vertical: 12),
+//                                 textStyle: TextStyle(fontSize: 18),
+//                               ),
+//                               child: Text('Register',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+//                             ),
+//                           ),
+//                       ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget _buildTextField(TextEditingController controller, String label, IconData icon, String errorMessage,
+//       {bool isPassword = false, bool isEmail = false, bool isNumeric = false}) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(vertical: 10.0),
+//       child: TextFormField(
+//         controller: controller,
+//         obscureText: isPassword,
+//         keyboardType: isNumeric ? TextInputType.phone : (isEmail ? TextInputType.emailAddress : TextInputType.text),
+//         decoration: InputDecoration(
+//           labelText: label,
+//           prefixIcon: Icon(icon),
+//           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+//         ),
+//         validator: (value) {
+//           if (value == null || value.isEmpty) return errorMessage;
+//           if (isEmail && RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\$').hasMatch(value)) return 'Enter a valid email';
+//           if (isNumeric && RegExp(r'^[0-9]{10}\$').hasMatch(value)) return 'Enter a valid 10-digit phone number';
+//           if (isPassword && value.length < 6) return 'Password must be at least 6 characters';
+//           return null;
+//         },
+//       ),
+//     );
+//   }
+// }
+
+
 import 'package:agthia/DeliveryPersonnel_pages/delivery_changepassword.dart';
 import 'package:agthia/backend_pages/backend_new/loginpage.dart';
 import 'package:flutter/material.dart';
@@ -1861,7 +2096,6 @@ class _AddDeliveryState extends State<AddDelivery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: Text('Register Delivery Boy')),
       appBar: AppBar(
         title: Center(
           child: Transform.translate(
@@ -1875,78 +2109,8 @@ class _AddDeliveryState extends State<AddDelivery> {
         ),
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFF282d37),
-        actions: [
-          PopupMenuButton<String>(
-            child: Row(
-              children: [
-                CircleAvatar(
-                    backgroundColor: const Color.fromARGB(255, 188, 187, 187),
-                    child: Icon(Icons.person,
-                        color: Colors.white)), // Profile Icon
-                SizedBox(width: 5),
-                Text(
-                  "DELIVERY PERSONNEL",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(width: 5),
-                Icon(Icons.arrow_drop_down)
-              ],
-            ),
-            onSelected: (value) {
-              if (value == 'change_password') {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DeliveryChangepassword()));
-                // Navigate to change password screen
-              } else if (value == 'logout') {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => LoginPage()));
-                // Perform logout action
-              }
-            },
-            itemBuilder: (BuildContext context) => [
-              // Title Item (Non-clickable)
-              PopupMenuItem<String>(
-                enabled: false,
-                child: Text(
-                  "Delivery Personnel",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              PopupMenuDivider(),
-
-              // Change Password
-              PopupMenuItem<String>(
-                value: 'change_password',
-                child: Row(
-                  children: [
-                    Icon(Icons.lock, color: Colors.black),
-                    SizedBox(width: 10),
-                    Text("Change Password"),
-                  ],
-                ),
-              ),
-
-              // Logout
-              PopupMenuItem<String>(
-                value: 'logout',
-                child: Row(
-                  children: [
-                    Icon(Icons.logout, color: Colors.black),
-                    SizedBox(width: 10),
-                    Text("Logout"),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(width: 10),
-        ],
       ),
       backgroundColor: const Color.fromARGB(255, 218, 223, 232),
-      
       body: Center(
         child: Container(
           width: 600,
@@ -1959,43 +2123,72 @@ class _AddDeliveryState extends State<AddDelivery> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Registration",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.green),),
-                  Center(
-                    child: SizedBox(
-                      width: 500,
-                      child: _buildTextField(_nameController, 'Name', Icons.person, 'Please enter name')),
+                  Text(
+                    "Registration",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.green),
                   ),
                   Center(
                     child: SizedBox(
                       width: 500,
-                      child: _buildTextField(_phoneController, 'Phone Number', Icons.phone, 'Enter a valid 10-digit phone number', isNumeric: true)),
+                      child: _buildTextField(_nameController, 'Name', Icons.person, 'Please enter name'),
+                    ),
                   ),
                   Center(
                     child: SizedBox(
                       width: 500,
-                      child: _buildTextField(_emailController, 'Email', Icons.email, 'Enter a valid email', isEmail: true)),
+                      child: _buildTextField(
+                        _phoneController,
+                        'Phone Number',
+                        Icons.phone,
+                        'Enter a valid 10-digit phone number',
+                        isNumeric: true,
+                      ),
+                    ),
                   ),
                   Center(
                     child: SizedBox(
                       width: 500,
-                      child: _buildTextField(_passwordController, 'Password', Icons.lock, 'Password must be at least 6 characters', isPassword: true)),
+                      child: _buildTextField(
+                        _emailController,
+                        'Email',
+                        Icons.email,
+                        'Enter a valid email',
+                        isEmail: true,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: SizedBox(
+                      width: 500,
+                      child: _buildTextField(
+                        _passwordController,
+                        'Password',
+                        Icons.lock,
+                        'Password must be at least 6 characters',
+                        isPassword: true,
+                      ),
+                    ),
                   ),
                   SizedBox(height: 20),
                   _isLoading
                       ? Center(child: CircularProgressIndicator())
                       : Center(
-                        child: SizedBox(
+                          child: SizedBox(
                             width: 300,
                             child: ElevatedButton(
                               onPressed: registerDeliveryBoy,
-                              style: ElevatedButton.styleFrom(backgroundColor: Colors.green,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
                                 padding: EdgeInsets.symmetric(vertical: 12),
                                 textStyle: TextStyle(fontSize: 18),
                               ),
-                              child: Text('Register',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                              child: Text(
+                                'Register',
+                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
-                      ),
+                        ),
                 ],
               ),
             ),
@@ -2005,8 +2198,15 @@ class _AddDeliveryState extends State<AddDelivery> {
     );
   }
 
-  Widget _buildTextField(TextEditingController controller, String label, IconData icon, String errorMessage,
-      {bool isPassword = false, bool isEmail = false, bool isNumeric = false}) {
+  Widget _buildTextField(
+    TextEditingController controller,
+    String label,
+    IconData icon,
+    String errorMessage, {
+    bool isPassword = false,
+    bool isEmail = false,
+    bool isNumeric = false,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: TextFormField(
@@ -2020,12 +2220,22 @@ class _AddDeliveryState extends State<AddDelivery> {
         ),
         validator: (value) {
           if (value == null || value.isEmpty) return errorMessage;
-          if (isEmail && RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\$').hasMatch(value)) return 'Enter a valid email';
-          if (isNumeric && RegExp(r'^[0-9]{10}\$').hasMatch(value)) return 'Enter a valid 10-digit phone number';
+          if (isEmail && !_isValidEmail(value)) return 'Enter a valid email';
+          if (isNumeric && !_isValidPhoneNumber(value)) return 'Enter a valid 10-digit phone number';
           if (isPassword && value.length < 6) return 'Password must be at least 6 characters';
           return null;
         },
       ),
     );
+  }
+
+  bool _isValidEmail(String email) {
+    final emailRegExp = RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+    return emailRegExp.hasMatch(email);
+  }
+
+  bool _isValidPhoneNumber(String phone) {
+    final phoneRegExp = RegExp(r'^[0-9]{10}$'); // Exactly 10 digits
+    return phoneRegExp.hasMatch(phone);
   }
 }

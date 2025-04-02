@@ -502,6 +502,257 @@
 // }
 
 
+// import 'package:agthia/User_pages/confirmation_page.dart';
+// import 'package:agthia/User_pages/cart_provider.dart';
+// import 'package:agthia/User_pages/payment.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+
+// class AddressFormPage extends StatefulWidget {
+//   @override
+//   _AddressFormPageState createState() => _AddressFormPageState();
+// }
+
+// class _AddressFormPageState extends State<AddressFormPage> {
+//   final TextEditingController _nameController = TextEditingController();
+//   final TextEditingController _phoneController = TextEditingController();
+//   final TextEditingController _addressController = TextEditingController();
+
+//   void placeOrder() async {
+//     String name = _nameController.text.trim();
+//     String phone = _phoneController.text.trim();
+//     String address = _addressController.text.trim();
+//     var cartItems = Provider.of<CartProvider>(context, listen: false).cartItems;
+//     double totalAmount = Provider.of<CartProvider>(context, listen: false).totalAmount;
+//     double shippingCharge = Provider.of<CartProvider>(context, listen: false).shippingCharge;
+//     String paymentMethod = Provider.of<CartProvider>(context, listen: false).paymentMethod;
+
+//     User? user = FirebaseAuth.instance.currentUser;
+//     if (user == null) {
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please log in first.')));
+//       return;
+//     }
+
+//     if (name.isEmpty || phone.isEmpty || address.isEmpty || cartItems.isEmpty) {
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Fill all fields.')));
+//       return;
+//     }
+
+//     if (paymentMethod == 'Credit Card') {
+//       Navigator.push(
+//         context,
+//         MaterialPageRoute(
+//           builder: (_) => PaymentPage(
+//             name: name,
+//             phone: phone,
+//             address: address,
+//             totalAmount: totalAmount,
+//             shippingCharge: shippingCharge,
+//           ),
+//         ),
+//       );
+//       return;
+//     }
+
+
+    
+
+//     String userId = user.uid;
+
+//     var order = {
+//       'userId': userId,
+//       'name': name,
+//       'phone': phone,
+//       'address': address,
+//       'cartItems': cartItems.map((item) => item.toJson()).toList(),
+//       'totalAmount': totalAmount,
+//       'shippingCharge': shippingCharge,
+//       'paymentMethod': paymentMethod,
+//       'status': 'Pending',
+//       'timestamp': FieldValue.serverTimestamp(),
+//     };
+
+//     try {
+//       DocumentReference orderRef = await FirebaseFirestore.instance.collection('orders').add(order);
+//       String orderId = orderRef.id;
+
+//       Navigator.push(
+//         context,
+//         MaterialPageRoute(builder: (_) => ConfirmationPage(orderId: orderId)),
+//       );
+
+//       Provider.of<CartProvider>(context, listen: false).clearCart();
+//     } catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error placing order: $e')));
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       // appBar: AppBar(title: Text('Enter Delivery Address')),
+//        appBar: AppBar(
+//           title: Center(
+//             child: Transform.translate(
+//               offset: Offset(-10.0, 0.0),
+//               child: Image(
+//                 image: AssetImage("asset/logo_agthia.jpg"),
+//                 height: 50,
+//                 fit: BoxFit.contain,
+//               ),
+//             ),
+//           ),
+//           iconTheme: IconThemeData(color: Colors.white),
+//           backgroundColor: Color(0xFF282d37),
+//         ),
+//       backgroundColor:const Color.fromARGB(255, 216, 225, 233),
+//       body: SingleChildScrollView(
+//         child: Padding(
+//           padding: const EdgeInsets.all(16.0),
+//           child: Column(
+//             children: [
+//               Card(
+//                 elevation: 4,
+//                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//                 child: Padding(
+//                   padding: const EdgeInsets.all(16.0),
+//                   child: Column(
+//                     children: [
+//                       SizedBox(height: 20,),
+//                       SizedBox(
+//                         width: 500,
+//                         child: buildTextField(_nameController, 'Full Name', Icons.person)),
+//                       SizedBox(
+//                         width: 500,
+//                         child: buildTextField(_phoneController, 'Phone Number', Icons.phone)),
+//                       SizedBox(
+//                         width: 500,
+//                         child: buildTextField(_addressController, 'Delivery Address', Icons.home)),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//               SizedBox(height: 20),
+//               buildDropdownSection(),
+//               SizedBox(height: 20),
+//               Consumer<CartProvider>(
+//                 builder: (context, cartProvider, child) {
+//                   return Column(
+//                     children: [
+//                       Text(
+//                         'Total: \$${cartProvider.totalAmount.toStringAsFixed(2)}',
+//                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//                       ),
+//                       SizedBox(height: 15),
+//                       ElevatedButton(
+//                         onPressed: placeOrder,
+//                         style: ElevatedButton.styleFrom(
+//                           backgroundColor: Colors.green,
+//                           padding: EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+//                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+//                           elevation: 4,
+//                         ),
+//                         child: Text(
+//                           'Place Order',
+//                           style: TextStyle(color: Colors.white, fontSize: 16),
+//                         ),
+//                       ),
+//                     ],
+//                   );
+//                 },
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget buildTextField(TextEditingController controller, String label, IconData icon) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(vertical: 8.0),
+//       child: TextField(
+//         controller: controller,
+//         decoration: InputDecoration(
+//           labelText: label,
+//           prefixIcon: Icon(icon, color: Colors.blue),
+//           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+//           filled: true,
+//           fillColor: Colors.white,
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget buildDropdownSection() {
+//     return Center(
+//       child: SizedBox(
+//         width: 600,
+//         child: Card(
+//           elevation: 3,
+//           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+//           child: Padding(
+//             padding: const EdgeInsets.all(16.0),
+//             child: Column(
+//               children: [
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: [
+//                     Text('Shipping Charge:', style: TextStyle(fontSize: 16)),
+//                     Consumer<CartProvider>(
+//                       builder: (context, cartProvider, child) {
+//                         return DropdownButton<double>(
+//                           value: cartProvider.shippingCharge,
+//                           items: [
+//                             DropdownMenuItem(value: 5.0, child: Text('Standard - \$5')),
+//                             DropdownMenuItem(value: 10.0, child: Text('Express - \$10')),
+//                             DropdownMenuItem(value: 0.0, child: Text('Free')),
+//                           ],
+//                           onChanged: (newValue) {
+//                             if (newValue != null) {
+//                               cartProvider.setShippingCharge(newValue);
+//                             }
+//                           },
+//                         );
+//                       },
+//                     ),
+//                   ],
+//                 ),
+//                 Divider(),
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: [
+//                     Text('Payment Method:', style: TextStyle(fontSize: 16)),
+//                     Consumer<CartProvider>(
+//                       builder: (context, cartProvider, child) {
+//                         return DropdownButton<String>(
+//                           value: cartProvider.paymentMethod.isEmpty ? null : cartProvider.paymentMethod,
+//                           items: [
+//                             DropdownMenuItem(value: 'Credit Card', child: Text('Credit Card')),
+//                             DropdownMenuItem(value: 'Cash', child: Text('Cash on Delivery')),
+//                           ],
+//                           onChanged: (newValue) {
+//                             if (newValue != null) {
+//                               cartProvider.setPaymentMethod(newValue);
+//                             }
+//                           },
+//                         );
+//                       },
+//                     ),
+//                   ],
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
 import 'package:agthia/User_pages/confirmation_page.dart';
 import 'package:agthia/User_pages/cart_provider.dart';
 import 'package:agthia/User_pages/payment.dart';
@@ -540,6 +791,12 @@ class _AddressFormPageState extends State<AddressFormPage> {
       return;
     }
 
+    // Validate phone number (should be exactly 10 digits)
+    if (!RegExp(r'^[0-9]{10}$').hasMatch(phone)) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Enter a valid 10-digit phone number.')));
+      return;
+    }
+
     if (paymentMethod == 'Credit Card') {
       Navigator.push(
         context,
@@ -555,9 +812,6 @@ class _AddressFormPageState extends State<AddressFormPage> {
       );
       return;
     }
-
-
-    
 
     String userId = user.uid;
 
@@ -592,22 +846,21 @@ class _AddressFormPageState extends State<AddressFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: Text('Enter Delivery Address')),
-       appBar: AppBar(
-          title: Center(
-            child: Transform.translate(
-              offset: Offset(-10.0, 0.0),
-              child: Image(
-                image: AssetImage("asset/logo_agthia.jpg"),
-                height: 50,
-                fit: BoxFit.contain,
-              ),
+      appBar: AppBar(
+        title: Center(
+          child: Transform.translate(
+            offset: Offset(-10.0, 0.0),
+            child: Image(
+              image: AssetImage("asset/logo_agthia.jpg"),
+              height: 50,
+              fit: BoxFit.contain,
             ),
           ),
-          iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: Color(0xFF282d37),
         ),
-      backgroundColor:const Color.fromARGB(255, 216, 225, 233),
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Color(0xFF282d37),
+      ),
+      backgroundColor: const Color.fromARGB(255, 216, 225, 233),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -620,16 +873,10 @@ class _AddressFormPageState extends State<AddressFormPage> {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      SizedBox(height: 20,),
-                      SizedBox(
-                        width: 500,
-                        child: buildTextField(_nameController, 'Full Name', Icons.person)),
-                      SizedBox(
-                        width: 500,
-                        child: buildTextField(_phoneController, 'Phone Number', Icons.phone)),
-                      SizedBox(
-                        width: 500,
-                        child: buildTextField(_addressController, 'Delivery Address', Icons.home)),
+                      SizedBox(height: 20),
+                      SizedBox(width: 500, child: buildTextField(_nameController, 'Full Name', Icons.person)),
+                      SizedBox(width: 500, child: buildTextField(_phoneController, 'Phone Number', Icons.phone, isPhone: true)),
+                      SizedBox(width: 500, child: buildTextField(_addressController, 'Delivery Address', Icons.home)),
                     ],
                   ),
                 ),
@@ -670,17 +917,22 @@ class _AddressFormPageState extends State<AddressFormPage> {
     );
   }
 
-  Widget buildTextField(TextEditingController controller, String label, IconData icon) {
+  Widget buildTextField(TextEditingController controller, String label, IconData icon, {bool isPhone = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextField(
         controller: controller,
+        keyboardType: isPhone ? TextInputType.phone : TextInputType.text,
+        maxLength: isPhone ? 10 : null,
         decoration: InputDecoration(
           labelText: label,
           prefixIcon: Icon(icon, color: Colors.blue),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           filled: true,
           fillColor: Colors.white,
+          errorText: isPhone && controller.text.isNotEmpty && !RegExp(r'^[0-9]{10}$').hasMatch(controller.text)
+              ? 'Enter a valid 10-digit phone number'
+              : null,
         ),
       ),
     );
