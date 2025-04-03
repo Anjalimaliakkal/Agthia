@@ -963,43 +963,86 @@ Future<void> pickFile() async {
   }
 }
 
-  Future<void> submitApplication() async {
-    if (_formKey.currentState!.validate()) {
-      Map<String, dynamic> applicationData = {
-        "jobId": widget.jobId,
-        "jobTitle": widget.jobTitle,
-        "fullName": fullNameController.text,
-        "phone": phoneController.text,
-        "email": emailController.text,
-        "address": addressController.text,
-        "submittedAt": FieldValue.serverTimestamp(),
-        "resumeFileName": selectedFile != null ? selectedFile!.path.split('/').last : null,
-        "qualification": qualificationController.text,
-      };
+  // Future<void> submitApplication() async {
+  //   if (_formKey.currentState!.validate()) {
+  //     Map<String, dynamic> applicationData = {
+  //       "jobId": widget.jobId,
+  //       "jobTitle": widget.jobTitle,
+  //       "fullName": fullNameController.text,
+  //       "phone": phoneController.text,
+  //       "email": emailController.text,
+  //       "address": addressController.text,
+  //       "submittedAt": FieldValue.serverTimestamp(),
+  //       "resumeFileName": selectedFile != null ? selectedFile!.path.split('/').last : null,
+  //       "qualification": qualificationController.text,
+  //     };
 
-      try {
-        await FirebaseFirestore.instance
-            .collection("job_applications")
-            .add(applicationData);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Application submitted successfully!")),
-        );
-        _formKey.currentState!.reset();
-        fullNameController.clear();
-        phoneController.clear();
-        emailController.clear();
-        addressController.clear();
-        qualificationController.clear();
-        setState(() {
-          selectedFile = null;
-        });
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Error submitting application: $e")),
-        );
-      }
+  //     try {
+  //       await FirebaseFirestore.instance
+  //           .collection("job_applications")
+  //           .add(applicationData);
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text("Application submitted successfully!")),
+  //       );
+  //       _formKey.currentState!.reset();
+  //       fullNameController.clear();
+  //       phoneController.clear();
+  //       emailController.clear();
+  //       addressController.clear();
+  //       qualificationController.clear();
+  //       setState(() {
+  //         selectedFile = null;
+  //       });
+  //     } catch (e) {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text("Error submitting application: $e")),
+  //       );
+  //     }
+  //   }
+  // }
+  Future<void> submitApplication() async {
+  if (_formKey.currentState!.validate()) {
+    // if (selectedFile == null) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(content: Text("Please upload a resume")),
+    //   );
+    //   return;
+    // }
+
+    Map<String, dynamic> applicationData = {
+      "jobId": widget.jobId,
+      "jobTitle": widget.jobTitle,
+      "fullName": fullNameController.text.trim(),
+      "phone": phoneController.text.trim(),
+      "email": emailController.text.trim(),
+      "address": addressController.text.trim(),
+      "submittedAt": FieldValue.serverTimestamp(),
+      //"resumeFileName": selectedFile!.path.split('/').last,
+      "qualification": qualificationController.text.trim(),
+    };
+
+    try {
+      await FirebaseFirestore.instance.collection("job_applications").add(applicationData);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Application submitted successfully!")),
+      );
+      _formKey.currentState!.reset();
+      fullNameController.clear();
+      phoneController.clear();
+      emailController.clear();
+      addressController.clear();
+      qualificationController.clear();
+      setState(() {
+        selectedFile = null;
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error submitting application: $e")),
+      );
     }
   }
+}
+
 
    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -1256,54 +1299,115 @@ Future<void> subscribeUser() async {
                         SizedBox(height: 10),
                         Divider(color: Colors.orange),
                         SizedBox(height: 10),
+                        // TextFormField(
+                        //   controller: fullNameController,
+                        //   decoration: InputDecoration(labelText: "Full Name"),
+                        //   validator: (value) {
+                        //     if (value!.isEmpty) return "Please enter your full name";
+                        //     return null;
+                        //   },
+                        // ),
+                        // SizedBox(height: 10),
+                        // TextFormField(
+                        //   controller: phoneController,
+                        //   decoration: InputDecoration(labelText: "Phone"),
+                        //   keyboardType: TextInputType.phone,
+                        //   validator: (value) {
+                        //     if (value!.isEmpty) return "Please enter your phone number";
+                        //     return null;
+                        //   },
+                        // ),
+                        // SizedBox(height: 10),
+                        // TextFormField(
+                        //   controller: emailController,
+                        //   decoration: InputDecoration(labelText: "Email"),
+                        //   keyboardType: TextInputType.emailAddress,
+                        //   validator: (value) {
+                        //     if (value!.isEmpty) return "Please enter your email";
+                        //     return null;
+                        //   },
+                        // ),
+                        // SizedBox(height: 10),
+                        // TextFormField(
+                        //   controller: addressController,
+                        //   decoration: InputDecoration(labelText: "Address"),
+                        //   //maxLines: 3,
+                        //   validator: (value) {
+                        //     if (value!.isEmpty) return "Please enter your address";
+                        //     return null;
+                        //   },
+                        // ),
+                        // SizedBox(height: 10),
+                        // TextFormField(
+                        //   controller: qualificationController,
+                        //   decoration: InputDecoration(labelText: "Qualification"),
+                        //   //maxLines: 3,
+                        //   validator: (value) {
+                        //     if (value!.isEmpty) return "Please enter your Qualification";
+                        //     return null;
+                        //   },
+                        // ),
                         TextFormField(
-                          controller: fullNameController,
-                          decoration: InputDecoration(labelText: "Full Name"),
-                          validator: (value) {
-                            if (value!.isEmpty) return "Please enter your full name";
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          controller: phoneController,
-                          decoration: InputDecoration(labelText: "Phone"),
-                          keyboardType: TextInputType.phone,
-                          validator: (value) {
-                            if (value!.isEmpty) return "Please enter your phone number";
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          controller: emailController,
-                          decoration: InputDecoration(labelText: "Email"),
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) {
-                            if (value!.isEmpty) return "Please enter your email";
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          controller: addressController,
-                          decoration: InputDecoration(labelText: "Address"),
-                          //maxLines: 3,
-                          validator: (value) {
-                            if (value!.isEmpty) return "Please enter your address";
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          controller: qualificationController,
-                          decoration: InputDecoration(labelText: "Qualification"),
-                          //maxLines: 3,
-                          validator: (value) {
-                            if (value!.isEmpty) return "Please enter your Qualification";
-                            return null;
-                          },
-                        ),
+  controller: fullNameController,
+  decoration: InputDecoration(labelText: "Full Name"),
+  validator: (value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Full Name is required";
+    } else if (value.length < 3) {
+      return "Full Name must be at least 3 characters long";
+    }
+    return null;
+  },
+),
+TextFormField(
+  controller: phoneController,
+  decoration: InputDecoration(labelText: "Phone Number"),
+  keyboardType: TextInputType.phone,
+  validator: (value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Phone Number is required";
+    } else if (!RegExp(r'^\d{10}$').hasMatch(value)) {
+      return "Enter a valid 10-digit phone number";
+    }
+    return null;
+  },
+),
+TextFormField(
+  controller: emailController,
+  decoration: InputDecoration(labelText: "Email"),
+  keyboardType: TextInputType.emailAddress,
+  validator: (value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Email is required";
+    } else if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(value)) {
+      return "Enter a valid email address";
+    }
+    return null;
+  },
+),
+TextFormField(
+  controller: addressController,
+  decoration: InputDecoration(labelText: "Address"),
+  validator: (value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Address is required";
+    } else if (value.length < 5) {
+      return "Address must be at least 5 characters long";
+    }
+    return null;
+  },
+),
+TextFormField(
+  controller: qualificationController,
+  decoration: InputDecoration(labelText: "Qualification"),
+  validator: (value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Qualification is required";
+    }
+    return null;
+  },
+),
+
                         SizedBox(height: 10),
                         // SizedBox(
                         //   width: 500,
